@@ -1,0 +1,245 @@
+10
+
+dir
+0
+http://gtm-oauth2.googlecode.com/svn/trunk/Examples/OAuth2SampleTouch/GoogleAPI/Headers
+http://gtm-oauth2.googlecode.com/svn
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+22754eea-fc93-e339-b032-c1f495b90c16
+
+GTLBase64.h
+file
+
+
+
+add
+
+GTLJSONParser.h
+file
+
+
+
+add
+
+GTMHTTPUploadFetcher.h
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+GTMMIMEDocument.h
+file
+
+
+
+add
+
+GTMHTTPFetcherLogging.h
+file
+
+
+
+add
+
+GTLRuntimeCommon.h
+file
+
+
+
+add
+
+GTLDateTime.h
+file
+
+
+
+add
+
+GTLFramework.h
+file
+
+
+
+add
+
+GTMOAuth2WindowController.h
+file
+
+
+
+add
+
+GTLService.h
+file
+
+
+
+add
+
+GTMHTTPFetcherService.h
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+GTLTargetNamespace.h
+file
+
+
+
+add
+
+GTMOAuth2Authentication.h
+file
+
+
+
+add
+
+GTLQuery.h
+file
+
+
+
+add
+
+GTMOAuth2ViewControllerTouch.h
+file
+
+
+
+add
+
+GTLObject.h
+file
+
+
+
+add
+
+GTLBatchQuery.h
+file
+
+
+
+add
+
+GTMGatherInputStream.h
+file
+
+
+
+add
+
+GTLUploadParameters.h
+file
+
+
+
+add
+
+GTLUtilities.h
+file
+
+
+
+add
+
+GTMOAuth2SignIn.h
+file
+
+
+
+add
+
+GTMHTTPFetchHistory.h
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+GTLDefines.h
+file
+
+
+
+add
+
+GTLErrorObject.h
+file
+
+
+
+add
+
+GTLBatchResult.h
+file
+
+
+
+add
+
+GTMReadMonitorInputStream.h
+file
+
+
+
+add
+
+GTMHTTPFetcher.h
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+

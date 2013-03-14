@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1301BB45119CB4B100A33D6C /* OAuth2SampleMainiPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1301BB44119CB4B100A33D6C /* OAuth2SampleMainiPad.xib */; };
+		13E350A0119CA9AE00B2EB5A /* mainTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C82E9211373B3000ACAEDD /* mainTouch.m */; };
+		13E350A1119CA9AE00B2EB5A /* OAuth2SampleAppDelegateTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C82E9411373B3000ACAEDD /* OAuth2SampleAppDelegateTouch.m */; };
+		13E350A2119CA9AE00B2EB5A /* OAuth2SampleRootViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C82E9611373B3000ACAEDD /* OAuth2SampleRootViewControllerTouch.m */; };
+		13E350A8119CA9AE00B2EB5A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		13E350A9119CA9AE00B2EB5A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		13E350AA119CA9AE00B2EB5A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
+		13E350AB119CA9AE00B2EB5A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1397AC501137075C00DE52FD /* Security.framework */; };
+		13E350AC119CA9AE00B2EB5A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF23DC011754C0300E96C5A /* SystemConfiguration.framework */; };
+		4F244813121F263E00FEE1DA /* OAuth2SampleMainTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F244810121F253B00FEE1DA /* OAuth2SampleMainTouch.xib */; };
+		D6D3CCA116F2440B003C0434 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6D3CCA016F2440B003C0434 /* Default-568h@2x.png */; };
+		D6D3CCFA16F246F1003C0434 /* libGTLTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D3CCE816F246F1003C0434 /* libGTLTouchStaticLib.a */; };
+		D6D3CD0416F24997003C0434 /* libGTLTouchStaticLib-device.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D3CD0316F24997003C0434 /* libGTLTouchStaticLib-device.a */; };
+		D6D3CD0616F24CD9003C0434 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1301BB44119CB4B100A33D6C /* OAuth2SampleMainiPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OAuth2SampleMainiPad.xib; sourceTree = "<group>"; };
+		1397AC501137075C00DE52FD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		13C82E9211373B3000ACAEDD /* mainTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mainTouch.m; sourceTree = "<group>"; };
+		13C82E9311373B3000ACAEDD /* OAuth2SampleAppDelegateTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuth2SampleAppDelegateTouch.h; sourceTree = "<group>"; };
+		13C82E9411373B3000ACAEDD /* OAuth2SampleAppDelegateTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuth2SampleAppDelegateTouch.m; sourceTree = "<group>"; };
+		13C82E9511373B3000ACAEDD /* OAuth2SampleRootViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuth2SampleRootViewControllerTouch.h; sourceTree = "<group>"; };
+		13C82E9611373B3000ACAEDD /* OAuth2SampleRootViewControllerTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuth2SampleRootViewControllerTouch.m; sourceTree = "<group>"; };
+		13C82E9711373B3000ACAEDD /* prefixTouch.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prefixTouch.pch; sourceTree = "<group>"; };
+		13E350B0119CA9AE00B2EB5A /* gTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13FA93DF113867A700E1AAA4 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4F244810121F253B00FEE1DA /* OAuth2SampleMainTouch.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OAuth2SampleMainTouch.xib; sourceTree = "<group>"; };
+		4FF23DC011754C0300E96C5A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D6D3CCA016F2440B003C0434 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		D6D3CCCD16F246F1003C0434 /* GTLBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLBase64.h; sourceTree = "<group>"; };
+		D6D3CCCE16F246F1003C0434 /* GTLBatchQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLBatchQuery.h; sourceTree = "<group>"; };
+		D6D3CCCF16F246F1003C0434 /* GTLBatchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLBatchResult.h; sourceTree = "<group>"; };
+		D6D3CCD016F246F1003C0434 /* GTLDateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLDateTime.h; sourceTree = "<group>"; };
+		D6D3CCD116F246F1003C0434 /* GTLDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLDefines.h; sourceTree = "<group>"; };
+		D6D3CCD216F246F1003C0434 /* GTLErrorObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLErrorObject.h; sourceTree = "<group>"; };
+		D6D3CCD316F246F1003C0434 /* GTLFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLFramework.h; sourceTree = "<group>"; };
+		D6D3CCD416F246F1003C0434 /* GTLJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLJSONParser.h; sourceTree = "<group>"; };
+		D6D3CCD516F246F1003C0434 /* GTLObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLObject.h; sourceTree = "<group>"; };
+		D6D3CCD616F246F1003C0434 /* GTLQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLQuery.h; sourceTree = "<group>"; };
+		D6D3CCD716F246F1003C0434 /* GTLRuntimeCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLRuntimeCommon.h; sourceTree = "<group>"; };
+		D6D3CCD816F246F1003C0434 /* GTLService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLService.h; sourceTree = "<group>"; };
+		D6D3CCD916F246F1003C0434 /* GTLTargetNamespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLTargetNamespace.h; sourceTree = "<group>"; };
+		D6D3CCDA16F246F1003C0434 /* GTLUploadParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLUploadParameters.h; sourceTree = "<group>"; };
+		D6D3CCDB16F246F1003C0434 /* GTLUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLUtilities.h; sourceTree = "<group>"; };
+		D6D3CCDC16F246F1003C0434 /* GTMGatherInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMGatherInputStream.h; sourceTree = "<group>"; };
+		D6D3CCDD16F246F1003C0434 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
+		D6D3CCDE16F246F1003C0434 /* GTMHTTPFetcherLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcherLogging.h; sourceTree = "<group>"; };
+		D6D3CCDF16F246F1003C0434 /* GTMHTTPFetcherService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcherService.h; sourceTree = "<group>"; };
+		D6D3CCE016F246F1003C0434 /* GTMHTTPFetchHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetchHistory.h; sourceTree = "<group>"; };
+		D6D3CCE116F246F1003C0434 /* GTMHTTPUploadFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPUploadFetcher.h; sourceTree = "<group>"; };
+		D6D3CCE216F246F1003C0434 /* GTMMIMEDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMMIMEDocument.h; sourceTree = "<group>"; };
+		D6D3CCE316F246F1003C0434 /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2Authentication.h; sourceTree = "<group>"; };
+		D6D3CCE416F246F1003C0434 /* GTMOAuth2SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2SignIn.h; sourceTree = "<group>"; };
+		D6D3CCE516F246F1003C0434 /* GTMOAuth2ViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2ViewControllerTouch.h; sourceTree = "<group>"; };
+		D6D3CCE616F246F1003C0434 /* GTMOAuth2WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2WindowController.h; sourceTree = "<group>"; };
+		D6D3CCE716F246F1003C0434 /* GTMReadMonitorInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMReadMonitorInputStream.h; sourceTree = "<group>"; };
+		D6D3CCE816F246F1003C0434 /* libGTLTouchStaticLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGTLTouchStaticLib.a; sourceTree = "<group>"; };
+		D6D3CCEA16F246F1003C0434 /* GTLQueryTasks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLQueryTasks.h; sourceTree = "<group>"; };
+		D6D3CCEC16F246F1003C0434 /* GTLServiceTasks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLServiceTasks.h; sourceTree = "<group>"; };
+		D6D3CCEE16F246F1003C0434 /* GTLTasks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLTasks.h; sourceTree = "<group>"; };
+		D6D3CCF016F246F1003C0434 /* GTLTasksConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLTasksConstants.h; sourceTree = "<group>"; };
+		D6D3CCF216F246F1003C0434 /* GTLTasksTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLTasksTask.h; sourceTree = "<group>"; };
+		D6D3CCF416F246F1003C0434 /* GTLTasksTaskList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLTasksTaskList.h; sourceTree = "<group>"; };
+		D6D3CCF616F246F1003C0434 /* GTLTasksTaskLists.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLTasksTaskLists.h; sourceTree = "<group>"; };
+		D6D3CCF816F246F1003C0434 /* GTLTasksTasks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLTasksTasks.h; sourceTree = "<group>"; };
+		D6D3CD0316F24997003C0434 /* libGTLTouchStaticLib-device.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libGTLTouchStaticLib-device.a"; sourceTree = "<group>"; };
+		D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
+		F49B45D213315AA200EAA732 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		13E350A7119CA9AE00B2EB5A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13E350A8119CA9AE00B2EB5A /* Foundation.framework in Frameworks */,
+				13E350A9119CA9AE00B2EB5A /* UIKit.framework in Frameworks */,
+				13E350AA119CA9AE00B2EB5A /* CoreGraphics.framework in Frameworks */,
+				13E350AB119CA9AE00B2EB5A /* Security.framework in Frameworks */,
+				13E350AC119CA9AE00B2EB5A /* SystemConfiguration.framework in Frameworks */,
+				D6D3CCFA16F246F1003C0434 /* libGTLTouchStaticLib.a in Frameworks */,
+				D6D3CD0416F24997003C0434 /* libGTLTouchStaticLib-device.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		13C82E9111373B3000ACAEDD /* Sample App Classes */ = {
+			isa = PBXGroup;
+			children = (
+				13C82E9311373B3000ACAEDD /* OAuth2SampleAppDelegateTouch.h */,
+				13C82E9411373B3000ACAEDD /* OAuth2SampleAppDelegateTouch.m */,
+				13C82E9511373B3000ACAEDD /* OAuth2SampleRootViewControllerTouch.h */,
+				13C82E9611373B3000ACAEDD /* OAuth2SampleRootViewControllerTouch.m */,
+				13C82E9B11373B6A00ACAEDD /* Sample App Resources */,
+			);
+			name = "Sample App Classes";
+			sourceTree = "<group>";
+		};
+		13C82E9B11373B6A00ACAEDD /* Sample App Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */,
+				4F244810121F253B00FEE1DA /* OAuth2SampleMainTouch.xib */,
+				1301BB44119CB4B100A33D6C /* OAuth2SampleMainiPad.xib */,
+				F49B45D213315AA200EAA732 /* Info.plist */,
+			);
+			name = "Sample App Resources";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13E350B0119CA9AE00B2EB5A /* gTask.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				D6D3CCCB16F246F1003C0434 /* GoogleAPI */,
+				D6D3CCA016F2440B003C0434 /* Default-568h@2x.png */,
+				13FA93DF113867A700E1AAA4 /* README.txt */,
+				13C82E9111373B3000ACAEDD /* Sample App Classes */,
+				4F41065D1149BCAE009202D9 /* OAuth Classes and Resources */,
+				29B97315FDCFA39411CA2CEA /* Other Sample App Sources */,
+				29B97323FDCFA39411CA2CEA /* System Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sample App Sources */ = {
+			isa = PBXGroup;
+			children = (
+				13C82E9211373B3000ACAEDD /* mainTouch.m */,
+				13C82E9711373B3000ACAEDD /* prefixTouch.pch */,
+			);
+			name = "Other Sample App Sources";
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* System Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4FF23DC011754C0300E96C5A /* SystemConfiguration.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
+				1397AC501137075C00DE52FD /* Security.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+			);
+			name = "System Frameworks";
+			sourceTree = "<group>";
+		};
+		4F41065D1149BCAE009202D9 /* OAuth Classes and Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4FDB9F9C152BA2BB004A2830 /* JSON */,
+			);
+			name = "OAuth Classes and Resources";
+			sourceTree = "<group>";
+		};
+		4FDB9F9C152BA2BB004A2830 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = JSON;
+			sourceTree = "<group>";
+		};
+		D6D3CCCB16F246F1003C0434 /* GoogleAPI */ = {
+			isa = PBXGroup;
+			children = (
+				D6D3CD0316F24997003C0434 /* libGTLTouchStaticLib-device.a */,
+				D6D3CCCC16F246F1003C0434 /* Headers */,
+				D6D3CCE816F246F1003C0434 /* libGTLTouchStaticLib.a */,
+				D6D3CCE916F246F1003C0434 /* TaskService */,
+			);
+			path = GoogleAPI;
+			sourceTree = "<group>";
+		};
+		D6D3CCCC16F246F1003C0434 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				D6D3CCCD16F246F1003C0434 /* GTLBase64.h */,
+				D6D3CCCE16F246F1003C0434 /* GTLBatchQuery.h */,
+				D6D3CCCF16F246F1003C0434 /* GTLBatchResult.h */,
+				D6D3CCD016F246F1003C0434 /* GTLDateTime.h */,
+				D6D3CCD116F246F1003C0434 /* GTLDefines.h */,
+				D6D3CCD216F246F1003C0434 /* GTLErrorObject.h */,
+				D6D3CCD316F246F1003C0434 /* GTLFramework.h */,
+				D6D3CCD416F246F1003C0434 /* GTLJSONParser.h */,
+				D6D3CCD516F246F1003C0434 /* GTLObject.h */,
+				D6D3CCD616F246F1003C0434 /* GTLQuery.h */,
+				D6D3CCD716F246F1003C0434 /* GTLRuntimeCommon.h */,
+				D6D3CCD816F246F1003C0434 /* GTLService.h */,
+				D6D3CCD916F246F1003C0434 /* GTLTargetNamespace.h */,
+				D6D3CCDA16F246F1003C0434 /* GTLUploadParameters.h */,
+				D6D3CCDB16F246F1003C0434 /* GTLUtilities.h */,
+				D6D3CCDC16F246F1003C0434 /* GTMGatherInputStream.h */,
+				D6D3CCDD16F246F1003C0434 /* GTMHTTPFetcher.h */,
+				D6D3CCDE16F246F1003C0434 /* GTMHTTPFetcherLogging.h */,
+				D6D3CCDF16F246F1003C0434 /* GTMHTTPFetcherService.h */,
+				D6D3CCE016F246F1003C0434 /* GTMHTTPFetchHistory.h */,
+				D6D3CCE116F246F1003C0434 /* GTMHTTPUploadFetcher.h */,
+				D6D3CCE216F246F1003C0434 /* GTMMIMEDocument.h */,
+				D6D3CCE316F246F1003C0434 /* GTMOAuth2Authentication.h */,
+				D6D3CCE416F246F1003C0434 /* GTMOAuth2SignIn.h */,
+				D6D3CCE516F246F1003C0434 /* GTMOAuth2ViewControllerTouch.h */,
+				D6D3CCE616F246F1003C0434 /* GTMOAuth2WindowController.h */,
+				D6D3CCE716F246F1003C0434 /* GTMReadMonitorInputStream.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		D6D3CCE916F246F1003C0434 /* TaskService */ = {
+			isa = PBXGroup;
+			children = (
+				D6D3CCEA16F246F1003C0434 /* GTLQueryTasks.h */,
+				D6D3CCEC16F246F1003C0434 /* GTLServiceTasks.h */,
+				D6D3CCEE16F246F1003C0434 /* GTLTasks.h */,
+				D6D3CCF016F246F1003C0434 /* GTLTasksConstants.h */,
+				D6D3CCF216F246F1003C0434 /* GTLTasksTask.h */,
+				D6D3CCF416F246F1003C0434 /* GTLTasksTaskList.h */,
+				D6D3CCF616F246F1003C0434 /* GTLTasksTaskLists.h */,
+				D6D3CCF816F246F1003C0434 /* GTLTasksTasks.h */,
+			);
+			path = TaskService;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		13E3509B119CA9AE00B2EB5A /* gTask */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13E350AD119CA9AE00B2EB5A /* Build configuration list for PBXNativeTarget "gTask" */;
+			buildPhases = (
+				13E3509C119CA9AE00B2EB5A /* Resources */,
+				13E3509F119CA9AE00B2EB5A /* Sources */,
+				13E350A7119CA9AE00B2EB5A /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = gTask;
+			productName = OAuthTouchSample;
+			productReference = 13E350B0119CA9AE00B2EB5A /* gTask.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "gTask" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				en,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				13E3509B119CA9AE00B2EB5A /* gTask */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		13E3509C119CA9AE00B2EB5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F244813121F263E00FEE1DA /* OAuth2SampleMainTouch.xib in Resources */,
+				1301BB45119CB4B100A33D6C /* OAuth2SampleMainiPad.xib in Resources */,
+				D6D3CCA116F2440B003C0434 /* Default-568h@2x.png in Resources */,
+				D6D3CD0616F24CD9003C0434 /* GTMOAuth2ViewTouch.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		13E3509F119CA9AE00B2EB5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13E350A0119CA9AE00B2EB5A /* mainTouch.m in Sources */,
+				13E350A1119CA9AE00B2EB5A /* OAuth2SampleAppDelegateTouch.m in Sources */,
+				13E350A2119CA9AE00B2EB5A /* OAuth2SampleRootViewControllerTouch.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		13E350AE119CA9AE00B2EB5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = prefixTouch.pch;
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GoogleAPI\"",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = gTask;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		13E350AF119CA9AE00B2EB5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = prefixTouch.pch;
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GoogleAPI\"",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = gTask;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-DDEBUG=1";
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		13E350AD119CA9AE00B2EB5A /* Build configuration list for PBXNativeTarget "gTask" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13E350AE119CA9AE00B2EB5A /* Debug */,
+				13E350AF119CA9AE00B2EB5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "gTask" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
