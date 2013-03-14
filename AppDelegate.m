@@ -12,12 +12,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#import <UIKit/UIKit.h>
 
-int main(int argc, char *argv[]) {
+// OAuth2SampleAppDelegateTouch.m
 
-    @autoreleasepool {
-        int retVal = UIApplicationMain(argc, argv, nil, nil);
-        return retVal;
-    }
+#import "AppDelegate.h"
+#import "RootViewController.h"
+
+@implementation AppDelegate
+
+@synthesize window = mWindow;
+@synthesize navigationController = mNavigationController;
+
+
+- (void)applicationDidFinishLaunching:(UIApplication *)application {
+  [mWindow addSubview:[mNavigationController view]];
+  [mWindow makeKeyAndVisible];
 }
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+  [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+@end
+

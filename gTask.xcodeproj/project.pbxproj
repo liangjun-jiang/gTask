@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		1301BB45119CB4B100A33D6C /* OAuth2SampleMainiPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1301BB44119CB4B100A33D6C /* OAuth2SampleMainiPad.xib */; };
 		13E350A0119CA9AE00B2EB5A /* mainTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C82E9211373B3000ACAEDD /* mainTouch.m */; };
-		13E350A1119CA9AE00B2EB5A /* OAuth2SampleAppDelegateTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C82E9411373B3000ACAEDD /* OAuth2SampleAppDelegateTouch.m */; };
-		13E350A2119CA9AE00B2EB5A /* OAuth2SampleRootViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C82E9611373B3000ACAEDD /* OAuth2SampleRootViewControllerTouch.m */; };
+		13E350A1119CA9AE00B2EB5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C82E9411373B3000ACAEDD /* AppDelegate.m */; };
+		13E350A2119CA9AE00B2EB5A /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C82E9611373B3000ACAEDD /* RootViewController.m */; };
 		13E350A8119CA9AE00B2EB5A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		13E350A9119CA9AE00B2EB5A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		13E350AA119CA9AE00B2EB5A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
@@ -21,16 +21,29 @@
 		D6D3CCFA16F246F1003C0434 /* libGTLTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D3CCE816F246F1003C0434 /* libGTLTouchStaticLib.a */; };
 		D6D3CD0416F24997003C0434 /* libGTLTouchStaticLib-device.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D3CD0316F24997003C0434 /* libGTLTouchStaticLib-device.a */; };
 		D6D3CD0616F24CD9003C0434 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */; };
+		D6D3CD5816F25307003C0434 /* SHCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D3CD3B16F25307003C0434 /* SHCViewController.xib */; };
+		D6D3CD5A16F25307003C0434 /* SHCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD3F16F25307003C0434 /* SHCAppDelegate.m */; };
+		D6D3CD5B16F25307003C0434 /* SHCMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD4116F25307003C0434 /* SHCMulticastDelegate.m */; };
+		D6D3CD5C16F25307003C0434 /* SHCMulticastDelegateUITableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD4316F25307003C0434 /* SHCMulticastDelegateUITableViewDelegate.m */; };
+		D6D3CD5D16F25307003C0434 /* SHCPinchToAddNewBehaviour.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD4516F25307003C0434 /* SHCPinchToAddNewBehaviour.m */; };
+		D6D3CD5E16F25307003C0434 /* SHCPullToAddNewBehaviour.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD4716F25307003C0434 /* SHCPullToAddNewBehaviour.m */; };
+		D6D3CD5F16F25307003C0434 /* SHCStrikethroughLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD4916F25307003C0434 /* SHCStrikethroughLabel.m */; };
+		D6D3CD6016F25307003C0434 /* SHCTableView+Multicast.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD4B16F25307003C0434 /* SHCTableView+Multicast.m */; };
+		D6D3CD6116F25307003C0434 /* SHCTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD4D16F25307003C0434 /* SHCTableView.m */; };
+		D6D3CD6216F25307003C0434 /* SHCTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD4F16F25307003C0434 /* SHCTableViewCell.m */; };
+		D6D3CD6316F25307003C0434 /* SHCToDoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD5316F25307003C0434 /* SHCToDoItem.m */; };
+		D6D3CD6416F25307003C0434 /* SHCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD5516F25307003C0434 /* SHCViewController.m */; };
+		D6D3CD6616F253BE003C0434 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D3CD6516F253BE003C0434 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1301BB44119CB4B100A33D6C /* OAuth2SampleMainiPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OAuth2SampleMainiPad.xib; sourceTree = "<group>"; };
 		1397AC501137075C00DE52FD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		13C82E9211373B3000ACAEDD /* mainTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mainTouch.m; sourceTree = "<group>"; };
-		13C82E9311373B3000ACAEDD /* OAuth2SampleAppDelegateTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuth2SampleAppDelegateTouch.h; sourceTree = "<group>"; };
-		13C82E9411373B3000ACAEDD /* OAuth2SampleAppDelegateTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuth2SampleAppDelegateTouch.m; sourceTree = "<group>"; };
-		13C82E9511373B3000ACAEDD /* OAuth2SampleRootViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuth2SampleRootViewControllerTouch.h; sourceTree = "<group>"; };
-		13C82E9611373B3000ACAEDD /* OAuth2SampleRootViewControllerTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuth2SampleRootViewControllerTouch.m; sourceTree = "<group>"; };
+		13C82E9311373B3000ACAEDD /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		13C82E9411373B3000ACAEDD /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		13C82E9511373B3000ACAEDD /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		13C82E9611373B3000ACAEDD /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		13C82E9711373B3000ACAEDD /* prefixTouch.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prefixTouch.pch; sourceTree = "<group>"; };
 		13E350B0119CA9AE00B2EB5A /* gTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13FA93DF113867A700E1AAA4 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
@@ -78,6 +91,32 @@
 		D6D3CCF816F246F1003C0434 /* GTLTasksTasks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLTasksTasks.h; sourceTree = "<group>"; };
 		D6D3CD0316F24997003C0434 /* libGTLTouchStaticLib-device.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libGTLTouchStaticLib-device.a"; sourceTree = "<group>"; };
 		D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
+		D6D3CD3C16F25307003C0434 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SHCViewController.xib; sourceTree = "<group>"; };
+		D6D3CD3E16F25307003C0434 /* SHCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCAppDelegate.h; sourceTree = "<group>"; };
+		D6D3CD3F16F25307003C0434 /* SHCAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCAppDelegate.m; sourceTree = "<group>"; };
+		D6D3CD4016F25307003C0434 /* SHCMulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCMulticastDelegate.h; sourceTree = "<group>"; };
+		D6D3CD4116F25307003C0434 /* SHCMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCMulticastDelegate.m; sourceTree = "<group>"; };
+		D6D3CD4216F25307003C0434 /* SHCMulticastDelegateUITableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCMulticastDelegateUITableViewDelegate.h; sourceTree = "<group>"; };
+		D6D3CD4316F25307003C0434 /* SHCMulticastDelegateUITableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCMulticastDelegateUITableViewDelegate.m; sourceTree = "<group>"; };
+		D6D3CD4416F25307003C0434 /* SHCPinchToAddNewBehaviour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCPinchToAddNewBehaviour.h; sourceTree = "<group>"; };
+		D6D3CD4516F25307003C0434 /* SHCPinchToAddNewBehaviour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCPinchToAddNewBehaviour.m; sourceTree = "<group>"; };
+		D6D3CD4616F25307003C0434 /* SHCPullToAddNewBehaviour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCPullToAddNewBehaviour.h; sourceTree = "<group>"; };
+		D6D3CD4716F25307003C0434 /* SHCPullToAddNewBehaviour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCPullToAddNewBehaviour.m; sourceTree = "<group>"; };
+		D6D3CD4816F25307003C0434 /* SHCStrikethroughLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCStrikethroughLabel.h; sourceTree = "<group>"; };
+		D6D3CD4916F25307003C0434 /* SHCStrikethroughLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCStrikethroughLabel.m; sourceTree = "<group>"; };
+		D6D3CD4A16F25307003C0434 /* SHCTableView+Multicast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SHCTableView+Multicast.h"; sourceTree = "<group>"; };
+		D6D3CD4B16F25307003C0434 /* SHCTableView+Multicast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SHCTableView+Multicast.m"; sourceTree = "<group>"; };
+		D6D3CD4C16F25307003C0434 /* SHCTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCTableView.h; sourceTree = "<group>"; };
+		D6D3CD4D16F25307003C0434 /* SHCTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCTableView.m; sourceTree = "<group>"; };
+		D6D3CD4E16F25307003C0434 /* SHCTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCTableViewCell.h; sourceTree = "<group>"; };
+		D6D3CD4F16F25307003C0434 /* SHCTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCTableViewCell.m; sourceTree = "<group>"; };
+		D6D3CD5016F25307003C0434 /* SHCTableViewCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCTableViewCellDelegate.h; sourceTree = "<group>"; };
+		D6D3CD5116F25307003C0434 /* SHCTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCTableViewDataSource.h; sourceTree = "<group>"; };
+		D6D3CD5216F25307003C0434 /* SHCToDoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCToDoItem.h; sourceTree = "<group>"; };
+		D6D3CD5316F25307003C0434 /* SHCToDoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCToDoItem.m; sourceTree = "<group>"; };
+		D6D3CD5416F25307003C0434 /* SHCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCViewController.h; sourceTree = "<group>"; };
+		D6D3CD5516F25307003C0434 /* SHCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCViewController.m; sourceTree = "<group>"; };
+		D6D3CD6516F253BE003C0434 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F49B45D213315AA200EAA732 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6D3CD6616F253BE003C0434 /* QuartzCore.framework in Frameworks */,
 				13E350A8119CA9AE00B2EB5A /* Foundation.framework in Frameworks */,
 				13E350A9119CA9AE00B2EB5A /* UIKit.framework in Frameworks */,
 				13E350AA119CA9AE00B2EB5A /* CoreGraphics.framework in Frameworks */,
@@ -99,19 +139,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		13C82E9111373B3000ACAEDD /* Sample App Classes */ = {
+		13C82E9111373B3000ACAEDD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				13C82E9311373B3000ACAEDD /* OAuth2SampleAppDelegateTouch.h */,
-				13C82E9411373B3000ACAEDD /* OAuth2SampleAppDelegateTouch.m */,
-				13C82E9511373B3000ACAEDD /* OAuth2SampleRootViewControllerTouch.h */,
-				13C82E9611373B3000ACAEDD /* OAuth2SampleRootViewControllerTouch.m */,
-				13C82E9B11373B6A00ACAEDD /* Sample App Resources */,
+				13C82E9311373B3000ACAEDD /* AppDelegate.h */,
+				13C82E9411373B3000ACAEDD /* AppDelegate.m */,
+				13C82E9511373B3000ACAEDD /* RootViewController.h */,
+				13C82E9611373B3000ACAEDD /* RootViewController.m */,
+				13C82E9B11373B6A00ACAEDD /* Resources */,
 			);
-			name = "Sample App Classes";
+			name = Classes;
 			sourceTree = "<group>";
 		};
-		13C82E9B11373B6A00ACAEDD /* Sample App Resources */ = {
+		13C82E9B11373B6A00ACAEDD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */,
@@ -119,7 +159,7 @@
 				1301BB44119CB4B100A33D6C /* OAuth2SampleMainiPad.xib */,
 				F49B45D213315AA200EAA732 /* Info.plist */,
 			);
-			name = "Sample App Resources";
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -133,25 +173,26 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				D6D3CD6516F253BE003C0434 /* QuartzCore.framework */,
+				D6D3CD3616F25307003C0434 /* ClearStyle */,
 				D6D3CCCB16F246F1003C0434 /* GoogleAPI */,
 				D6D3CCA016F2440B003C0434 /* Default-568h@2x.png */,
 				13FA93DF113867A700E1AAA4 /* README.txt */,
-				13C82E9111373B3000ACAEDD /* Sample App Classes */,
-				4F41065D1149BCAE009202D9 /* OAuth Classes and Resources */,
-				29B97315FDCFA39411CA2CEA /* Other Sample App Sources */,
+				13C82E9111373B3000ACAEDD /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other App Sources */,
 				29B97323FDCFA39411CA2CEA /* System Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
 		};
-		29B97315FDCFA39411CA2CEA /* Other Sample App Sources */ = {
+		29B97315FDCFA39411CA2CEA /* Other App Sources */ = {
 			isa = PBXGroup;
 			children = (
 				13C82E9211373B3000ACAEDD /* mainTouch.m */,
 				13C82E9711373B3000ACAEDD /* prefixTouch.pch */,
 			);
-			name = "Other Sample App Sources";
+			name = "Other App Sources";
 			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA /* System Frameworks */ = {
@@ -164,21 +205,6 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 			);
 			name = "System Frameworks";
-			sourceTree = "<group>";
-		};
-		4F41065D1149BCAE009202D9 /* OAuth Classes and Resources */ = {
-			isa = PBXGroup;
-			children = (
-				4FDB9F9C152BA2BB004A2830 /* JSON */,
-			);
-			name = "OAuth Classes and Resources";
-			sourceTree = "<group>";
-		};
-		4FDB9F9C152BA2BB004A2830 /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = JSON;
 			sourceTree = "<group>";
 		};
 		D6D3CCCB16F246F1003C0434 /* GoogleAPI */ = {
@@ -241,6 +267,38 @@
 			path = TaskService;
 			sourceTree = "<group>";
 		};
+		D6D3CD3616F25307003C0434 /* ClearStyle */ = {
+			isa = PBXGroup;
+			children = (
+				D6D3CD3B16F25307003C0434 /* SHCViewController.xib */,
+				D6D3CD3E16F25307003C0434 /* SHCAppDelegate.h */,
+				D6D3CD3F16F25307003C0434 /* SHCAppDelegate.m */,
+				D6D3CD4016F25307003C0434 /* SHCMulticastDelegate.h */,
+				D6D3CD4116F25307003C0434 /* SHCMulticastDelegate.m */,
+				D6D3CD4216F25307003C0434 /* SHCMulticastDelegateUITableViewDelegate.h */,
+				D6D3CD4316F25307003C0434 /* SHCMulticastDelegateUITableViewDelegate.m */,
+				D6D3CD4416F25307003C0434 /* SHCPinchToAddNewBehaviour.h */,
+				D6D3CD4516F25307003C0434 /* SHCPinchToAddNewBehaviour.m */,
+				D6D3CD4616F25307003C0434 /* SHCPullToAddNewBehaviour.h */,
+				D6D3CD4716F25307003C0434 /* SHCPullToAddNewBehaviour.m */,
+				D6D3CD4816F25307003C0434 /* SHCStrikethroughLabel.h */,
+				D6D3CD4916F25307003C0434 /* SHCStrikethroughLabel.m */,
+				D6D3CD4A16F25307003C0434 /* SHCTableView+Multicast.h */,
+				D6D3CD4B16F25307003C0434 /* SHCTableView+Multicast.m */,
+				D6D3CD4C16F25307003C0434 /* SHCTableView.h */,
+				D6D3CD4D16F25307003C0434 /* SHCTableView.m */,
+				D6D3CD4E16F25307003C0434 /* SHCTableViewCell.h */,
+				D6D3CD4F16F25307003C0434 /* SHCTableViewCell.m */,
+				D6D3CD5016F25307003C0434 /* SHCTableViewCellDelegate.h */,
+				D6D3CD5116F25307003C0434 /* SHCTableViewDataSource.h */,
+				D6D3CD5216F25307003C0434 /* SHCToDoItem.h */,
+				D6D3CD5316F25307003C0434 /* SHCToDoItem.m */,
+				D6D3CD5416F25307003C0434 /* SHCViewController.h */,
+				D6D3CD5516F25307003C0434 /* SHCViewController.m */,
+			);
+			path = ClearStyle;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -295,6 +353,7 @@
 				1301BB45119CB4B100A33D6C /* OAuth2SampleMainiPad.xib in Resources */,
 				D6D3CCA116F2440B003C0434 /* Default-568h@2x.png in Resources */,
 				D6D3CD0616F24CD9003C0434 /* GTMOAuth2ViewTouch.xib in Resources */,
+				D6D3CD5816F25307003C0434 /* SHCViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,25 +365,48 @@
 			buildActionMask = 2147483647;
 			files = (
 				13E350A0119CA9AE00B2EB5A /* mainTouch.m in Sources */,
-				13E350A1119CA9AE00B2EB5A /* OAuth2SampleAppDelegateTouch.m in Sources */,
-				13E350A2119CA9AE00B2EB5A /* OAuth2SampleRootViewControllerTouch.m in Sources */,
+				13E350A1119CA9AE00B2EB5A /* AppDelegate.m in Sources */,
+				13E350A2119CA9AE00B2EB5A /* RootViewController.m in Sources */,
+				D6D3CD5A16F25307003C0434 /* SHCAppDelegate.m in Sources */,
+				D6D3CD5B16F25307003C0434 /* SHCMulticastDelegate.m in Sources */,
+				D6D3CD5C16F25307003C0434 /* SHCMulticastDelegateUITableViewDelegate.m in Sources */,
+				D6D3CD5D16F25307003C0434 /* SHCPinchToAddNewBehaviour.m in Sources */,
+				D6D3CD5E16F25307003C0434 /* SHCPullToAddNewBehaviour.m in Sources */,
+				D6D3CD5F16F25307003C0434 /* SHCStrikethroughLabel.m in Sources */,
+				D6D3CD6016F25307003C0434 /* SHCTableView+Multicast.m in Sources */,
+				D6D3CD6116F25307003C0434 /* SHCTableView.m in Sources */,
+				D6D3CD6216F25307003C0434 /* SHCTableViewCell.m in Sources */,
+				D6D3CD6316F25307003C0434 /* SHCToDoItem.m in Sources */,
+				D6D3CD6416F25307003C0434 /* SHCViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D6D3CD3B16F25307003C0434 /* SHCViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D6D3CD3C16F25307003C0434 /* en */,
+			);
+			name = SHCViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		13E350AE119CA9AE00B2EB5A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = prefixTouch.pch;
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAPI\"",
@@ -344,11 +426,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = prefixTouch.pch;
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAPI\"",
@@ -373,7 +456,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DDEBUG=1";
 				OTHER_LDFLAGS = "-ObjC";
@@ -390,7 +473,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;

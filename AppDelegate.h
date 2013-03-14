@@ -12,12 +12,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#import <UIKit/UIKit.h>
 
-int main(int argc, char *argv[]) {
+// OAuth2SampleAppDelegateTouch.h - OAuth example for Cocoa Touch.
 
-    @autoreleasepool {
-        int retVal = UIApplicationMain(argc, argv, nil, nil);
-        return retVal;
-    }
+@interface AppDelegate : NSObject <UIApplicationDelegate> {
+ @private
+  UIWindow *mWindow;
+  UINavigationController *mNavigationController;
 }
+
+@property (nonatomic, strong) IBOutlet UIWindow *window;
+@property (nonatomic, strong) IBOutlet UINavigationController *navigationController;
+
+@end
+

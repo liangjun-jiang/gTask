@@ -1,0 +1,224 @@
+10
+
+dir
+0
+http://gtm-oauth2.googlecode.com/svn/trunk/Examples/OAuth2SampleTouch/ClearStyle
+http://gtm-oauth2.googlecode.com/svn
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+22754eea-fc93-e339-b032-c1f495b90c16
+
+main.m
+file
+
+
+
+add
+
+SHCPinchToAddNewBehaviour.h
+file
+
+
+
+add
+
+SHCMulticastDelegateUITableViewDelegate.h
+file
+
+
+
+add
+
+SHCTableViewDataSource.h
+file
+
+
+
+add
+
+SHCMulticastDelegate.h
+file
+
+
+
+add
+
+SHCPinchToAddNewBehaviour.m
+file
+
+
+
+add
+
+SHCMulticastDelegateUITableViewDelegate.m
+file
+
+
+
+add
+
+SHCStrikethroughLabel.h
+file
+
+
+
+add
+
+en.lproj
+dir
+
+
+
+add
+
+SHCMulticastDelegate.m
+file
+
+
+
+add
+
+ClearStyle-Info.plist
+file
+
+
+
+add
+
+SHCPullToAddNewBehaviour.h
+file
+
+
+
+add
+
+SHCStrikethroughLabel.m
+file
+
+
+
+add
+
+SHCAppDelegate.h
+file
+
+
+
+add
+
+SHCPullToAddNewBehaviour.m
+file
+
+
+
+add
+
+SHCTableViewCellDelegate.h
+file
+
+
+
+add
+
+SHCViewController.h
+file
+
+
+
+add
+
+SHCAppDelegate.m
+file
+
+
+
+add
+
+SHCTableView.h
+file
+
+
+
+add
+
+SHCTableViewCell.h
+file
+
+
+
+add
+
+SHCTableView+Multicast.h
+file
+
+
+
+add
+
+SHCViewController.m
+file
+
+
+
+add
+
+SHCToDoItem.h
+file
+
+
+
+add
+
+ClearStyle-Prefix.pch
+file
+
+
+
+add
+
+SHCTableView.m
+file
+
+
+
+add
+
+SHCTableViewCell.m
+file
+
+
+
+add
+
+SHCTableView+Multicast.m
+file
+
+
+
+add
+
+SHCToDoItem.m
+file
+
+
+
+add
+

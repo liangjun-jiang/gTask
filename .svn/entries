@@ -26,6 +26,194 @@ grobbins@google.com
 
 22754eea-fc93-e339-b032-c1f495b90c16
 
+OAuth2SampleMainiPad.xib
+file
+
+
+
+
+2013-02-19T16:09:53.000000Z
+fbaf67270219fadde8be4c9270bec0a9
+2011-08-24T21:00:14.755186Z
+53
+grobbins@google.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+64337
+
+GTMOAuth2ViewTouch.xib
+file
+0
+
+
+add
+
+OAuth2SampleMainTouch.xib
+file
+
+
+
+
+2013-02-19T16:09:53.000000Z
+6e527b921592b330407e58ae6dc3ec5a
+2011-03-24T19:15:36.047395Z
+11
+grobbins@google.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+65142
+
+GTMOAuth2Authentication.h
+file
+0
+
+
+add
+
+SBJsonParser.h
+file
+0
+
+
+add
+
+OAuth2SampleTouch.xcodeproj
+dir
+
+
+
+delete
+
+gTask.xcodeproj
+dir
+
+
+
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+copied
+http://gtm-oauth2.googlecode.com/svn/trunk/Examples/OAuth2SampleTouch/OAuth2SampleTouch.xcodeproj
+101
+
+GTMOAuth2Authentication.m
+file
+0
+
+
+add
+
+GoogleAPI
+dir
+
+
+
+add
+
+SBJsonParser.m
+file
+0
+
+
+add
+
+prefixTouch.pch
+file
+
+
+
+
+2013-02-19T16:09:53.000000Z
+c4a3d79d8d13f0851346dbbcb3250415
+2011-03-24T19:15:36.047395Z
+11
+grobbins@google.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+712
+
+GTMHTTPFetcher.h
+file
+0
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
 SBJsonBase.h
 file
 0
@@ -136,53 +324,12 @@ file
 
 add
 
-OAuth2SampleMainiPad.xib
-file
-
-
-
-
-2013-02-19T16:09:53.000000Z
-fbaf67270219fadde8be4c9270bec0a9
-2011-08-24T21:00:14.755186Z
-53
-grobbins@google.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-64337
-
-GTMOAuth2ViewTouch.xib
-file
-0
-
-
-add
-
 OAuth2SampleAppDelegateTouch.h
 file
 
 
 
-
+delete
 2013-02-19T16:09:53.000000Z
 37802ada8b5bced6c7170e79765d7be0
 2011-03-24T19:15:36.047395Z
@@ -211,46 +358,12 @@ grobbins@google.com
 
 974
 
-OAuth2SampleMainTouch.xib
-file
-
-
-
-
-2013-02-19T16:09:53.000000Z
-6e527b921592b330407e58ae6dc3ec5a
-2011-03-24T19:15:36.047395Z
-11
-grobbins@google.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-65142
-
 OAuth2SampleAppDelegateTouch.m
 file
 
 
 
-
+delete
 2013-02-19T16:09:53.000000Z
 961b8a155e9dfc313764065c9a5fe900
 2011-07-09T01:09:26.924731Z
@@ -279,19 +392,12 @@ grobbins@google.com
 
 1237
 
-GTMOAuth2Authentication.h
-file
-0
-
-
-add
-
 OAuth2SampleRootViewControllerTouch.h
 file
 
 
 
-
+delete
 2013-02-19T16:09:53.000000Z
 520068d9fd71a0b88f273bb7204a7093
 2011-03-24T19:15:36.047395Z
@@ -320,12 +426,28 @@ grobbins@google.com
 
 2462
 
-SBJsonParser.h
+AppDelegate.h
 file
-0
+
 
 
 add
+
+37802ada8b5bced6c7170e79765d7be0
+
+
+
+
+
+
+
+
+
+
+
+copied
+http://gtm-oauth2.googlecode.com/svn/trunk/Examples/OAuth2SampleTouch/OAuth2SampleAppDelegateTouch.h
+101
 
 GTMOAuth2ViewControllerTouch.h
 file
@@ -334,19 +456,12 @@ file
 
 add
 
-OAuth2SampleTouch.xcodeproj
-dir
-
-
-
-delete
-
 OAuth2SampleRootViewControllerTouch.m
 file
 
 
 
-
+delete
 2013-02-19T16:09:53.000000Z
 6a7de5f37fc83120665760ad6986a357
 2012-04-20T21:10:54.478492Z
@@ -375,21 +490,14 @@ grobbins@google.com
 
 22462
 
-GTMOAuth2Authentication.m
+AppDelegate.m
 file
-0
-
-
-add
-
-gTask.xcodeproj
-dir
 
 
 
 add
 
-
+961b8a155e9dfc313764065c9a5fe900
 
 
 
@@ -402,26 +510,19 @@ add
 
 
 copied
-http://gtm-oauth2.googlecode.com/svn/trunk/Examples/OAuth2SampleTouch/OAuth2SampleTouch.xcodeproj
+http://gtm-oauth2.googlecode.com/svn/trunk/Examples/OAuth2SampleTouch/OAuth2SampleAppDelegateTouch.m
 101
-
-SBJsonParser.m
-file
-0
-
-
-add
-
-GoogleAPI
-dir
-
-
-
-add
 
 GTMOAuth2ViewControllerTouch.m
 file
 0
+
+
+add
+
+ClearStyle
+dir
+
 
 
 add
@@ -433,17 +534,14 @@ file
 
 add
 
-prefixTouch.pch
+RootViewController.h
 file
 
 
 
+add
 
-2013-02-19T16:09:53.000000Z
-c4a3d79d8d13f0851346dbbcb3250415
-2011-03-24T19:15:36.047395Z
-11
-grobbins@google.com
+520068d9fd71a0b88f273bb7204a7093
 
 
 
@@ -455,17 +553,9 @@ grobbins@google.com
 
 
 
-
-
-
-
-
-
-
-
-
-
-712
+copied
+http://gtm-oauth2.googlecode.com/svn/trunk/Examples/OAuth2SampleTouch/OAuth2SampleRootViewControllerTouch.h
+101
 
 Default-568h@2x.png
 file
@@ -522,17 +612,26 @@ file
 
 add
 
-GTMHTTPFetcher.h
+RootViewController.m
 file
-0
+
 
 
 add
 
+6a7de5f37fc83120665760ad6986a357
 
 
 
 
-has-props
-has-prop-mods
+
+
+
+
+
+
+
+copied
+http://gtm-oauth2.googlecode.com/svn/trunk/Examples/OAuth2SampleTouch/OAuth2SampleRootViewControllerTouch.m
+101
 

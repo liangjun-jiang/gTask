@@ -15,7 +15,7 @@
 
 // OAuth2SampleRootViewControllerTouch.m
 
-#import "OAuth2SampleRootViewControllerTouch.h"
+#import "RootViewController.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTMOAuth2SignIn.h"
 
@@ -28,7 +28,7 @@ static NSString *const kDailyMotionServiceName = @"DailyMotion";
 static NSString *const kSampleClientIDKey = @"clientID";
 static NSString *const kSampleClientSecretKey = @"clientSecret";
 
-@interface OAuth2SampleRootViewControllerTouch()
+@interface RootViewController()
 - (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
       finishedWithAuth:(GTMOAuth2Authentication *)auth
                  error:(NSError *)error;
@@ -44,7 +44,7 @@ static NSString *const kSampleClientSecretKey = @"clientSecret";
 
 @end
 
-@implementation OAuth2SampleRootViewControllerTouch
+@implementation RootViewController
 
 @synthesize clientIDField = mClientIDField,
             clientSecretField = mClientSecretField,
@@ -141,21 +141,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 - (void)dealloc {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 
-  [mServiceSegments release];
-  [mClientIDField release];
-  [mClientSecretField release];
-  [mServiceNameField release];
-  [mEmailField release];
-  [mAccessTokenField release];
-  [mExpirationField release];
-  [mRefreshTokenField release];
-  [mFetchButton release];
-  [mExpireNowButton release];
-  [mShouldSaveInKeychainSwitch release];
-  [mSignInOutButton release];
-  [mAuth release];
 
-  [super dealloc];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
@@ -302,8 +288,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   // using BCP 47 language codes.
   //
   // For this sample, we'll force English as the display language.
-  NSDictionary *params = [NSDictionary dictionaryWithObject:@"en"
-                                                     forKey:@"hl"];
+  NSDictionary *params = @{@"hl": @"en"};
   viewController.signIn.additionalAuthorizationParameters = params;
 
   // By default, the controller will fetch the user's email, but not the rest of
@@ -398,11 +383,11 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     // Authentication failed (perhaps the user denied access, or closed the
     // window before granting access)
     NSLog(@"Authentication error: %@", error);
-    NSData *responseData = [[error userInfo] objectForKey:@"data"]; // kGTMHTTPFetcherStatusDataKey
+    NSData *responseData = [error userInfo][@"data"]; // kGTMHTTPFetcherStatusDataKey
     if ([responseData length] > 0) {
       // show the body of the server's authentication failure response
-      NSString *str = [[[NSString alloc] initWithData:responseData
-                                             encoding:NSUTF8StringEncoding] autorelease];
+      NSString *str = [[NSString alloc] initWithData:responseData
+                                             encoding:NSUTF8StringEncoding];
       NSLog(@"%@", str);
     }
 
@@ -459,8 +444,8 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
                                                                  error:&error];
                 if (data) {
                   // API fetch succeeded
-                  output = [[[NSString alloc] initWithData:data
-                                                  encoding:NSUTF8StringEncoding] autorelease];
+                  output = [[NSString alloc] initWithData:data
+                                                  encoding:NSUTF8StringEncoding];
                 } else {
                   // fetch failed
                   output = [error description];
@@ -536,11 +521,11 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 }
 
 - (void)displayAlertWithMessage:(NSString *)message {
-  UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"OAuth2Sample"
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"OAuth2Sample"
                                                    message:message
                                                   delegate:nil
                                          cancelButtonTitle:@"OK"
-                                         otherButtonTitles:nil] autorelease];
+                                         otherButtonTitles:nil];
   [alert show];
 }
 
