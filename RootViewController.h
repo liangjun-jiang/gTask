@@ -79,7 +79,7 @@
 - (IBAction)toggleShouldSaveInKeychain:(id)sender;
 
 - (void)signInToGoogle;
-- (void)signInToDailyMotion;
+//- (void)signInToDailyMotion;
 - (void)signOut;
 - (BOOL)isSignedIn;
 

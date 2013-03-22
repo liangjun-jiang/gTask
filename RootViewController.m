@@ -53,7 +53,7 @@ static NSString *const kSampleClientSecretKey = @"clientSecret";
 - (void)incrementNetworkActivity:(NSNotification *)notify;
 - (void)decrementNetworkActivity:(NSNotification *)notify;
 - (void)signInNetworkLostOrFound:(NSNotification *)notify;
-- (GTMOAuth2Authentication *)authForDailyMotion;
+//- (GTMOAuth2Authentication *)authForDailyMotion;
 - (void)doAnAuthenticatedAPIFetch;
 - (void)displayAlertWithMessage:(NSString *)str;
 - (BOOL)shouldSaveInKeychain;
@@ -131,23 +131,23 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     // Perhaps we have a saved authorization for DailyMotion instead; try getting
     // that from the keychain
 
-    clientID = [defaults stringForKey:kDailyMotionClientIDKey];
-    clientSecret = [defaults stringForKey:kDailyMotionClientSecretKey];
-
-    if (clientID && clientSecret) {
-      auth = [self authForDailyMotion];
-      if (auth) {
-        auth.clientID = clientID;
-        auth.clientSecret = clientSecret;
-
-        BOOL didAuth = [GTMOAuth2ViewControllerTouch authorizeFromKeychainForName:kDailyMotionAppServiceName
-                                                                   authentication:auth];
-        if (didAuth) {
-          // select the DailyMotion radio button
-          self.serviceSegments.selectedSegmentIndex = 1;
-        }
-      }
-    }
+//    clientID = [defaults stringForKey:kDailyMotionClientIDKey];
+//    clientSecret = [defaults stringForKey:kDailyMotionClientSecretKey];
+//
+//    if (clientID && clientSecret) {
+//      auth = [self authForDailyMotion];
+//      if (auth) {
+//        auth.clientID = clientID;
+//        auth.clientSecret = clientSecret;
+//
+//        BOOL didAuth = [GTMOAuth2ViewControllerTouch authorizeFromKeychainForName:kDailyMotionAppServiceName
+//                                                                   authentication:auth];
+//        if (didAuth) {
+//          // select the DailyMotion radio button
+//          self.serviceSegments.selectedSegmentIndex = 1;
+//        }
+//      }
+//    }
   }
 
   // Save the authentication object, which holds the auth tokens and
@@ -198,9 +198,10 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     // Sign in
     if ([self isGoogleSegmentSelected]) {
       [self signInToGoogle];
-    } else {
-      [self signInToDailyMotion];
     }
+//    else {
+//      [self signInToDailyMotion];
+//    }
   } else {
     // Sign out
     [self signOut];
@@ -271,7 +272,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     
     
   if ([clientID length] == 0 || [clientSecret length] == 0) {
-    NSString *msg = @"The sample code requires a valid client ID and client secret to sign in.";
+    NSString *msg = @"This requires a valid client ID and client secret to sign in.";
     [self displayAlertWithMessage:msg];
     return;
   }
@@ -340,66 +341,66 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   // posted, just until the finished selector is invoked.
 }
 
-- (GTMOAuth2Authentication *)authForDailyMotion {
-  // http://www.dailymotion.com/doc/api/authentication.html
-  NSURL *tokenURL = [NSURL URLWithString:@"https://api.dailymotion.com/oauth/token"];
+//- (GTMOAuth2Authentication *)authForDailyMotion {
+//  // http://www.dailymotion.com/doc/api/authentication.html
+//  NSURL *tokenURL = [NSURL URLWithString:@"https://api.dailymotion.com/oauth/token"];
+//
+//  // We'll make up an arbitrary redirectURI.  The controller will watch for
+//  // the server to redirect the web view to this URI, but this URI will not be
+//  // loaded, so it need not be for any actual web page.
+//  NSString *redirectURI = @"http://www.google.com/OAuthCallback";
+//
+//  NSString *clientID = self.clientIDField.text;
+//  NSString *clientSecret = self.clientSecretField.text;
+//
+//  GTMOAuth2Authentication *auth;
+//  auth = [GTMOAuth2Authentication authenticationWithServiceProvider:kDailyMotionServiceName
+//                                                           tokenURL:tokenURL
+//                                                        redirectURI:redirectURI
+//                                                           clientID:clientID
+//                                                       clientSecret:clientSecret];
+//  return auth;
+//}
 
-  // We'll make up an arbitrary redirectURI.  The controller will watch for
-  // the server to redirect the web view to this URI, but this URI will not be
-  // loaded, so it need not be for any actual web page.
-  NSString *redirectURI = @"http://www.google.com/OAuthCallback";
-
-  NSString *clientID = self.clientIDField.text;
-  NSString *clientSecret = self.clientSecretField.text;
-
-  GTMOAuth2Authentication *auth;
-  auth = [GTMOAuth2Authentication authenticationWithServiceProvider:kDailyMotionServiceName
-                                                           tokenURL:tokenURL
-                                                        redirectURI:redirectURI
-                                                           clientID:clientID
-                                                       clientSecret:clientSecret];
-  return auth;
-}
-
-- (void)signInToDailyMotion {
-  [self signOut];
-
-  GTMOAuth2Authentication *auth = [self authForDailyMotion];
-  auth.scope = @"read";
-
-  if ([auth.clientID length] == 0 || [auth.clientSecret length] == 0) {
-    NSString *msg = @"The sample code requires a valid client ID and client secret to sign in.";
-    [self displayAlertWithMessage:msg];
-    return;
-  }
-
-  NSString *keychainItemName = nil;
-  if ([self shouldSaveInKeychain]) {
-    keychainItemName = kKeychainItemName;
-  }
-
-  NSURL *authURL = [NSURL URLWithString:@"https://api.dailymotion.com/oauth/authorize?display=mobile"];
-
-  // Display the authentication view
-  SEL sel = @selector(viewController:finishedWithAuth:error:);
-
-  GTMOAuth2ViewControllerTouch *viewController;
-  viewController = [GTMOAuth2ViewControllerTouch controllerWithAuthentication:auth
-                                                             authorizationURL:authURL
-                                                             keychainItemName:keychainItemName
-                                                                     delegate:self
-                                                             finishedSelector:sel];
-
-  // We can set a URL for deleting the cookies after sign-in so the next time
-  // the user signs in, the browser does not assume the user is already signed
-  // in
-  viewController.browserCookiesURL = [NSURL URLWithString:@"http://api.dailymotion.com/"];
-
-  // You can set the title of the navigationItem of the controller here, if you want
-
-  // Now push our sign-in view
-  [[self navigationController] pushViewController:viewController animated:YES];
-}
+//- (void)signInToDailyMotion {
+//  [self signOut];
+//
+//  GTMOAuth2Authentication *auth = [self authForDailyMotion];
+//  auth.scope = @"read";
+//
+//  if ([auth.clientID length] == 0 || [auth.clientSecret length] == 0) {
+//    NSString *msg = @"The sample code requires a valid client ID and client secret to sign in.";
+//    [self displayAlertWithMessage:msg];
+//    return;
+//  }
+//
+//  NSString *keychainItemName = nil;
+//  if ([self shouldSaveInKeychain]) {
+//    keychainItemName = kKeychainItemName;
+//  }
+//
+//  NSURL *authURL = [NSURL URLWithString:@"https://api.dailymotion.com/oauth/authorize?display=mobile"];
+//
+//  // Display the authentication view
+//  SEL sel = @selector(viewController:finishedWithAuth:error:);
+//
+//  GTMOAuth2ViewControllerTouch *viewController;
+//  viewController = [GTMOAuth2ViewControllerTouch controllerWithAuthentication:auth
+//                                                             authorizationURL:authURL
+//                                                             keychainItemName:keychainItemName
+//                                                                     delegate:self
+//                                                             finishedSelector:sel];
+//
+//  // We can set a URL for deleting the cookies after sign-in so the next time
+//  // the user signs in, the browser does not assume the user is already signed
+//  // in
+//  viewController.browserCookiesURL = [NSURL URLWithString:@"http://api.dailymotion.com/"];
+//
+//  // You can set the title of the navigationItem of the controller here, if you want
+//
+//  // Now push our sign-in view
+//  [[self navigationController] pushViewController:viewController animated:YES];
+//}
 
 - (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
       finishedWithAuth:(GTMOAuth2Authentication *)auth
@@ -420,20 +421,21 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   } else {
     // Authentication succeeded
     //
-    // At this point, we either use the authentication object to explicitly
-    // authorize requests, like
     //
-    //  [auth authorizeRequest:myNSURLMutableRequest
-    //       completionHandler:^(NSError *error) {
-    //         if (error == nil) {
-    //           // request here has been authorized
-    //         }
-    //       }];
-    //
-    // or store the authentication object into a fetcher or a Google API service
-    // object like
-    //
-    //   [fetcher setAuthorizer:auth];
+      DebugLog(@"succesfully!");
+      if (error == nil) {
+          DebugLog(@"is service nil ? %@",self.tasksService);
+          self.tasksService.authorizer = auth;
+          
+          [self performSelector:@selector(fetchTaskLists)];
+//          if (signInDoneSel) {
+//              [self performSelector:signInDoneSel];
+//          }
+          DebugLog(@"sign in succesfuuly");
+      } else {
+          self.taskListsFetchError = error;
+          [self updateUI];
+      }
 
     // save the authentication object
     self.auth = auth;
@@ -485,6 +487,41 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 //              // the access token may have changed
 //              [self updateUI];
 //            }];
+//    NSString *clientID = client_id;
+//    NSString *clientSecret = client_secret;
+    
+//    if ([clientID length] == 0 || [clientSecret length] == 0) {
+//        // Remind the developer that client ID and client secret are needed
+//        [clientIDButton_ performSelector:@selector(performClick:)
+//                              withObject:self
+//                              afterDelay:0.5];
+//        return;
+//    }
+    
+    // Show the OAuth 2 sign-in controller
+//    NSBundle *frameworkBundle = [NSBundle bundleForClass:[GTMOAuth2WindowController class]];
+//    GTMOAuth2WindowController *windowController;
+//    windowController = [GTMOAuth2WindowController controllerWithScope:kGTLAuthScopeTasks
+//                                                             clientID:clientID
+//                                                         clientSecret:clientSecret
+//                                                     keychainItemName:kKeychainItemName
+//                                                       resourceBundle:frameworkBundle];
+//    
+//    [windowController signInSheetModalForWindow:[self window]
+//                              completionHandler:^(GTMOAuth2Authentication *auth,
+//                                                  NSError *error) {
+//                                  // callback
+//                                  if (error == nil) {
+//                                      self.tasksService.authorizer = auth;
+//                                      if (signInDoneSel) {
+//                                          [self performSelector:signInDoneSel];
+//                                      }
+//                                  } else {
+//                                      self.taskListsFetchError = error;
+//                                      [self updateUI];
+//                                  }
+//                              }];
+    
 }
 
 #pragma mark -
