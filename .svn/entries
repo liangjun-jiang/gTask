@@ -214,6 +214,13 @@ add
 has-props
 has-prop-mods
 
+TaskListViewController.xib
+file
+0
+
+
+add
+
 SBJsonBase.h
 file
 0
@@ -276,6 +283,13 @@ add
 has-props
 has-prop-mods
 
+TaskListViewController.h
+file
+0
+
+
+add
+
 SBJsonBase.m
 file
 0
@@ -318,6 +332,13 @@ grobbins@google.com
 986
 
 SBJsonWriter.m
+file
+0
+
+
+add
+
+TaskListViewController.m
 file
 0
 
@@ -513,16 +534,16 @@ copied
 http://gtm-oauth2.googlecode.com/svn/trunk/Examples/OAuth2SampleTouch/OAuth2SampleAppDelegateTouch.m
 101
 
-GTMOAuth2ViewControllerTouch.m
-file
-0
+ClearStyle
+dir
+
 
 
 add
 
-ClearStyle
-dir
-
+GTMOAuth2ViewControllerTouch.m
+file
+0
 
 
 add

@@ -443,45 +443,48 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 }
 
 - (void)doAnAuthenticatedAPIFetch {
-  NSString *urlStr;
-  if ([self isGoogleSegmentSelected]) {
-    // Google Plus feed
-    urlStr = @"https://www.googleapis.com/plus/v1/people/me/activities/public";
-  } else {
-    // DailyMotion status feed
-    urlStr = @"https://api.dailymotion.com/videos/favorites";
-  }
+    [self fetchTaskLists];
+//  NSString *urlStr;
+//  if ([self isGoogleSegmentSelected]) {
+//    // Google Plus feed
+//    urlStr = @"https://www.googleapis.com/plus/v1/people/me/activities/public";
+//  }
+    // we don't care DailyMotion
+//  else {
+//    // DailyMotion status feed
+//    urlStr = @"https://api.dailymotion.com/videos/favorites";
+//  }
 
-  NSURL *url = [NSURL URLWithString:urlStr];
-  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-  [self.auth authorizeRequest:request
-            completionHandler:^(NSError *error) {
-              NSString *output = nil;
-              if (error) {
-                output = [error description];
-              } else {
-                // Synchronous fetches like this are a really bad idea in Cocoa applications
-                //
-                // For a very easy async alternative, we could use GTMHTTPFetcher
-                NSURLResponse *response = nil;
-                NSData *data = [NSURLConnection sendSynchronousRequest:request
-                                                     returningResponse:&response
-                                                                 error:&error];
-                if (data) {
-                  // API fetch succeeded
-                  output = [[NSString alloc] initWithData:data
-                                                  encoding:NSUTF8StringEncoding];
-                } else {
-                  // fetch failed
-                  output = [error description];
-                }
-              }
-
-              [self displayAlertWithMessage:output];
-
-              // the access token may have changed
-              [self updateUI];
-            }];
+//  NSURL *url = [NSURL URLWithString:urlStr];
+//  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+//  [self.auth authorizeRequest:request
+//            completionHandler:^(NSError *error) {
+//              NSString *output = nil;
+//              if (error) {
+//                output = [error description];
+//              } else {
+//                // Synchronous fetches like this are a really bad idea in Cocoa applications
+//                //
+//                // For a very easy async alternative, we could use GTMHTTPFetcher
+//                NSURLResponse *response = nil;
+//                NSData *data = [NSURLConnection sendSynchronousRequest:request
+//                                                     returningResponse:&response
+//                                                                 error:&error];
+//                if (data) {
+//                  // API fetch succeeded
+//                  output = [[NSString alloc] initWithData:data
+//                                                  encoding:NSUTF8StringEncoding];
+//                } else {
+//                  // fetch failed
+//                  output = [error description];
+//                }
+//              }
+//
+//              [self displayAlertWithMessage:output];
+//
+//              // the access token may have changed
+//              [self updateUI];
+//            }];
 }
 
 #pragma mark -
@@ -543,10 +546,126 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 
   BOOL isRemembering = [self shouldSaveInKeychain];
   self.shouldSaveInKeychainSwitch.on = isRemembering;
+    
+    
+    // todo: copied from other part
+    
+    
+    //
+    // Task lists table
+    //
+//    [taskListsTable__ reloadData];
+    
+    if (self.taskListsTicket != nil || self.editTaskListTicket != nil) {
+        DebugLog(@"we got some tasks");
+//        [taskListsProgressIndicator_ startAnimation:self];
+    } else {
+//        [taskListsProgressIndicator_ stopAnimation:self];
+        DebugLog(@"we didn't get anything");
+    }
+    
+    // Get the description of the selected item, or the feed fetch error
+    NSString *resultStr = @"";
+    
+    if (self.taskListsFetchError) {
+        // Display the error
+        resultStr = [self.taskListsFetchError description];
+        
+        // Also display any server data present
+        NSData *errData = [[self.taskListsFetchError userInfo] objectForKey:kGTMHTTPFetcherStatusDataKey];
+        if (errData) {
+            NSString *dataStr = [[NSString alloc] initWithData:errData
+                                                       encoding:NSUTF8StringEncoding];
+            resultStr = [resultStr stringByAppendingFormat:@"\n%@", dataStr];
+        }
+    } else {
+        // Display the selected item
+        GTLTasksTaskList *item = [self selectedTaskList];
+        if (item) {
+            resultStr = [item description];
+        }
+    }
+//    [taskListsResultTextView_ setString:resultStr];
+    DebugLog(@"this is the task lists we got: %@", resultStr);
+    //
+    // Tasks outline
+    //
+//    [tasksOutline_ reloadData];
+    
+    if (self.tasksTicket != nil) {
+        DebugLog(@"self.tasksTicket is not nil");
+//        [tasksProgressIndicator_ startAnimation:self];
+    } else {
+//        [tasksProgressIndicator_ stopAnimation:self];
+        DebugLog(@"self.tasksticket is nil");
+    }
+    
+    // Get the description of the selected item, or the feed fetch error
+    resultStr = @"";
+    if (self.tasksFetchError) {
+        resultStr = [self.tasksFetchError description];
+    } else {
+        GTLTasksTask *item = [self selectedTask];
+        if (item) {
+            resultStr = [item description];
+        }
+    }
+//    [tasksResultTextView_ setString:resultStr];
+    DebugLog(@"this is the task we got: %@", resultStr);
+
+    // Enable task lists buttons
+//    BOOL hasTaskLists = (self.taskLists != nil);
+//    BOOL isTaskListSelected = ([self selectedTaskList] != nil);
+//    BOOL hasTaskListTitle = ([[taskListNameField_ stringValue] length] > 0);
+//    
+//    [addTaskListButton_ setEnabled:(hasTaskListTitle && hasTaskLists)];
+//    [renameTaskListButton_ setEnabled:(hasTaskListTitle && isTaskListSelected)];
+//    [deleteTaskListButton_ setEnabled:(isTaskListSelected)];
+//    
+//    BOOL isFetchingTaskLists = (self.taskListsTicket != nil);
+//    BOOL isEditingTaskList = (self.editTaskListTicket != nil);
+//    [taskListsCancelButton_ setEnabled:(isFetchingTaskLists || isEditingTaskList)];
+//    
+//    // Enable tasks buttons
+//    GTLTasksTask *selectedTask = [self selectedTask];
+//    BOOL hasTasks = (self.tasks != nil);
+//    BOOL isTaskSelected = (selectedTask != nil);
+//    BOOL hasTaskTitle = ([[taskNameField_ stringValue] length] > 0);
+//    
+//    [addTaskButton_ setEnabled:(hasTaskTitle && hasTasks)];
+//    [renameTaskButton_ setEnabled:(hasTaskTitle && isTaskSelected)];
+//    [deleteTaskButton_ setEnabled:(isTaskSelected)];
+//    
+//    BOOL isCompleted = [selectedTask.status isEqual:kTaskStatusCompleted];
+//    [completeTaskButton_ setEnabled:isTaskSelected];
+//    [completeTaskButton_ setTitle:(isCompleted ? @"Uncomplete" : @"Complete")];
+//    
+//    NSArray *completedTasks = [self completedTasks];
+//    NSUInteger numberOfCompletedTasks = [completedTasks count];
+//    [clearTasksButton_ setEnabled:(numberOfCompletedTasks > 0)];
+//    
+//    NSUInteger numberOfTasks = [self.tasks.items count];
+//    [deleteAllTasksButton_ setEnabled:(numberOfTasks > 0)];
+//    
+//    BOOL areAllTasksCompleted = (numberOfCompletedTasks == numberOfTasks);
+//    [completeAllTasksButton_ setEnabled:(numberOfTasks > 0)];
+//    [completeAllTasksButton_ setTitle:(areAllTasksCompleted ?
+//                                       @"Uncomplete All" : @"Complete All")];
+//    
+//    BOOL isFetchingTasks = (self.tasksTicket != nil);
+//    BOOL isEditingTask = (self.editTaskTicket != nil);
+//    [tasksCancelButton_ setEnabled:(isFetchingTasks || isEditingTask)];
+    
+//    // Show or hide the text indicating that the client ID or client secret are
+//    // needed
+//    BOOL hasClientIDStrings = [[clientIDField_ stringValue] length] > 0
+//    && [[clientSecretField_ stringValue] length] > 0;
+//    [clientIDRequiredTextField_ setHidden:hasClientIDStrings];
+    
 }
 
 - (void)displayAlertWithMessage:(NSString *)message {
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"OAuth2Sample"
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"gTask"
                                                    message:message
                                                   delegate:nil
                                          cancelButtonTitle:@"OK"
