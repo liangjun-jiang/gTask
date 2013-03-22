@@ -52,6 +52,7 @@
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4F244810121F253B00FEE1DA /* OAuth2SampleMainTouch.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OAuth2SampleMainTouch.xib; sourceTree = "<group>"; };
 		4FF23DC011754C0300E96C5A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D62EC15B16FC021A005E65F5 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
 		D6D3CCA016F2440B003C0434 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D6D3CCCD16F246F1003C0434 /* GTLBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLBase64.h; sourceTree = "<group>"; };
 		D6D3CCCE16F246F1003C0434 /* GTLBatchQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLBatchQuery.h; sourceTree = "<group>"; };
@@ -69,7 +70,6 @@
 		D6D3CCDA16F246F1003C0434 /* GTLUploadParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLUploadParameters.h; sourceTree = "<group>"; };
 		D6D3CCDB16F246F1003C0434 /* GTLUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLUtilities.h; sourceTree = "<group>"; };
 		D6D3CCDC16F246F1003C0434 /* GTMGatherInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMGatherInputStream.h; sourceTree = "<group>"; };
-		D6D3CCDD16F246F1003C0434 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
 		D6D3CCDE16F246F1003C0434 /* GTMHTTPFetcherLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcherLogging.h; sourceTree = "<group>"; };
 		D6D3CCDF16F246F1003C0434 /* GTMHTTPFetcherService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcherService.h; sourceTree = "<group>"; };
 		D6D3CCE016F246F1003C0434 /* GTMHTTPFetchHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetchHistory.h; sourceTree = "<group>"; };
@@ -221,6 +221,7 @@
 		D6D3CCCC16F246F1003C0434 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				D62EC15B16FC021A005E65F5 /* GTMHTTPFetcher.h */,
 				D6D3CCCD16F246F1003C0434 /* GTLBase64.h */,
 				D6D3CCCE16F246F1003C0434 /* GTLBatchQuery.h */,
 				D6D3CCCF16F246F1003C0434 /* GTLBatchResult.h */,
@@ -237,7 +238,6 @@
 				D6D3CCDA16F246F1003C0434 /* GTLUploadParameters.h */,
 				D6D3CCDB16F246F1003C0434 /* GTLUtilities.h */,
 				D6D3CCDC16F246F1003C0434 /* GTMGatherInputStream.h */,
-				D6D3CCDD16F246F1003C0434 /* GTMHTTPFetcher.h */,
 				D6D3CCDE16F246F1003C0434 /* GTMHTTPFetcherLogging.h */,
 				D6D3CCDF16F246F1003C0434 /* GTMHTTPFetcherService.h */,
 				D6D3CCE016F246F1003C0434 /* GTMHTTPFetchHistory.h */,
