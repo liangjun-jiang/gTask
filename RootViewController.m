@@ -177,10 +177,12 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   return [super shouldAutorotateToInterfaceOrientation:orientation];
 }
 
-- (BOOL)isSignedIn {
-  BOOL isSignedIn = self.auth.canAuthorize;
-  return isSignedIn;
-}
+//- (BOOL)isSignedIn {
+//    
+//    
+//  BOOL isSignedIn = self.auth.canAuthorize;
+//  return isSignedIn;
+//}
 
 - (BOOL)isGoogleSegmentSelected {
   int segmentIndex = self.serviceSegments.selectedSegmentIndex;
@@ -189,6 +191,23 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 
 - (IBAction)serviceSegmentClicked:(id)sender {
   [self loadClientIDValues];
+}
+
+// copy from GTasks Mac
+- (NSString *)signedInUsername {
+    // Get the email address of the signed-in user
+    GTMOAuth2Authentication *auth = self.tasksService.authorizer;
+    BOOL isSignedIn = auth.canAuthorize;
+    if (isSignedIn) {
+        return auth.userEmail;
+    } else {
+        return nil;
+    }
+}
+
+- (BOOL)isSignedIn {
+    NSString *name = [self signedInUsername];
+    return (name != nil);
 }
 
 - (IBAction)signInOutClicked:(id)sender {
@@ -260,7 +279,8 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 
   // For Google APIs, the scope strings are available
   // in the service constant header files.
-  NSString *scope = @"https://www.googleapis.com/auth/plus.me";
+  NSString *scope = @"https://www.googleapis.com/auth/tasks";
+//    NSString *scope =@"https://www.googleapis.com/auth/plus.me";
 
   // Typically, applications will hardcode the client ID and client secret
   // strings into the source code; they should not be user-editable or visible.
@@ -422,7 +442,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     // Authentication succeeded
     //
     //
-      DebugLog(@"succesfully!");
+      DebugLog(@"auth: succesfully!");
       if (error == nil) {
           DebugLog(@"is service nil ? %@",self.tasksService);
           self.tasksService.authorizer = auth;
