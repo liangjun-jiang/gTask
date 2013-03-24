@@ -446,40 +446,6 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 //              // the access token may have changed
 //              [self updateUI];
 //            }];
-//    NSString *clientID = client_id;
-//    NSString *clientSecret = client_secret;
-    
-//    if ([clientID length] == 0 || [clientSecret length] == 0) {
-//        // Remind the developer that client ID and client secret are needed
-//        [clientIDButton_ performSelector:@selector(performClick:)
-//                              withObject:self
-//                              afterDelay:0.5];
-//        return;
-//    }
-    
-    // Show the OAuth 2 sign-in controller
-//    NSBundle *frameworkBundle = [NSBundle bundleForClass:[GTMOAuth2WindowController class]];
-//    GTMOAuth2WindowController *windowController;
-//    windowController = [GTMOAuth2WindowController controllerWithScope:kGTLAuthScopeTasks
-//                                                             clientID:clientID
-//                                                         clientSecret:clientSecret
-//                                                     keychainItemName:kKeychainItemName
-//                                                       resourceBundle:frameworkBundle];
-//    
-//    [windowController signInSheetModalForWindow:[self window]
-//                              completionHandler:^(GTMOAuth2Authentication *auth,
-//                                                  NSError *error) {
-//                                  // callback
-//                                  if (error == nil) {
-//                                      self.tasksService.authorizer = auth;
-//                                      if (signInDoneSel) {
-//                                          [self performSelector:signInDoneSel];
-//                                      }
-//                                  } else {
-//                                      self.taskListsFetchError = error;
-//                                      [self updateUI];
-//                                  }
-//                              }];
     
 }
 
