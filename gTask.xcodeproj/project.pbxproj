@@ -48,9 +48,16 @@
 		D62C375916FCDEFA00EF8CDE /* GTLTasksTaskList.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C375116FCDEFA00EF8CDE /* GTLTasksTaskList.m */; };
 		D62C375A16FCDEFA00EF8CDE /* GTLTasksTaskLists.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C375216FCDEFA00EF8CDE /* GTLTasksTaskLists.m */; };
 		D62C375B16FCDEFA00EF8CDE /* GTLTasksTasks.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C375316FCDEFA00EF8CDE /* GTLTasksTasks.m */; };
+		D62C37EE16FF679300EF8CDE /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37E916FF679300EF8CDE /* Icon-72.png */; };
+		D62C37EF16FF679300EF8CDE /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37EA16FF679300EF8CDE /* Icon-72@2x.png */; };
+		D62C37F016FF679300EF8CDE /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37EB16FF679300EF8CDE /* Icon-Small.png */; };
+		D62C37F116FF679300EF8CDE /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37EC16FF679300EF8CDE /* Icon.png */; };
+		D62C37F216FF679300EF8CDE /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37ED16FF679300EF8CDE /* Icon@2x.png */; };
+		D62C37F416FF68D700EF8CDE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37F316FF68D700EF8CDE /* Default.png */; };
+		D62C37F616FF68E200EF8CDE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37F516FF68E200EF8CDE /* Default@2x.png */; };
+		D62C37F816FF68EB00EF8CDE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37F716FF68EB00EF8CDE /* Default-568h@2x.png */; };
 		D62EC16116FCC2C5005E65F5 /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62EC15F16FCC2C5005E65F5 /* TaskListViewController.m */; };
 		D62EC16216FCC2C5005E65F5 /* TaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D62EC16016FCC2C5005E65F5 /* TaskListViewController.xib */; };
-		D6D3CCA116F2440B003C0434 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6D3CCA016F2440B003C0434 /* Default-568h@2x.png */; };
 		D6D3CD0616F24CD9003C0434 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */; };
 		D6D3CD5816F25307003C0434 /* SHCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D3CD3B16F25307003C0434 /* SHCViewController.xib */; };
 		D6D3CD5A16F25307003C0434 /* SHCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD3F16F25307003C0434 /* SHCAppDelegate.m */; };
@@ -147,10 +154,17 @@
 		D62C375116FCDEFA00EF8CDE /* GTLTasksTaskList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLTasksTaskList.m; path = TaskService/GTLTasksTaskList.m; sourceTree = "<group>"; };
 		D62C375216FCDEFA00EF8CDE /* GTLTasksTaskLists.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLTasksTaskLists.m; path = TaskService/GTLTasksTaskLists.m; sourceTree = "<group>"; };
 		D62C375316FCDEFA00EF8CDE /* GTLTasksTasks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLTasksTasks.m; path = TaskService/GTLTasksTasks.m; sourceTree = "<group>"; };
+		D62C37E916FF679300EF8CDE /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		D62C37EA16FF679300EF8CDE /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		D62C37EB16FF679300EF8CDE /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		D62C37EC16FF679300EF8CDE /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		D62C37ED16FF679300EF8CDE /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		D62C37F316FF68D700EF8CDE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		D62C37F516FF68E200EF8CDE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		D62C37F716FF68EB00EF8CDE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D62EC15E16FCC2C5005E65F5 /* TaskListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListViewController.h; sourceTree = "<group>"; };
 		D62EC15F16FCC2C5005E65F5 /* TaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListViewController.m; sourceTree = "<group>"; };
 		D62EC16016FCC2C5005E65F5 /* TaskListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskListViewController.xib; sourceTree = "<group>"; };
-		D6D3CCA016F2440B003C0434 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
 		D6D3CD3C16F25307003C0434 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SHCViewController.xib; sourceTree = "<group>"; };
 		D6D3CD3E16F25307003C0434 /* SHCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCAppDelegate.h; sourceTree = "<group>"; };
@@ -216,7 +230,6 @@
 		13C82E9B11373B6A00ACAEDD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D6D3CCA016F2440B003C0434 /* Default-568h@2x.png */,
 				D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */,
 				4F244810121F253B00FEE1DA /* OAuth2SampleMainTouch.xib */,
 				1301BB44119CB4B100A33D6C /* OAuth2SampleMainiPad.xib */,
@@ -236,6 +249,9 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				D62C37F716FF68EB00EF8CDE /* Default-568h@2x.png */,
+				D62C37F516FF68E200EF8CDE /* Default@2x.png */,
+				D62C37F316FF68D700EF8CDE /* Default.png */,
 				D62C375C16FCDF9800EF8CDE /* GTLTasks */,
 				13C82E9111373B3000ACAEDD /* Classes */,
 				D6D3CD3616F25307003C0434 /* ClearStyle */,
@@ -252,6 +268,11 @@
 		29B97315FDCFA39411CA2CEA /* Other App Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D62C37E916FF679300EF8CDE /* Icon-72.png */,
+				D62C37EA16FF679300EF8CDE /* Icon-72@2x.png */,
+				D62C37EB16FF679300EF8CDE /* Icon-Small.png */,
+				D62C37EC16FF679300EF8CDE /* Icon.png */,
+				D62C37ED16FF679300EF8CDE /* Icon@2x.png */,
 				13C82E9211373B3000ACAEDD /* mainTouch.m */,
 				13C82E9711373B3000ACAEDD /* prefixTouch.pch */,
 			);
@@ -432,11 +453,18 @@
 			files = (
 				4F244813121F263E00FEE1DA /* OAuth2SampleMainTouch.xib in Resources */,
 				1301BB45119CB4B100A33D6C /* OAuth2SampleMainiPad.xib in Resources */,
-				D6D3CCA116F2440B003C0434 /* Default-568h@2x.png in Resources */,
 				D6D3CD0616F24CD9003C0434 /* GTMOAuth2ViewTouch.xib in Resources */,
 				D6D3CD5816F25307003C0434 /* SHCViewController.xib in Resources */,
 				D62EC16216FCC2C5005E65F5 /* TaskListViewController.xib in Resources */,
 				D62C366316FCD2C600EF8CDE /* GTMOAuth2ViewTouch.xib in Resources */,
+				D62C37EE16FF679300EF8CDE /* Icon-72.png in Resources */,
+				D62C37EF16FF679300EF8CDE /* Icon-72@2x.png in Resources */,
+				D62C37F016FF679300EF8CDE /* Icon-Small.png in Resources */,
+				D62C37F116FF679300EF8CDE /* Icon.png in Resources */,
+				D62C37F216FF679300EF8CDE /* Icon@2x.png in Resources */,
+				D62C37F416FF68D700EF8CDE /* Default.png in Resources */,
+				D62C37F616FF68E200EF8CDE /* Default@2x.png in Resources */,
+				D62C37F816FF68EB00EF8CDE /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -361,67 +361,6 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   // posted, just until the finished selector is invoked.
 }
 
-//- (GTMOAuth2Authentication *)authForDailyMotion {
-//  // http://www.dailymotion.com/doc/api/authentication.html
-//  NSURL *tokenURL = [NSURL URLWithString:@"https://api.dailymotion.com/oauth/token"];
-//
-//  // We'll make up an arbitrary redirectURI.  The controller will watch for
-//  // the server to redirect the web view to this URI, but this URI will not be
-//  // loaded, so it need not be for any actual web page.
-//  NSString *redirectURI = @"http://www.google.com/OAuthCallback";
-//
-//  NSString *clientID = self.clientIDField.text;
-//  NSString *clientSecret = self.clientSecretField.text;
-//
-//  GTMOAuth2Authentication *auth;
-//  auth = [GTMOAuth2Authentication authenticationWithServiceProvider:kDailyMotionServiceName
-//                                                           tokenURL:tokenURL
-//                                                        redirectURI:redirectURI
-//                                                           clientID:clientID
-//                                                       clientSecret:clientSecret];
-//  return auth;
-//}
-
-//- (void)signInToDailyMotion {
-//  [self signOut];
-//
-//  GTMOAuth2Authentication *auth = [self authForDailyMotion];
-//  auth.scope = @"read";
-//
-//  if ([auth.clientID length] == 0 || [auth.clientSecret length] == 0) {
-//    NSString *msg = @"The sample code requires a valid client ID and client secret to sign in.";
-//    [self displayAlertWithMessage:msg];
-//    return;
-//  }
-//
-//  NSString *keychainItemName = nil;
-//  if ([self shouldSaveInKeychain]) {
-//    keychainItemName = kKeychainItemName;
-//  }
-//
-//  NSURL *authURL = [NSURL URLWithString:@"https://api.dailymotion.com/oauth/authorize?display=mobile"];
-//
-//  // Display the authentication view
-//  SEL sel = @selector(viewController:finishedWithAuth:error:);
-//
-//  GTMOAuth2ViewControllerTouch *viewController;
-//  viewController = [GTMOAuth2ViewControllerTouch controllerWithAuthentication:auth
-//                                                             authorizationURL:authURL
-//                                                             keychainItemName:keychainItemName
-//                                                                     delegate:self
-//                                                             finishedSelector:sel];
-//
-//  // We can set a URL for deleting the cookies after sign-in so the next time
-//  // the user signs in, the browser does not assume the user is already signed
-//  // in
-//  viewController.browserCookiesURL = [NSURL URLWithString:@"http://api.dailymotion.com/"];
-//
-//  // You can set the title of the navigationItem of the controller here, if you want
-//
-//  // Now push our sign-in view
-//  [[self navigationController] pushViewController:viewController animated:YES];
-//}
-
 - (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
       finishedWithAuth:(GTMOAuth2Authentication *)auth
                  error:(NSError *)error {
@@ -566,7 +505,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   if ([[notify name] isEqual:kGTMOAuth2NetworkLost]) {
     // network connection was lost; alert the user, or dismiss
     // the sign-in view with
-    //   [[[notify object] delegate] cancelSigningIn];
+    [[[notify object] delegate] cancelSigningIn];
   } else {
     // network connection was found again
   }
@@ -605,9 +544,6 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   self.shouldSaveInKeychainSwitch.on = isRemembering;
     
     
-    // todo: copied from other part
-    
-    
     //
     // Task lists table
     //
@@ -639,6 +575,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
         // Display the selected item
         GTLTasksTaskList *item = [self selectedTaskList];
         if (item) {
+            // this is all we care
             resultStr = [item description];
         }
     }
@@ -649,26 +586,30 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     //
 //    [tasksOutline_ reloadData];
     
-    if (self.tasksTicket != nil) {
-        DebugLog(@"self.tasksTicket is not nil");
-//        [tasksProgressIndicator_ startAnimation:self];
-    } else {
-//        [tasksProgressIndicator_ stopAnimation:self];
-        DebugLog(@"self.tasksticket is nil");
-    }
+    // todo: this is a total temp hacker!!!
+    [self fetchTasksForSelectedList];
     
-    // Get the description of the selected item, or the feed fetch error
-    resultStr = @"";
-    if (self.tasksFetchError) {
-        resultStr = [self.tasksFetchError description];
-    } else {
-        GTLTasksTask *item = [self selectedTask];
-        if (item) {
-            resultStr = [item description];
-        }
-    }
-//    [tasksResultTextView_ setString:resultStr];
-    DebugLog(@"this is the task we got: %@", resultStr);
+//    if (self.tasksTicket != nil) {
+//        DebugLog(@"self.tasksTicket is not nil");
+////        [tasksProgressIndicator_ startAnimation:self];
+//    } else {
+////        [tasksProgressIndicator_ stopAnimation:self];
+//        DebugLog(@"self.tasksticket is nil");
+//    }
+//    
+//    // Get the description of the selected item, or the feed fetch error
+//    resultStr = @"";
+//    if (self.tasksFetchError) {
+//        resultStr = [self.tasksFetchError description];
+//    } else {
+//        DebugLog(@"the all tasks %@",self.tasks);
+//        GTLTasksTask *item = [self selectedTask];
+//        if (item) {
+//            resultStr = [item description];
+//        }
+//    }
+////    [tasksResultTextView_ setString:resultStr];
+//    DebugLog(@"this is the task we got: %@", resultStr);
 
     // Enable task lists buttons
 //    BOOL hasTaskLists = (self.taskLists != nil);
@@ -958,6 +899,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 
 - (GTLTasksTaskList *)selectedTaskList {
 //    int rowIndex = [taskListsTable__ selectedRow];
+    // todo: the default is always the first one
     int rowIndex = 0;
     if (rowIndex > -1) {
         GTLTasksTaskList *item = [self.taskLists itemAtIndex:rowIndex];
@@ -968,9 +910,12 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 
 - (GTLTasksTask *)selectedTask {
 //    int rowIndex = [tasksOutline_ selectedRow];
+    int rowIndex = 0;
 //    GTLTasksTask *item = [tasksOutline_ itemAtRow:rowIndex];
-//    return item;
-    return nil;
+    
+    GTLTasksTask *item = self.tasks.items[rowIndex];
+    return item;
+//    return nil;
 }
 
 - (NSArray *)completedTasks {
@@ -1097,10 +1042,37 @@ static NSString *const kGTLChildTasksProperty = @"childTasks";
                                    self.tasksFetchError = error;
                                    self.tasksTicket = nil;
                                    
-                                   [self updateUI];
+                                   [self updateTasksTable];
+//                                   [self updateUI];
                                }];
-        [self updateUI];
+//        [self updateUI];
     }
+}
+
+#pragma mark - updat another table
+- (void)updateTasksTable
+{
+    if (self.tasksTicket != nil) {
+        DebugLog(@"self.tasksTicket is not nil");
+        //        [tasksProgressIndicator_ startAnimation:self];
+    } else {
+        //        [tasksProgressIndicator_ stopAnimation:self];
+        DebugLog(@"self.tasksticket is nil");
+    }
+    
+    // Get the description of the selected item, or the feed fetch error
+    NSString *resultStr = @"";
+    if (self.tasksFetchError) {
+        resultStr = [self.tasksFetchError description];
+    } else {
+        DebugLog(@"the all tasks %@",self.tasks);
+        GTLTasksTask *item = [self selectedTask];
+        if (item) {
+            resultStr = [item description];
+        }
+    }
+    //    [tasksResultTextView_ setString:resultStr];
+    DebugLog(@"this is the task we got: %@", resultStr);
 }
 
 #pragma mark Add a Task List
