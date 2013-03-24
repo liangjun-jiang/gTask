@@ -1,19 +1,3 @@
-/* Copyright (c) 2011 Google Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-// OAuth2SampleRootViewControllerTouch.m
 
 #import "RootViewController.h"
 #import "GTMOAuth2ViewControllerTouch.h"
@@ -21,6 +5,8 @@
 
 #import "GTLUtilities.h"
 #import "GTMHTTPFetcherLogging.h"
+
+#import "TaskListViewController.h"
 
 //static NSString *const kKeychainItemName = @"OAuth Sample: Google Contacts";
 static NSString *const kShouldSaveInKeychainKey = @"shouldSaveInKeychain";
@@ -63,11 +49,11 @@ static NSString *const kSampleClientSecretKey = @"clientSecret";
 
 @end
 // Constants that ought to be defined by the API
-NSString *const kTaskStatusCompleted = @"completed";
-NSString *const kTaskStatusNeedsAction = @"needsAction";
+//NSString *const kTaskStatusCompleted = @"completed";
+//NSString *const kTaskStatusNeedsAction = @"needsAction";
 
 // Keychain item name for saving the user's authentication information
-NSString *const kKeychainItemName = @"TasksSample: Google Tasks";
+NSString *const kKeychainItemName = @"gTasks: Google Tasks";
 
 @implementation RootViewController
 
@@ -125,31 +111,8 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   if (auth.canAuthorize) {
     // Select the Google service segment
     self.serviceSegments.selectedSegmentIndex = 0;
-  } else {
-    // There is no saved Google authentication
-    //
-    // Perhaps we have a saved authorization for DailyMotion instead; try getting
-    // that from the keychain
-
-//    clientID = [defaults stringForKey:kDailyMotionClientIDKey];
-//    clientSecret = [defaults stringForKey:kDailyMotionClientSecretKey];
-//
-//    if (clientID && clientSecret) {
-//      auth = [self authForDailyMotion];
-//      if (auth) {
-//        auth.clientID = clientID;
-//        auth.clientSecret = clientSecret;
-//
-//        BOOL didAuth = [GTMOAuth2ViewControllerTouch authorizeFromKeychainForName:kDailyMotionAppServiceName
-//                                                                   authentication:auth];
-//        if (didAuth) {
-//          // select the DailyMotion radio button
-//          self.serviceSegments.selectedSegmentIndex = 1;
-//        }
-//      }
-//    }
   }
-
+  
   // Save the authentication object, which holds the auth tokens and
   // the scope string used to obtain the token.  For Google services,
   // the auth object also holds the user's email address.
@@ -218,9 +181,6 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     if ([self isGoogleSegmentSelected]) {
       [self signInToGoogle];
     }
-//    else {
-//      [self signInToDailyMotion];
-//    }
   } else {
     // Sign out
     [self signOut];
@@ -383,10 +343,15 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     //
       DebugLog(@"auth: succesfully!");
       if (error == nil) {
-          DebugLog(@"is service nil ? %@",self.tasksService);
+//          DebugLog(@"is service nil ? %@",self.tasksService);
           self.tasksService.authorizer = auth;
           
-          [self performSelector:@selector(fetchTaskLists)];
+          TaskListViewController *tasksListViewController = [[TaskListViewController alloc] initWithStyle:UITableViewStylePlain];
+          tasksListViewController.tasksService = self.tasksService;
+          
+          [self.navigationController pushViewController:tasksListViewController animated:YES];
+          
+//          [self performSelector:@selector(fetchTaskLists)];
 //          if (signInDoneSel) {
 //              [self performSelector:signInDoneSel];
 //          }
@@ -515,45 +480,45 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     //
 //    [taskListsTable__ reloadData];
     
-    if (self.taskListsTicket != nil || self.editTaskListTicket != nil) {
-        DebugLog(@"we got some tasks");
-//        [taskListsProgressIndicator_ startAnimation:self];
-    } else {
-//        [taskListsProgressIndicator_ stopAnimation:self];
-        DebugLog(@"we didn't get anything");
-    }
-    
-    // Get the description of the selected item, or the feed fetch error
-    NSString *resultStr = @"";
-    
-    if (self.taskListsFetchError) {
-        // Display the error
-        resultStr = [self.taskListsFetchError description];
-        
-        // Also display any server data present
-        NSData *errData = [[self.taskListsFetchError userInfo] objectForKey:kGTMHTTPFetcherStatusDataKey];
-        if (errData) {
-            NSString *dataStr = [[NSString alloc] initWithData:errData
-                                                       encoding:NSUTF8StringEncoding];
-            resultStr = [resultStr stringByAppendingFormat:@"\n%@", dataStr];
-        }
-    } else {
-        // Display the selected item
-        GTLTasksTaskList *item = [self selectedTaskList];
-        if (item) {
-            // this is all we care
-            resultStr = [item description];
-        }
-    }
-//    [taskListsResultTextView_ setString:resultStr];
-    DebugLog(@"this is the task lists we got: %@", resultStr);
-    //
-    // Tasks outline
-    //
-//    [tasksOutline_ reloadData];
-    
-    // todo: this is a total temp hacker!!!
-    [self fetchTasksForSelectedList];
+//    if (self.taskListsTicket != nil || self.editTaskListTicket != nil) {
+//        DebugLog(@"we got some tasks");
+////        [taskListsProgressIndicator_ startAnimation:self];
+//    } else {
+////        [taskListsProgressIndicator_ stopAnimation:self];
+//        DebugLog(@"we didn't get anything");
+//    }
+//
+//    // Get the description of the selected item, or the feed fetch error
+//    NSString *resultStr = @"";
+//    
+//    if (self.taskListsFetchError) {
+//        // Display the error
+//        resultStr = [self.taskListsFetchError description];
+//        
+//        // Also display any server data present
+//        NSData *errData = [[self.taskListsFetchError userInfo] objectForKey:kGTMHTTPFetcherStatusDataKey];
+//        if (errData) {
+//            NSString *dataStr = [[NSString alloc] initWithData:errData
+//                                                       encoding:NSUTF8StringEncoding];
+//            resultStr = [resultStr stringByAppendingFormat:@"\n%@", dataStr];
+//        }
+//    } else {
+//        // Display the selected item
+//        GTLTasksTaskList *item = [self selectedTaskList];
+//        if (item) {
+//            // this is all we care
+//            resultStr = [item description];
+//        }
+//    }
+////    [taskListsResultTextView_ setString:resultStr];
+//    DebugLog(@"this is the task lists we got: %@", resultStr);
+//    //
+//    // Tasks outline
+//    //
+////    [tasksOutline_ reloadData];
+//    
+//    // todo: this is a total temp hacker!!!
+//    [self fetchTasksForSelectedList];
     
 //    if (self.tasksTicket != nil) {
 //        DebugLog(@"self.tasksTicket is not nil");
@@ -800,41 +765,8 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     alertView.tag = 11;
     [alertView show];
     
-//    NSBeginAlertSheet(@"Delete", nil, @"Cancel", nil,
-//                      [self window], self,
-//                      @selector(deleteTaskSheetDidEnd:returnCode:contextInfo:),
-//                      nil, nil, @"Delete \"%@\"?", title);
-//}
 }
 
-
-//- (void)deleteTaskSheetDidEnd:(NSWindow *)sheet
-//                   returnCode:(int)returnCode
-//                  contextInfo:(void *)contextInfo {
-//    if (returnCode == NSAlertDefaultReturn) {
-//        [self deleteSelectedTask];
-//    }
-//}
-
-- (IBAction)completeTaskClicked:(id)sender {
-    [self completeSelectedTask];
-}
-
-- (IBAction)clearTasksClicked:(id)sender {
-    [self hideCompletedTasks];
-}
-
-- (IBAction)completeAllTasksClicked:(id)sender {
-    [self completeAllTasks];
-}
-
-- (IBAction)deleteAllTasksClicked:(id)sender {
-    [self deleteAllTasks];
-}
-
-- (IBAction)showTasksCheckboxClicked:(id)sender {
-    [self fetchTasksForSelectedList];
-}
 
 #pragma mark - 
 #pragma mark -
@@ -884,12 +816,12 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 //    return nil;
 }
 
-- (NSArray *)completedTasks {
-    NSArray *array = [GTLUtilities objectsFromArray:self.tasks.items
-                                          withValue:kTaskStatusCompleted
-                                         forKeyPath:@"status"];
-    return array;
-}
+//- (NSArray *)completedTasks {
+//    NSArray *array = [GTLUtilities objectsFromArray:self.tasks.items
+//                                          withValue:kTaskStatusCompleted
+//                                         forKeyPath:@"status"];
+//    return array;
+//}
 
 #pragma mark Create ID Map and Ordered Child Arrays
 
@@ -1276,235 +1208,235 @@ static NSString *const kGTLChildTasksProperty = @"childTasks";
 
 #pragma mark Change a Task's Complete Status
 
-- (void)completeSelectedTask {
-    // Mark a task as completed or incomplete
-    GTLTasksTask *selectedTask = [self selectedTask];
-    GTLTasksTask *patchObject = [GTLTasksTask object];
-    
-    if ([selectedTask.status isEqual:kTaskStatusCompleted]) {
-        // Change the status to not complete
-        patchObject.status = kTaskStatusNeedsAction;
-        patchObject.completed = [GTLObject nullValue]; // remove the completed date
-    } else {
-        // Change the status to complete
-        patchObject.status = kTaskStatusCompleted;
-    }
-    
-    GTLTasksTaskList *tasklist = [self selectedTaskList];
-    GTLQueryTasks *query = [GTLQueryTasks queryForTasksPatchWithObject:patchObject
-                                                              tasklist:tasklist.identifier
-                                                                  task:selectedTask.identifier];
-    GTLServiceTasks *service = self.tasksService;
-    self.editTaskTicket = [service executeQuery:query
-                              completionHandler:^(GTLServiceTicket *ticket,
-                                                  id item, NSError *error) {
-                                  // callback
-                                  self.editTaskTicket = nil;
-                                  GTLTasksTask *task = item;
-                                  
-                                  if (error == nil) {
-                                      NSString *displayStatus;
-                                      if ([task.status isEqual:kTaskStatusCompleted]) {
-                                          displayStatus = @"complete";
-                                      } else {
-                                          displayStatus = @"incomplete";
-                                      }
-                                      [self displayAlertWithMessage:[NSString stringWithFormat:@"Deleted task \"%@\"", task.title]];
-//                                      [self displayAlert:@"Task Updated"
-//                                                  format:@"Marked task \"%@\" %@", task.title, displayStatus];
-                                      [self fetchTasksForSelectedList];
-                                  } else {
-                                      [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
+//- (void)completeSelectedTask {
+//    // Mark a task as completed or incomplete
+//    GTLTasksTask *selectedTask = [self selectedTask];
+//    GTLTasksTask *patchObject = [GTLTasksTask object];
+//    
+//    if ([selectedTask.status isEqual:kTaskStatusCompleted]) {
+//        // Change the status to not complete
+//        patchObject.status = kTaskStatusNeedsAction;
+//        patchObject.completed = [GTLObject nullValue]; // remove the completed date
+//    } else {
+//        // Change the status to complete
+//        patchObject.status = kTaskStatusCompleted;
+//    }
+//    
+//    GTLTasksTaskList *tasklist = [self selectedTaskList];
+//    GTLQueryTasks *query = [GTLQueryTasks queryForTasksPatchWithObject:patchObject
+//                                                              tasklist:tasklist.identifier
+//                                                                  task:selectedTask.identifier];
+//    GTLServiceTasks *service = self.tasksService;
+//    self.editTaskTicket = [service executeQuery:query
+//                              completionHandler:^(GTLServiceTicket *ticket,
+//                                                  id item, NSError *error) {
+//                                  // callback
+//                                  self.editTaskTicket = nil;
+//                                  GTLTasksTask *task = item;
+//                                  
+//                                  if (error == nil) {
+//                                      NSString *displayStatus;
+//                                      if ([task.status isEqual:kTaskStatusCompleted]) {
+//                                          displayStatus = @"complete";
+//                                      } else {
+//                                          displayStatus = @"incomplete";
+//                                      }
+//                                      [self displayAlertWithMessage:[NSString stringWithFormat:@"Deleted task \"%@\"", task.title]];
+////                                      [self displayAlert:@"Task Updated"
+////                                                  format:@"Marked task \"%@\" %@", task.title, displayStatus];
+//                                      [self fetchTasksForSelectedList];
+//                                  } else {
+//                                      [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
+////                                      [self displayAlert:@"Error"
+////                                                  format:@"%@", error];
+//                                      [self updateUI];
+//                                  }
+//                              }];
+//    [self updateUI];
+//}
+//
+//#pragma mark Hide Completed Tasks
+//
+//- (void)hideCompletedTasks {
+//    // Make all completed tasks hidden
+//    NSArray *previouslyCompletedTasks = [self completedTasks];
+//    GTLTasksTaskList *tasklist = [self selectedTaskList];
+//    GTLQueryTasks *query = [GTLQueryTasks queryForTasksClearWithTasklist:tasklist.identifier];
+//    
+//    GTLServiceTasks *service = self.tasksService;
+//    self.editTaskTicket = [service executeQuery:query
+//                              completionHandler:^(GTLServiceTicket *ticket,
+//                                                  id item, NSError *error) {
+//                                  // callback
+//                                  self.editTaskTicket = nil;
+//                                  
+//                                  if (error == nil) {
+////                                       [self displayAlertWithMessage:[NSString stringWithFormat:@"Task List Clear"]];
+//                                      [self displayAlert:@"Task List Clear"
+//                                                  format:@"Made %lu tasks hidden", (unsigned long) [previouslyCompletedTasks count]];
+//                                      [self fetchTasksForSelectedList];
+//                                  } else {
+//                                      [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
+////                                      [self displayAlert:@"Error"
+////                                                  format:@"%@", error];
+//                                      [self updateUI];
+//                                  }
+//                              }];
+//    [self updateUI];
+//}
+//
+//#pragma mark Complete All Tasks
+//
+//- (void)completeAllTasks {
+//    // Change all tasks to be completed or uncompleted
+//    NSArray *completedTasks = [self completedTasks];
+//    NSUInteger numberOfCompletedTasks = [completedTasks count];
+//    NSUInteger numberOfTasks = [self.tasks.items count];
+//    BOOL wereAllTasksCompleted = (numberOfCompletedTasks == numberOfTasks);
+//    
+//    // Make a batch of queries to set all tasks to completed or uncompleted
+//    GTLTasksTaskList *tasklist = [self selectedTaskList];
+//    
+//    GTLBatchQuery *batchQuery = [GTLBatchQuery batchQuery];
+//    
+//    for (GTLTasksTask *task in self.tasks) {
+//        GTLTasksTask *patchObject = [GTLTasksTask object];
+//        
+//        if (wereAllTasksCompleted) {
+//            // Change the status to not complete
+//            patchObject.status = kTaskStatusNeedsAction;
+//            patchObject.completed = [GTLObject nullValue]; // remove the completed date
+//        } else {
+//            // Change the status to complete
+//            patchObject.status = kTaskStatusCompleted;
+//        }
+//        
+//        GTLQueryTasks *query = [GTLQueryTasks queryForTasksPatchWithObject:patchObject
+//                                                                  tasklist:tasklist.identifier
+//                                                                      task:task.identifier];
+//        [batchQuery addQuery:query];
+//    }
+//    
+//    GTLServiceTasks *service = self.tasksService;
+//    self.editTaskTicket = [service executeQuery:batchQuery
+//                              completionHandler:^(GTLServiceTicket *ticket,
+//                                                  id object, NSError *error) {
+//                                  // callback
+//                                  self.editTaskTicket = nil;
+//                                  
+//                                  if (error == nil) {
+//                                      GTLBatchResult *batchResults = (GTLBatchResult *)object;
+//                                      NSString *status = wereAllTasksCompleted ? @"Uncompleted" : @"Completed";
+//                                      
+//                                      NSDictionary *successes = batchResults.successes;
+//                                      NSDictionary *failures = batchResults.failures;
+//                                      
+//                                      NSUInteger numberUpdated = [successes count];
+//                                      NSUInteger numberFailed = [failures count];
+//                                      
+//                                      NSArray *successTasks = [successes allValues];
+//                                      NSArray *titles = [successTasks valueForKey:@"title"];
+//                                      NSString *titlesStr = [titles componentsJoinedByString:@", "];
+//                                      
+//                                      [self displayAlert:@"Tasks Updated"
+//                                                  format:@"%@: %lu\n%@\nErrors: %lu\n%@",
+//                                       status,
+//                                       (unsigned long) numberUpdated, titlesStr,
+//                                       (unsigned long) numberFailed, failures];
+//                                      
+//                                      [self fetchTasksForSelectedList];
+//                                  } else {
 //                                      [self displayAlert:@"Error"
 //                                                  format:@"%@", error];
-                                      [self updateUI];
-                                  }
-                              }];
-    [self updateUI];
-}
-
-#pragma mark Hide Completed Tasks
-
-- (void)hideCompletedTasks {
-    // Make all completed tasks hidden
-    NSArray *previouslyCompletedTasks = [self completedTasks];
-    GTLTasksTaskList *tasklist = [self selectedTaskList];
-    GTLQueryTasks *query = [GTLQueryTasks queryForTasksClearWithTasklist:tasklist.identifier];
-    
-    GTLServiceTasks *service = self.tasksService;
-    self.editTaskTicket = [service executeQuery:query
-                              completionHandler:^(GTLServiceTicket *ticket,
-                                                  id item, NSError *error) {
-                                  // callback
-                                  self.editTaskTicket = nil;
-                                  
-                                  if (error == nil) {
-//                                       [self displayAlertWithMessage:[NSString stringWithFormat:@"Task List Clear"]];
-                                      [self displayAlert:@"Task List Clear"
-                                                  format:@"Made %lu tasks hidden", (unsigned long) [previouslyCompletedTasks count]];
-                                      [self fetchTasksForSelectedList];
-                                  } else {
-                                      [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
+//                                      [self updateUI];
+//                                  }
+//                              }];
+//    [self updateUI];
+//}
+//
+//#pragma mark Delete All Tasks
+//
+//- (void)deleteAllTasks {
+//    // Make a batch of queries to delete all tasks
+//    GTLTasksTaskList *tasklist = [self selectedTaskList];
+//    
+//    GTLBatchQuery *batch = [GTLBatchQuery batchQuery];
+//    
+//    for (GTLTasksTask *task in self.tasks) {
+//        GTLQueryTasks *query = [GTLQueryTasks queryForTasksDeleteWithTasklist:tasklist.identifier
+//                                                                         task:task.identifier];
+//        [batch addQuery:query];
+//    }
+//    
+//    GTLServiceTasks *service = self.tasksService;
+//    self.editTaskTicket = [service executeQuery:batch
+//                              completionHandler:^(GTLServiceTicket *ticket,
+//                                                  id object, NSError *error) {
+//                                  // callback
+//                                  self.editTaskTicket = nil;
+//                                  
+//                                  if (error == nil) {
+//                                      GTLBatchResult *batch = (GTLBatchResult *)object;
+//                                      
+//                                      NSUInteger numberDeleted = [batch.successes count];
+//                                      
+//                                      [self displayAlert:@"Tasks Deleted"
+//                                                  format:@"Deleted: %lu\nErrors: %@",
+//                                       (unsigned long) numberDeleted,
+//                                       batch.failures];
+//                                      
+//                                      [self fetchTasksForSelectedList];
+//                                  } else {
 //                                      [self displayAlert:@"Error"
 //                                                  format:@"%@", error];
-                                      [self updateUI];
-                                  }
-                              }];
-    [self updateUI];
-}
-
-#pragma mark Complete All Tasks
-
-- (void)completeAllTasks {
-    // Change all tasks to be completed or uncompleted
-    NSArray *completedTasks = [self completedTasks];
-    NSUInteger numberOfCompletedTasks = [completedTasks count];
-    NSUInteger numberOfTasks = [self.tasks.items count];
-    BOOL wereAllTasksCompleted = (numberOfCompletedTasks == numberOfTasks);
-    
-    // Make a batch of queries to set all tasks to completed or uncompleted
-    GTLTasksTaskList *tasklist = [self selectedTaskList];
-    
-    GTLBatchQuery *batchQuery = [GTLBatchQuery batchQuery];
-    
-    for (GTLTasksTask *task in self.tasks) {
-        GTLTasksTask *patchObject = [GTLTasksTask object];
-        
-        if (wereAllTasksCompleted) {
-            // Change the status to not complete
-            patchObject.status = kTaskStatusNeedsAction;
-            patchObject.completed = [GTLObject nullValue]; // remove the completed date
-        } else {
-            // Change the status to complete
-            patchObject.status = kTaskStatusCompleted;
-        }
-        
-        GTLQueryTasks *query = [GTLQueryTasks queryForTasksPatchWithObject:patchObject
-                                                                  tasklist:tasklist.identifier
-                                                                      task:task.identifier];
-        [batchQuery addQuery:query];
-    }
-    
-    GTLServiceTasks *service = self.tasksService;
-    self.editTaskTicket = [service executeQuery:batchQuery
-                              completionHandler:^(GTLServiceTicket *ticket,
-                                                  id object, NSError *error) {
-                                  // callback
-                                  self.editTaskTicket = nil;
-                                  
-                                  if (error == nil) {
-                                      GTLBatchResult *batchResults = (GTLBatchResult *)object;
-                                      NSString *status = wereAllTasksCompleted ? @"Uncompleted" : @"Completed";
-                                      
-                                      NSDictionary *successes = batchResults.successes;
-                                      NSDictionary *failures = batchResults.failures;
-                                      
-                                      NSUInteger numberUpdated = [successes count];
-                                      NSUInteger numberFailed = [failures count];
-                                      
-                                      NSArray *successTasks = [successes allValues];
-                                      NSArray *titles = [successTasks valueForKey:@"title"];
-                                      NSString *titlesStr = [titles componentsJoinedByString:@", "];
-                                      
-                                      [self displayAlert:@"Tasks Updated"
-                                                  format:@"%@: %lu\n%@\nErrors: %lu\n%@",
-                                       status,
-                                       (unsigned long) numberUpdated, titlesStr,
-                                       (unsigned long) numberFailed, failures];
-                                      
-                                      [self fetchTasksForSelectedList];
-                                  } else {
-                                      [self displayAlert:@"Error"
-                                                  format:@"%@", error];
-                                      [self updateUI];
-                                  }
-                              }];
-    [self updateUI];
-}
-
-#pragma mark Delete All Tasks
-
-- (void)deleteAllTasks {
-    // Make a batch of queries to delete all tasks
-    GTLTasksTaskList *tasklist = [self selectedTaskList];
-    
-    GTLBatchQuery *batch = [GTLBatchQuery batchQuery];
-    
-    for (GTLTasksTask *task in self.tasks) {
-        GTLQueryTasks *query = [GTLQueryTasks queryForTasksDeleteWithTasklist:tasklist.identifier
-                                                                         task:task.identifier];
-        [batch addQuery:query];
-    }
-    
-    GTLServiceTasks *service = self.tasksService;
-    self.editTaskTicket = [service executeQuery:batch
-                              completionHandler:^(GTLServiceTicket *ticket,
-                                                  id object, NSError *error) {
-                                  // callback
-                                  self.editTaskTicket = nil;
-                                  
-                                  if (error == nil) {
-                                      GTLBatchResult *batch = (GTLBatchResult *)object;
-                                      
-                                      NSUInteger numberDeleted = [batch.successes count];
-                                      
-                                      [self displayAlert:@"Tasks Deleted"
-                                                  format:@"Deleted: %lu\nErrors: %@",
-                                       (unsigned long) numberDeleted,
-                                       batch.failures];
-                                      
-                                      [self fetchTasksForSelectedList];
-                                  } else {
-                                      [self displayAlert:@"Error"
-                                                  format:@"%@", error];
-                                      [self updateUI];
-                                  }
-                              }];
-    [self updateUI];
-}
-
-#pragma mark Move Task
-
-- (void)moveTaskWithIdentifier:(NSString *)taskID
-                    toParentID:(NSString *)destinationParentIDorNil
-                         index:(NSInteger)destinationIndex {
-    // Make all completed tasks hidden
-    GTLTasksTaskList *tasklist = [self selectedTaskList];
-    GTLQueryTasks *query = [GTLQueryTasks queryForTasksMoveWithTasklist:tasklist.identifier
-                                                                   task:taskID];
-    query.parent = destinationParentIDorNil;
-    
-    // Determine the ID of the task preceding the new location
-    if (destinationIndex > 0) {
-        GTLObject *parentTask;
-        if (destinationParentIDorNil) {
-            parentTask = [self taskWithIdentifier:destinationParentIDorNil
-                                        fromTasks:self.tasks];
-        } else {
-            // There is no parent; it's a top-level task
-            parentTask = self.tasks;
-        }
-        NSArray *children = [self taskChildrenForObject:parentTask];
-        
-        GTLTasksTask *previousTask = [children objectAtIndex:(destinationIndex - 1)];
-        query.previous = previousTask.identifier;
-    }
-    
-    GTLServiceTasks *service = self.tasksService;
-    self.editTaskTicket = [service executeQuery:query
-                              completionHandler:^(GTLServiceTicket *ticket,
-                                                  id item, NSError *error) {
-                                  // callback
-                                  self.editTaskTicket = nil;
-                                  
-                                  if (error == nil) {
-                                      [self fetchTasksForSelectedList];
-                                  } else {
-                                      [self displayAlert:@"Error"
-                                                  format:@"%@", error];
-                                      [self updateUI];
-                                  }
-                              }];
-    [self updateUI];
-}
+//                                      [self updateUI];
+//                                  }
+//                              }];
+//    [self updateUI];
+//}
+//
+//#pragma mark Move Task
+//
+//- (void)moveTaskWithIdentifier:(NSString *)taskID
+//                    toParentID:(NSString *)destinationParentIDorNil
+//                         index:(NSInteger)destinationIndex {
+//    // Make all completed tasks hidden
+//    GTLTasksTaskList *tasklist = [self selectedTaskList];
+//    GTLQueryTasks *query = [GTLQueryTasks queryForTasksMoveWithTasklist:tasklist.identifier
+//                                                                   task:taskID];
+//    query.parent = destinationParentIDorNil;
+//    
+//    // Determine the ID of the task preceding the new location
+//    if (destinationIndex > 0) {
+//        GTLObject *parentTask;
+//        if (destinationParentIDorNil) {
+//            parentTask = [self taskWithIdentifier:destinationParentIDorNil
+//                                        fromTasks:self.tasks];
+//        } else {
+//            // There is no parent; it's a top-level task
+//            parentTask = self.tasks;
+//        }
+//        NSArray *children = [self taskChildrenForObject:parentTask];
+//        
+//        GTLTasksTask *previousTask = [children objectAtIndex:(destinationIndex - 1)];
+//        query.previous = previousTask.identifier;
+//    }
+//    
+//    GTLServiceTasks *service = self.tasksService;
+//    self.editTaskTicket = [service executeQuery:query
+//                              completionHandler:^(GTLServiceTicket *ticket,
+//                                                  id item, NSError *error) {
+//                                  // callback
+//                                  self.editTaskTicket = nil;
+//                                  
+//                                  if (error == nil) {
+//                                      [self fetchTasksForSelectedList];
+//                                  } else {
+//                                      [self displayAlert:@"Error"
+//                                                  format:@"%@", error];
+//                                      [self updateUI];
+//                                  }
+//                              }];
+//    [self updateUI];
+//}
 @end

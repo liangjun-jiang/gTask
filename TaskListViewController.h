@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GTLTasks.h"
 
-@interface TaskListViewController : UITableViewController
+@interface TaskListViewController : UITableViewController{
+    GTLServiceTasks *tasksService;
+    
+}
 
+@property (nonatomic,strong) GTLServiceTasks *tasksService;
 @end
