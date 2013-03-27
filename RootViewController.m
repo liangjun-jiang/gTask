@@ -11,8 +11,8 @@
 //static NSString *const kKeychainItemName = @"OAuth Sample: Google Contacts";
 static NSString *const kShouldSaveInKeychainKey = @"shouldSaveInKeychain";
 
-static NSString *const kDailyMotionAppServiceName = @"OAuth Sample: DailyMotion";
-static NSString *const kDailyMotionServiceName = @"DailyMotion";
+//static NSString *const kDailyMotionAppServiceName = @"OAuth Sample: DailyMotion";
+//static NSString *const kDailyMotionServiceName = @"DailyMotion";
 
 static NSString *const kSampleClientIDKey = @"clientID";
 static NSString *const kSampleClientSecretKey = @"clientSecret";
@@ -218,7 +218,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kKeychainItemName];
 
   // remove the stored DailyMotion authentication from the keychain, if any
-  [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kDailyMotionAppServiceName];
+//  [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kDailyMotionAppServiceName];
 
   // Discard our retained authentication object.
   self.auth = nil;
@@ -697,50 +697,50 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     [self updateUI];
 }
 
-- (IBAction)addTaskListClicked:(id)sender {
-    [self addATaskList];
-}
-
-- (IBAction)renameTaskListClicked:(id)sender {
-    [self renameSelectedTaskList];
-}
-
-- (IBAction)deleteTaskListClicked:(id)sender {
-    GTLTasksTaskList *tasklist = [self selectedTaskList];
-    NSString *title = tasklist.title;
-    
-    DebugLog(@"detele title: %@",title);
-//    NSBeginAlertSheet(@"Delete", nil, @"Cancel", nil,
-//                      [self window], self,
-//                      @selector(deleteTaskListSheetDidEnd:returnCode:contextInfo:),
-//                      nil, nil, @"Delete \"%@\"?", title);
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete" message:title delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", nil];
-    alertView.tag = 10;
-    [alertView show];
-                              
-    
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (alertView.tag) {
-        case 100:
-        {
-            if (buttonIndex == 1) [self deleteSelectedTaskList];
-            break;
-        }
-        case 101:
-        {
-            if (buttonIndex == 1) [self deleteSelectedTask];
-            break;
-        }
-            
-        default:
-            break;
-    }
-    
-}
+//- (IBAction)addTaskListClicked:(id)sender {
+//    [self addATaskList];
+//}
+//
+//- (IBAction)renameTaskListClicked:(id)sender {
+//    [self renameSelectedTaskList];
+//}
+//
+//- (IBAction)deleteTaskListClicked:(id)sender {
+//    GTLTasksTaskList *tasklist = [self selectedTaskList];
+//    NSString *title = tasklist.title;
+//    
+//    DebugLog(@"detele title: %@",title);
+////    NSBeginAlertSheet(@"Delete", nil, @"Cancel", nil,
+////                      [self window], self,
+////                      @selector(deleteTaskListSheetDidEnd:returnCode:contextInfo:),
+////                      nil, nil, @"Delete \"%@\"?", title);
+//    
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete" message:title delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", nil];
+//    alertView.tag = 10;
+//    [alertView show];
+//                              
+//    
+//}
+//
+//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    switch (alertView.tag) {
+//        case 100:
+//        {
+//            if (buttonIndex == 1) [self deleteSelectedTaskList];
+//            break;
+//        }
+//        case 101:
+//        {
+//            if (buttonIndex == 1) [self deleteSelectedTask];
+//            break;
+//        }
+//            
+//        default:
+//            break;
+//    }
+//    
+//}
 //- (void)deleteTaskListSheetDidEnd:(NSWindow *)sheet
 //                       returnCode:(int)returnCode
 //                      contextInfo:(void *)contextInfo {
@@ -749,23 +749,23 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 //    }
 //}
 
-- (IBAction)addTaskClicked:(id)sender {
-    [self addATask];
-}
-
-- (IBAction)renameTaskClicked:(id)sender {
-    [self renameSelectedTask];
-}
-
-- (IBAction)deleteTaskClicked:(id)sender {
-    GTLTasksTask *task = [self selectedTask];
-    NSString *title = task.title;
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"'" message:title delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", nil];
-    alertView.tag = 11;
-    [alertView show];
-    
-}
+//- (IBAction)addTaskClicked:(id)sender {
+//    [self addATask];
+//}
+//
+//- (IBAction)renameTaskClicked:(id)sender {
+//    [self renameSelectedTask];
+//}
+//
+//- (IBAction)deleteTaskClicked:(id)sender {
+//    GTLTasksTask *task = [self selectedTask];
+//    NSString *title = task.title;
+//    
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"'" message:title delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", nil];
+//    alertView.tag = 11;
+//    [alertView show];
+//    
+//}
 
 
 #pragma mark - 
@@ -823,72 +823,72 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 //    return array;
 //}
 
-#pragma mark Create ID Map and Ordered Child Arrays
-
-// For the efficient access to tasks in the tasks object, we'll
-// build a map from task identifier to each task item, and arrays
-// for the children of the top-level object and for the children
-// of every parent task
-
-static NSString *const kGTLTaskMapProperty = @"taskMap";
-static NSString *const kGTLChildTasksProperty = @"childTasks";
-
-- (void)createPropertiesForTasks:(GTLTasksTasks *)tasks {
-    // First, build a dictionary, mapping item identifier strings to items objects
-    //
-    // This will allow for much faster lookup than would linear search of
-    // task list's items
-    NSMutableDictionary *taskMap = [NSMutableDictionary dictionary];
-    for (GTLTasksTask *task in tasks) {
-        [taskMap setObject:task
-                    forKey:task.identifier];
-    }
-    [tasks setProperty:taskMap
-                forKey:kGTLTaskMapProperty];
-    
-    // Make an array for each parent with pointers to its immediate children, in
-    // the order the children occur in the list.  We'll store the array in a
-    // property of the parent task item.
-    //
-    // For top-level tasks, we'll store the array in a property of the list
-    // object.
-    NSMutableArray *topTasks = [NSMutableArray array];
-    [tasks setProperty:topTasks
-                forKey:kGTLChildTasksProperty];
-    
-    for (GTLTasksTask *task in tasks) {
-        NSString *parentID = task.parent;
-        if (parentID == nil) {
-            // this is a top-level task in the list, so the task's parent is the
-            // main list
-            [topTasks addObject:task];
-        } else {
-            // this task is child of another task; add it to the parent's list
-            GTLTasksTask *parentTask = [taskMap objectForKey:parentID];
-            NSMutableArray *childTasks = [parentTask propertyForKey:kGTLChildTasksProperty];
-            if (childTasks == nil) {
-                childTasks = [NSMutableArray array];
-                [parentTask setProperty:childTasks
-                                 forKey:kGTLChildTasksProperty];
-            }
-            [childTasks addObject:task];
-        }
-    }
-}
-
-- (GTLTasksTask *)taskWithIdentifier:(NSString *)taskID
-                           fromTasks:(GTLTasksTasks *)tasks {
-    NSDictionary *taskMap = [tasks propertyForKey:kGTLTaskMapProperty];
-    GTLTasksTask *task = [taskMap valueForKey:taskID];
-    return task;
-}
-
-- (NSArray *)taskChildrenForObject:(GTLObject *)obj {
-    // Object is either a GTLTasksTasks (the top-level tasks list)
-    // or a GTLTasksTask (a task which may be a parent of other tasks)
-    NSArray *array = [obj propertyForKey:kGTLChildTasksProperty];
-    return array;
-}
+//#pragma mark Create ID Map and Ordered Child Arrays
+//
+//// For the efficient access to tasks in the tasks object, we'll
+//// build a map from task identifier to each task item, and arrays
+//// for the children of the top-level object and for the children
+//// of every parent task
+//
+//static NSString *const kGTLTaskMapProperty = @"taskMap";
+//static NSString *const kGTLChildTasksProperty = @"childTasks";
+//
+//- (void)createPropertiesForTasks:(GTLTasksTasks *)tasks {
+//    // First, build a dictionary, mapping item identifier strings to items objects
+//    //
+//    // This will allow for much faster lookup than would linear search of
+//    // task list's items
+//    NSMutableDictionary *taskMap = [NSMutableDictionary dictionary];
+//    for (GTLTasksTask *task in tasks) {
+//        [taskMap setObject:task
+//                    forKey:task.identifier];
+//    }
+//    [tasks setProperty:taskMap
+//                forKey:kGTLTaskMapProperty];
+//    
+//    // Make an array for each parent with pointers to its immediate children, in
+//    // the order the children occur in the list.  We'll store the array in a
+//    // property of the parent task item.
+//    //
+//    // For top-level tasks, we'll store the array in a property of the list
+//    // object.
+//    NSMutableArray *topTasks = [NSMutableArray array];
+//    [tasks setProperty:topTasks
+//                forKey:kGTLChildTasksProperty];
+//    
+//    for (GTLTasksTask *task in tasks) {
+//        NSString *parentID = task.parent;
+//        if (parentID == nil) {
+//            // this is a top-level task in the list, so the task's parent is the
+//            // main list
+//            [topTasks addObject:task];
+//        } else {
+//            // this task is child of another task; add it to the parent's list
+//            GTLTasksTask *parentTask = [taskMap objectForKey:parentID];
+//            NSMutableArray *childTasks = [parentTask propertyForKey:kGTLChildTasksProperty];
+//            if (childTasks == nil) {
+//                childTasks = [NSMutableArray array];
+//                [parentTask setProperty:childTasks
+//                                 forKey:kGTLChildTasksProperty];
+//            }
+//            [childTasks addObject:task];
+//        }
+//    }
+//}
+//
+//- (GTLTasksTask *)taskWithIdentifier:(NSString *)taskID
+//                           fromTasks:(GTLTasksTasks *)tasks {
+//    NSDictionary *taskMap = [tasks propertyForKey:kGTLTaskMapProperty];
+//    GTLTasksTask *task = [taskMap valueForKey:taskID];
+//    return task;
+//}
+//
+//- (NSArray *)taskChildrenForObject:(GTLObject *)obj {
+//    // Object is either a GTLTasksTasks (the top-level tasks list)
+//    // or a GTLTasksTask (a task which may be a parent of other tasks)
+//    NSArray *array = [obj propertyForKey:kGTLChildTasksProperty];
+//    return array;
+//}
 
 #pragma mark Fetch Task Lists
 
@@ -915,296 +915,296 @@ static NSString *const kGTLChildTasksProperty = @"childTasks";
 
 #pragma mark Fetch Tasks
 
-- (void)fetchTasksForSelectedList {
-    self.tasks = nil;
-    self.tasksFetchError = nil;
-    
-    GTLServiceTasks *service = self.tasksService;
-    
-    GTLTasksTaskList *selectedTasklist = [self selectedTaskList];
-    if (selectedTasklist) {
-        NSString *tasklistID = selectedTasklist.identifier;
-        
-        GTLQueryTasks *query = [GTLQueryTasks queryForTasksListWithTasklist:tasklistID];
-//        query.showCompleted = [showCompletedTasksCheckbox_ state];
-//        query.showHidden = [showHiddenTasksCheckbox_ state];
-//        query.showDeleted = [showDeletedTasksCheckbox_ state];
-        
-        self.tasksTicket = [service executeQuery:query
-                               completionHandler:^(GTLServiceTicket *ticket,
-                                                   id tasks, NSError *error) {
-                                   // callback
-                                   [self createPropertiesForTasks:tasks];
-                                   
-                                   self.tasks = tasks;
-                                   self.tasksFetchError = error;
-                                   self.tasksTicket = nil;
-                                   
-                                   [self updateTasksTable];
-//                                   [self updateUI];
-                               }];
+//- (void)fetchTasksForSelectedList {
+//    self.tasks = nil;
+//    self.tasksFetchError = nil;
+//    
+//    GTLServiceTasks *service = self.tasksService;
+//    
+//    GTLTasksTaskList *selectedTasklist = [self selectedTaskList];
+//    if (selectedTasklist) {
+//        NSString *tasklistID = selectedTasklist.identifier;
+//        
+//        GTLQueryTasks *query = [GTLQueryTasks queryForTasksListWithTasklist:tasklistID];
+////        query.showCompleted = [showCompletedTasksCheckbox_ state];
+////        query.showHidden = [showHiddenTasksCheckbox_ state];
+////        query.showDeleted = [showDeletedTasksCheckbox_ state];
+//        
+//        self.tasksTicket = [service executeQuery:query
+//                               completionHandler:^(GTLServiceTicket *ticket,
+//                                                   id tasks, NSError *error) {
+//                                   // callback
+//                                   [self createPropertiesForTasks:tasks];
+//                                   
+//                                   self.tasks = tasks;
+//                                   self.tasksFetchError = error;
+//                                   self.tasksTicket = nil;
+//                                   
+//                                   [self updateTasksTable];
+////                                   [self updateUI];
+//                               }];
+////        [self updateUI];
+//    }
+//}
+//
+//#pragma mark - updat another table
+//- (void)updateTasksTable
+//{
+//    if (self.tasksTicket != nil) {
+//        DebugLog(@"self.tasksTicket is not nil");
+//        //        [tasksProgressIndicator_ startAnimation:self];
+//    } else {
+//        //        [tasksProgressIndicator_ stopAnimation:self];
+//        DebugLog(@"self.tasksticket is nil");
+//    }
+//    
+//    // Get the description of the selected item, or the feed fetch error
+//    NSString *resultStr = @"";
+//    if (self.tasksFetchError) {
+//        resultStr = [self.tasksFetchError description];
+//    } else {
+//        DebugLog(@"the all tasks %@",self.tasks);
+//        GTLTasksTask *item = [self selectedTask];
+//        if (item) {
+//            resultStr = [item description];
+//        }
+//    }
+//    //    [tasksResultTextView_ setString:resultStr];
+//    DebugLog(@"this is the task we got: %@", resultStr);
+//}
+//
+//#pragma mark Add a Task List
+//
+//- (void)addATaskList {
+////    NSString *title = [taskListNameField_ stringValue];
+//     NSString *title = @"";
+//    if ([title length] > 0) {
+//        // Make a new task list
+//        GTLTasksTaskList *tasklist = [GTLTasksTaskList object];
+//        tasklist.title = title;
+//        
+//        GTLQueryTasks *query = [GTLQueryTasks queryForTasklistsInsertWithObject:tasklist];
+//        
+//        GTLServiceTasks *service = self.tasksService;
+//        self.editTaskListTicket = [service executeQuery:query
+//                                      completionHandler:^(GTLServiceTicket *ticket,
+//                                                          id item, NSError *error) {
+//                                          // callback
+//                                          self.editTaskListTicket = nil;
+//                                          GTLTasksTaskList *tasklist = item;
+//                                          
+//                                          if (error == nil) {
+//                                              [self displayAlertWithMessage:[NSString stringWithFormat:@"Added task list \"%@\"", tasklist.title]];
+////                                              [self displayAlert:@"Task List Added"
+////                                                          format:@"Added task list \"%@\"", tasklist.title];
+//                                              [self fetchTaskLists];
+////                                              [taskListNameField_ setStringValue:@""];
+//                                          } else {
+////                                              [self displayAlert:@"Error"
+////                                                          format:@"%@", error];
+//                                              [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
+//                                              [self updateUI];
+//                                          }
+//                                      }];
 //        [self updateUI];
-    }
-}
-
-#pragma mark - updat another table
-- (void)updateTasksTable
-{
-    if (self.tasksTicket != nil) {
-        DebugLog(@"self.tasksTicket is not nil");
-        //        [tasksProgressIndicator_ startAnimation:self];
-    } else {
-        //        [tasksProgressIndicator_ stopAnimation:self];
-        DebugLog(@"self.tasksticket is nil");
-    }
-    
-    // Get the description of the selected item, or the feed fetch error
-    NSString *resultStr = @"";
-    if (self.tasksFetchError) {
-        resultStr = [self.tasksFetchError description];
-    } else {
-        DebugLog(@"the all tasks %@",self.tasks);
-        GTLTasksTask *item = [self selectedTask];
-        if (item) {
-            resultStr = [item description];
-        }
-    }
-    //    [tasksResultTextView_ setString:resultStr];
-    DebugLog(@"this is the task we got: %@", resultStr);
-}
-
-#pragma mark Add a Task List
-
-- (void)addATaskList {
-//    NSString *title = [taskListNameField_ stringValue];
-     NSString *title = @"";
-    if ([title length] > 0) {
-        // Make a new task list
-        GTLTasksTaskList *tasklist = [GTLTasksTaskList object];
-        tasklist.title = title;
-        
-        GTLQueryTasks *query = [GTLQueryTasks queryForTasklistsInsertWithObject:tasklist];
-        
-        GTLServiceTasks *service = self.tasksService;
-        self.editTaskListTicket = [service executeQuery:query
-                                      completionHandler:^(GTLServiceTicket *ticket,
-                                                          id item, NSError *error) {
-                                          // callback
-                                          self.editTaskListTicket = nil;
-                                          GTLTasksTaskList *tasklist = item;
-                                          
-                                          if (error == nil) {
-                                              [self displayAlertWithMessage:[NSString stringWithFormat:@"Added task list \"%@\"", tasklist.title]];
-//                                              [self displayAlert:@"Task List Added"
-//                                                          format:@"Added task list \"%@\"", tasklist.title];
-                                              [self fetchTaskLists];
-//                                              [taskListNameField_ setStringValue:@""];
-                                          } else {
-//                                              [self displayAlert:@"Error"
-//                                                          format:@"%@", error];
-                                              [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
-                                              [self updateUI];
-                                          }
-                                      }];
-        [self updateUI];
-    }
-}
-
-#pragma mark Rename a Task List
-
-- (void)renameSelectedTaskList {
-//    NSString *title = [taskListNameField_ stringValue];
-    
-    NSString *title = @"";
-    if ([title length] > 0) {
-        // Rename the selected task list
-        
-        // Rather than update the object with a complete replacement, we'll make
-        // a patch object containing just the changed title
-        GTLTasksTaskList *patchObject = [GTLTasksTaskList object];
-        patchObject.title = title;
-        
-        GTLTasksTaskList *selectedTaskList = [self selectedTaskList];
-        
-        GTLQueryTasks *query = [GTLQueryTasks queryForTasklistsPatchWithObject:patchObject
-                                                                      tasklist:selectedTaskList.identifier];
-        GTLServiceTasks *service = self.tasksService;
-        self.editTaskListTicket = [service executeQuery:query
-                                      completionHandler:^(GTLServiceTicket *ticket,
-                                                          id item, NSError *error) {
-                                          // callback
-                                          self.editTaskListTicket = nil;
-                                          GTLTasksTaskList *tasklist = item;
-                                          
-                                          if (error == nil) {
-                                              [self displayAlertWithMessage:[NSString stringWithFormat:@"Updated task list \"%@\"", tasklist.title]];
-//                                              [self displayAlert:@"Task List Updated"
-//                                                          format:@"Updated task list \"%@\"", tasklist.title];
-                                              [self fetchTaskLists];
-//                                              [taskListNameField_ setStringValue:@""];
-                                          } else {
-                                               [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
-//                                              [self displayAlert:@"Error"
-//                                                          format:@"%@", error];
-                                              [self updateUI];
-                                          }
-                                      }];
-        [self updateUI];
-    }
-}
-
-#pragma mark Delete a Task List
-
-- (void)deleteSelectedTaskList {
-    GTLTasksTaskList *tasklist = [self selectedTaskList];
-    
-    GTLQueryTasks *query = [GTLQueryTasks queryForTasklistsDeleteWithTasklist:tasklist.identifier];
-    
-    GTLServiceTasks *service = self.tasksService;
-    self.editTaskListTicket = [service executeQuery:query
-                                  completionHandler:^(GTLServiceTicket *ticket,
-                                                      id item, NSError *error) {
-                                      // callback
-                                      self.editTaskListTicket = nil;
-                                      
-                                      if (error == nil) {
-                                           [self displayAlertWithMessage:[NSString stringWithFormat:@"Delete task list \"%@\"", tasklist.title]];
-//                                          [self displayAlert:@"Task List Deleted"
-//                                                      format:@"Deleted task list \"%@\"", tasklist.title];
-                                          [self fetchTaskLists];
-                                      } else {
-                                          [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
-//                                          [self displayAlert:@"Error"
-//                                                      format:@"%@", error];
-                                          [self updateUI];
-                                      }
-                                  }];
-    [self updateUI];
-}
-
-#pragma mark Add a Task
-
-- (void)addATask {
-//    NSString *title = [taskNameField_ stringValue];
-    NSString *title = @"";
-    if ([title length] > 0) {
-        // Make a new task
-        GTLTasksTask *task = [GTLTasksTask object];
-        task.title = title;
-        
-        GTLTasksTaskList *tasklist = [self selectedTaskList];
-        GTLQueryTasks *query = [GTLQueryTasks queryForTasksInsertWithObject:task
-                                                                   tasklist:tasklist.identifier];
-        GTLServiceTasks *service = self.tasksService;
-        self.editTaskTicket = [service executeQuery:query
-                                  completionHandler:^(GTLServiceTicket *ticket,
-                                                      id item, NSError *error) {
-                                      // callback
-                                      self.editTaskTicket = nil;
-                                      GTLTasksTask *task = item;
-                                      
-                                      if (error == nil) {
-                                           [self displayAlertWithMessage:[NSString stringWithFormat:@"Updated task list \"%@\"", task.title]];
-//                                          [self displayAlert:@"Task Added"
-//                                                      format:@"Added task \"%@\"", task.title];
-                                          [self fetchTasksForSelectedList];
-//                                          [taskNameField_ setStringValue:@""];
-                                      } else {
-                                          [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
-//                                          [self displayAlert:@"Error"
-//                                                      format:@"%@", error];
-                                          [self updateUI];
-                                      }
-                                  }];
-        [self updateUI];
-    }
-}
-
-#pragma mark Rename a Task
-
-- (void)renameSelectedTask {
-//    NSString *title = [taskNameField_ stringValue];
-    NSString *title = @"";
-    if ([title length] > 0) {
-        // Rename the selected task
-        
-        // Rather than update the object with a complete replacement, we'll make
-        // a patch object containing just the changes
-        GTLTasksTask *patchObject = [GTLTasksTask object];
-        patchObject.title = title;
-        
-        GTLTasksTask *task = [self selectedTask];
-        GTLTasksTaskList *tasklist = [self selectedTaskList];
-        GTLQueryTasks *query = [GTLQueryTasks queryForTasksPatchWithObject:patchObject
-                                                                  tasklist:tasklist.identifier
-                                                                      task:task.identifier];
-        GTLServiceTasks *service = self.tasksService;
-        self.editTaskTicket = [service executeQuery:query
-                                  completionHandler:^(GTLServiceTicket *ticket,
-                                                      id item, NSError *error) {
-                                      // callback
-                                      self.editTaskTicket = nil;
-                                      GTLTasksTask *task = item;
-                                      
-                                      if (error == nil) {
-                                          [self displayAlertWithMessage:[NSString stringWithFormat:@"Renamed task to \"%@\"", task.title]];
-//                                          [self displayAlert:@"Task Updated"
-//                                                      format:@"Renamed task to \"%@\"", task.title];
+//    }
+//}
+//
+//#pragma mark Rename a Task List
+//
+//- (void)renameSelectedTaskList {
+////    NSString *title = [taskListNameField_ stringValue];
+//    
+//    NSString *title = @"";
+//    if ([title length] > 0) {
+//        // Rename the selected task list
+//        
+//        // Rather than update the object with a complete replacement, we'll make
+//        // a patch object containing just the changed title
+//        GTLTasksTaskList *patchObject = [GTLTasksTaskList object];
+//        patchObject.title = title;
+//        
+//        GTLTasksTaskList *selectedTaskList = [self selectedTaskList];
+//        
+//        GTLQueryTasks *query = [GTLQueryTasks queryForTasklistsPatchWithObject:patchObject
+//                                                                      tasklist:selectedTaskList.identifier];
+//        GTLServiceTasks *service = self.tasksService;
+//        self.editTaskListTicket = [service executeQuery:query
+//                                      completionHandler:^(GTLServiceTicket *ticket,
+//                                                          id item, NSError *error) {
+//                                          // callback
+//                                          self.editTaskListTicket = nil;
+//                                          GTLTasksTaskList *tasklist = item;
+//                                          
+//                                          if (error == nil) {
+//                                              [self displayAlertWithMessage:[NSString stringWithFormat:@"Updated task list \"%@\"", tasklist.title]];
+////                                              [self displayAlert:@"Task List Updated"
+////                                                          format:@"Updated task list \"%@\"", tasklist.title];
+//                                              [self fetchTaskLists];
+////                                              [taskListNameField_ setStringValue:@""];
+//                                          } else {
+//                                               [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
+////                                              [self displayAlert:@"Error"
+////                                                          format:@"%@", error];
+//                                              [self updateUI];
+//                                          }
+//                                      }];
+//        [self updateUI];
+//    }
+//}
+//
+//#pragma mark Delete a Task List
+//
+//- (void)deleteSelectedTaskList {
+//    GTLTasksTaskList *tasklist = [self selectedTaskList];
+//    
+//    GTLQueryTasks *query = [GTLQueryTasks queryForTasklistsDeleteWithTasklist:tasklist.identifier];
+//    
+//    GTLServiceTasks *service = self.tasksService;
+//    self.editTaskListTicket = [service executeQuery:query
+//                                  completionHandler:^(GTLServiceTicket *ticket,
+//                                                      id item, NSError *error) {
+//                                      // callback
+//                                      self.editTaskListTicket = nil;
+//                                      
+//                                      if (error == nil) {
+//                                           [self displayAlertWithMessage:[NSString stringWithFormat:@"Delete task list \"%@\"", tasklist.title]];
+////                                          [self displayAlert:@"Task List Deleted"
+////                                                      format:@"Deleted task list \"%@\"", tasklist.title];
+//                                          [self fetchTaskLists];
+//                                      } else {
+//                                          [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
+////                                          [self displayAlert:@"Error"
+////                                                      format:@"%@", error];
+//                                          [self updateUI];
+//                                      }
+//                                  }];
+//    [self updateUI];
+//}
+//
+//#pragma mark Add a Task
+//
+//- (void)addATask {
+////    NSString *title = [taskNameField_ stringValue];
+//    NSString *title = @"";
+//    if ([title length] > 0) {
+//        // Make a new task
+//        GTLTasksTask *task = [GTLTasksTask object];
+//        task.title = title;
+//        
+//        GTLTasksTaskList *tasklist = [self selectedTaskList];
+//        GTLQueryTasks *query = [GTLQueryTasks queryForTasksInsertWithObject:task
+//                                                                   tasklist:tasklist.identifier];
+//        GTLServiceTasks *service = self.tasksService;
+//        self.editTaskTicket = [service executeQuery:query
+//                                  completionHandler:^(GTLServiceTicket *ticket,
+//                                                      id item, NSError *error) {
+//                                      // callback
+//                                      self.editTaskTicket = nil;
+//                                      GTLTasksTask *task = item;
+//                                      
+//                                      if (error == nil) {
+//                                           [self displayAlertWithMessage:[NSString stringWithFormat:@"Updated task list \"%@\"", task.title]];
+////                                          [self displayAlert:@"Task Added"
+////                                                      format:@"Added task \"%@\"", task.title];
 //                                          [self fetchTasksForSelectedList];
-//                                          [taskNameField_ setStringValue:@""];
-                                      } else {
-                                          [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
-//                                          [self displayAlert:@"Error"
-//                                                      format:@"%@", error];
-                                          [self updateUI];
-                                      }
-                                  }];
-        [self updateUI];
-    }
-}
-
-#pragma mark Delete a Task
-
-- (void)deleteSelectedTask {
-    // Delete a task
-    GTLTasksTask *task = [self selectedTask];
-    NSString *taskTitle = task.title;
-    DebugLog(@"%@",taskTitle);
-    GTLTasksTaskList *tasklist = [self selectedTaskList];
-    GTLQueryTasks *query = [GTLQueryTasks queryForTasksDeleteWithTasklist:tasklist.identifier
-                                                                     task:task.identifier];
-    GTLServiceTasks *service = self.tasksService;
-    self.editTaskTicket = [service executeQuery:query
-                              completionHandler:^(GTLServiceTicket *ticket,
-                                                  id item, NSError *error) {
-                                  // callback
-                                  self.editTaskTicket = nil;
-                                  
-                                  if (error == nil) {
-                                      [self displayAlertWithMessage:[NSString stringWithFormat:@"Deleted task \"%@\"", task.title]];
-                                      //                                          [self displayAlert:@"Task Updated"
-                                      //                                                      format:@"Renamed task to \"%@\"", task.title];
-                                      //                                          [self fetchTasksForSelectedList];
-                                      //                                          [taskNameField_ setStringValue:@""];
-                                  } else {
-                                      [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
-                                      //                                          [self displayAlert:@"Error"
-                                      //                                                      format:@"%@", error];
-                                      [self updateUI];
-                                  }
-                                  
+////                                          [taskNameField_ setStringValue:@""];
+//                                      } else {
+//                                          [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
+////                                          [self displayAlert:@"Error"
+////                                                      format:@"%@", error];
+//                                          [self updateUI];
+//                                      }
+//                                  }];
+//        [self updateUI];
+//    }
+//}
+//
+//#pragma mark Rename a Task
+//
+//- (void)renameSelectedTask {
+////    NSString *title = [taskNameField_ stringValue];
+//    NSString *title = @"";
+//    if ([title length] > 0) {
+//        // Rename the selected task
+//        
+//        // Rather than update the object with a complete replacement, we'll make
+//        // a patch object containing just the changes
+//        GTLTasksTask *patchObject = [GTLTasksTask object];
+//        patchObject.title = title;
+//        
+//        GTLTasksTask *task = [self selectedTask];
+//        GTLTasksTaskList *tasklist = [self selectedTaskList];
+//        GTLQueryTasks *query = [GTLQueryTasks queryForTasksPatchWithObject:patchObject
+//                                                                  tasklist:tasklist.identifier
+//                                                                      task:task.identifier];
+//        GTLServiceTasks *service = self.tasksService;
+//        self.editTaskTicket = [service executeQuery:query
+//                                  completionHandler:^(GTLServiceTicket *ticket,
+//                                                      id item, NSError *error) {
+//                                      // callback
+//                                      self.editTaskTicket = nil;
+//                                      GTLTasksTask *task = item;
+//                                      
+//                                      if (error == nil) {
+//                                          [self displayAlertWithMessage:[NSString stringWithFormat:@"Renamed task to \"%@\"", task.title]];
+////                                          [self displayAlert:@"Task Updated"
+////                                                      format:@"Renamed task to \"%@\"", task.title];
+////                                          [self fetchTasksForSelectedList];
+////                                          [taskNameField_ setStringValue:@""];
+//                                      } else {
+//                                          [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
+////                                          [self displayAlert:@"Error"
+////                                                      format:@"%@", error];
+//                                          [self updateUI];
+//                                      }
+//                                  }];
+//        [self updateUI];
+//    }
+//}
+//
+//#pragma mark Delete a Task
+//
+//- (void)deleteSelectedTask {
+//    // Delete a task
+//    GTLTasksTask *task = [self selectedTask];
+//    NSString *taskTitle = task.title;
+//    DebugLog(@"%@",taskTitle);
+//    GTLTasksTaskList *tasklist = [self selectedTaskList];
+//    GTLQueryTasks *query = [GTLQueryTasks queryForTasksDeleteWithTasklist:tasklist.identifier
+//                                                                     task:task.identifier];
+//    GTLServiceTasks *service = self.tasksService;
+//    self.editTaskTicket = [service executeQuery:query
+//                              completionHandler:^(GTLServiceTicket *ticket,
+//                                                  id item, NSError *error) {
+//                                  // callback
+//                                  self.editTaskTicket = nil;
+//                                  
 //                                  if (error == nil) {
-//                                      [self displayAlert:@"Task Deleted"
-//                                                  format:@"Deleted task \"%@\"", taskTitle];
-//                                      [self fetchTasksForSelectedList];
+//                                      [self displayAlertWithMessage:[NSString stringWithFormat:@"Deleted task \"%@\"", task.title]];
+//                                      //                                          [self displayAlert:@"Task Updated"
+//                                      //                                                      format:@"Renamed task to \"%@\"", task.title];
+//                                      //                                          [self fetchTasksForSelectedList];
+//                                      //                                          [taskNameField_ setStringValue:@""];
 //                                  } else {
-//                                      [self displayAlert:@"Error"
-//                                                  format:@"%@", error];
+//                                      [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
+//                                      //                                          [self displayAlert:@"Error"
+//                                      //                                                      format:@"%@", error];
 //                                      [self updateUI];
 //                                  }
-                              }];
-    [self updateUI];
-}
+//                                  
+////                                  if (error == nil) {
+////                                      [self displayAlert:@"Task Deleted"
+////                                                  format:@"Deleted task \"%@\"", taskTitle];
+////                                      [self fetchTasksForSelectedList];
+////                                  } else {
+////                                      [self displayAlert:@"Error"
+////                                                  format:@"%@", error];
+////                                      [self updateUI];
+////                                  }
+//                              }];
+//    [self updateUI];
+//}
 
 #pragma mark Change a Task's Complete Status
 

@@ -58,6 +58,8 @@
 		D62C37F816FF68EB00EF8CDE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37F716FF68EB00EF8CDE /* Default-568h@2x.png */; };
 		D62EC16116FCC2C5005E65F5 /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62EC15F16FCC2C5005E65F5 /* TaskListViewController.m */; };
 		D62EC16216FCC2C5005E65F5 /* TaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D62EC16016FCC2C5005E65F5 /* TaskListViewController.xib */; };
+		D67ED23717028F6C0084E8A6 /* TaskTasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D67ED23517028F6C0084E8A6 /* TaskTasksViewController.m */; };
+		D67ED23817028F6C0084E8A6 /* TaskTasksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D67ED23617028F6C0084E8A6 /* TaskTasksViewController.xib */; };
 		D6D3CD0616F24CD9003C0434 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */; };
 		D6D3CD5816F25307003C0434 /* SHCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D3CD3B16F25307003C0434 /* SHCViewController.xib */; };
 		D6D3CD5A16F25307003C0434 /* SHCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD3F16F25307003C0434 /* SHCAppDelegate.m */; };
@@ -165,6 +167,9 @@
 		D62EC15E16FCC2C5005E65F5 /* TaskListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListViewController.h; sourceTree = "<group>"; };
 		D62EC15F16FCC2C5005E65F5 /* TaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListViewController.m; sourceTree = "<group>"; };
 		D62EC16016FCC2C5005E65F5 /* TaskListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskListViewController.xib; sourceTree = "<group>"; };
+		D67ED23417028F6C0084E8A6 /* TaskTasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTasksViewController.h; sourceTree = "<group>"; };
+		D67ED23517028F6C0084E8A6 /* TaskTasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTasksViewController.m; sourceTree = "<group>"; };
+		D67ED23617028F6C0084E8A6 /* TaskTasksViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskTasksViewController.xib; sourceTree = "<group>"; };
 		D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
 		D6D3CD3C16F25307003C0434 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SHCViewController.xib; sourceTree = "<group>"; };
 		D6D3CD3E16F25307003C0434 /* SHCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCAppDelegate.h; sourceTree = "<group>"; };
@@ -223,6 +228,9 @@
 				D62EC15E16FCC2C5005E65F5 /* TaskListViewController.h */,
 				D62EC15F16FCC2C5005E65F5 /* TaskListViewController.m */,
 				D62EC16016FCC2C5005E65F5 /* TaskListViewController.xib */,
+				D67ED23417028F6C0084E8A6 /* TaskTasksViewController.h */,
+				D67ED23517028F6C0084E8A6 /* TaskTasksViewController.m */,
+				D67ED23617028F6C0084E8A6 /* TaskTasksViewController.xib */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -465,6 +473,7 @@
 				D62C37F416FF68D700EF8CDE /* Default.png in Resources */,
 				D62C37F616FF68E200EF8CDE /* Default@2x.png in Resources */,
 				D62C37F816FF68EB00EF8CDE /* Default-568h@2x.png in Resources */,
+				D67ED23817028F6C0084E8A6 /* TaskTasksViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +529,7 @@
 				D62C375916FCDEFA00EF8CDE /* GTLTasksTaskList.m in Sources */,
 				D62C375A16FCDEFA00EF8CDE /* GTLTasksTaskLists.m in Sources */,
 				D62C375B16FCDEFA00EF8CDE /* GTLTasksTasks.m in Sources */,
+				D67ED23717028F6C0084E8A6 /* TaskTasksViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
