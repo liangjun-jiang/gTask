@@ -32,8 +32,6 @@
         va_end(argList);
     }
     [[[UIAlertView alloc] initWithTitle:title message:result delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil] show];
-    //    NSBeginAlertSheet(title, nil, nil, nil, [self window], nil, nil,
-    //                      nil, nil, @"%@", result);
 }
 
 - (void)displayAlertWithMessage:(NSString *)message {
@@ -69,6 +67,9 @@
 #pragma mark - UI Related
 - (void)updateUI
 {
+    [self.navigationController setToolbarHidden:NO];
+    [self setToolbarItems:[self toolbarItems]];
+
     if (self.tasksTicket != nil) {
         DebugLog(@"self.tasksTicket is not nil");
         //        [tasksProgressIndicator_ startAnimation:self];
@@ -96,6 +97,47 @@
     [self.tableView reloadData];
 }
 
+- (NSArray *)toolbarItems
+{
+    // Toolbar
+    NSMutableArray *items = [NSMutableArray arrayWithCapacity:9];
+    UIBarButtonItem *flexibleSpaceButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                             target:nil
+                                                                                             action:nil];
+    //add a task item
+    UIBarButtonItem *addATaskItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CIALBrowser.bundle/images/browserBack.png"]
+                                                      style:UIBarButtonItemStylePlain
+                                                     target:self
+                                                     action:@selector(addATask)];
+    //rename a task item
+    UIBarButtonItem *renameATaskItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CIALBrowser.bundle/images/browserForward.png"]
+                                                         style:UIBarButtonItemStylePlain
+                                                        target:self
+                                                        action:@selector(renameSelectedTask:)];
+    
+    //complete all tasks
+    UIBarButtonItem *completeAllItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                     target:self
+                                                                     action:@selector(actionButton:)];
+    
+    //delete all tasks
+    UIBarButtonItem *deleteAllItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
+                                                                                        target:self
+                                                                                        action:@selector(viewBookmark:)];
+    
+    [items addObject:flexibleSpaceButtonItem];
+    [items addObject:addATaskItem];
+    [items addObject:flexibleSpaceButtonItem];
+    [items addObject:renameATaskItem];
+    [items addObject:flexibleSpaceButtonItem];
+    [items addObject:completeAllItem];
+    [items addObject:flexibleSpaceButtonItem];
+    [items addObject:deleteAllItem];
+    [items addObject:flexibleSpaceButtonItem];
+    
+    return items;
+}
+
 #pragma mark - views
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -120,7 +162,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self fetchTasksForSelectedList];
     });
-    
+   
+      
 }
 
 - (void)didReceiveMemoryWarning
@@ -260,31 +303,6 @@
     return array;
 }
 
-//- (void)updateTasksTable
-//{
-//    if (self.tasksTicket != nil) {
-//        DebugLog(@"self.tasksTicket is not nil");
-//        //        [tasksProgressIndicator_ startAnimation:self];
-//    } else {
-//        //        [tasksProgressIndicator_ stopAnimation:self];
-//        DebugLog(@"self.tasksticket is nil");
-//    }
-//    
-//    // Get the description of the selected item, or the feed fetch error
-//    NSString *resultStr = @"";
-//    if (self.tasksFetchError) {
-//        resultStr = [self.tasksFetchError description];
-//    } else {
-//        DebugLog(@"the all tasks %@",self.tasks);
-//        GTLTasksTask *item = [self selectedTask];
-//        if (item) {
-//            resultStr = [item description];
-//        }
-//    }
-//    //    [tasksResultTextView_ setString:resultStr];
-//    DebugLog(@"this is the task we got: %@", resultStr);
-//}
-
 
 - (void)addATask {
     //    NSString *title = [taskNameField_ stringValue];
@@ -323,6 +341,8 @@
 }
 
 #pragma mark Rename a Task
+
+// for stupid compatiable purpose
 - (GTLTasksTaskList *)selectedTaskList
 {
     return self.selectedTasklist;
@@ -354,10 +374,10 @@
                                       
                                       if (error == nil) {
                                           [self displayAlertWithMessage:[NSString stringWithFormat:@"Renamed task to \"%@\"", task.title]];
-                                          //                                          [self displayAlert:@"Task Updated"
-                                          //                                                      format:@"Renamed task to \"%@\"", task.title];
-                                          //                                          [self fetchTasksForSelectedList];
-                                          //                                          [taskNameField_ setStringValue:@""];
+                                          [self displayAlert:@"Task Updated"
+                                                                                                format:@"Renamed task to \"%@\"", task.title];
+                                                                               [self fetchTasksForSelectedList];
+                               
                                       } else {
                                           [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
                                           //                                          [self displayAlert:@"Error"

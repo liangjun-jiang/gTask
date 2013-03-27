@@ -60,6 +60,9 @@
 		D62EC16216FCC2C5005E65F5 /* TaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D62EC16016FCC2C5005E65F5 /* TaskListViewController.xib */; };
 		D67ED23717028F6C0084E8A6 /* TaskTasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D67ED23517028F6C0084E8A6 /* TaskTasksViewController.m */; };
 		D67ED23817028F6C0084E8A6 /* TaskTasksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D67ED23617028F6C0084E8A6 /* TaskTasksViewController.xib */; };
+		D685369C1703A362006767EF /* CIALBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D685369B1703A362006767EF /* CIALBrowser.bundle */; };
+		D68536A21703A8F5006767EF /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D685369F1703A8F5006767EF /* SVProgressHUD.bundle */; };
+		D68536A31703A8F5006767EF /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D68536A11703A8F5006767EF /* SVProgressHUD.m */; };
 		D6D3CD0616F24CD9003C0434 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */; };
 		D6D3CD5816F25307003C0434 /* SHCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D3CD3B16F25307003C0434 /* SHCViewController.xib */; };
 		D6D3CD5A16F25307003C0434 /* SHCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD3F16F25307003C0434 /* SHCAppDelegate.m */; };
@@ -170,6 +173,10 @@
 		D67ED23417028F6C0084E8A6 /* TaskTasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTasksViewController.h; sourceTree = "<group>"; };
 		D67ED23517028F6C0084E8A6 /* TaskTasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTasksViewController.m; sourceTree = "<group>"; };
 		D67ED23617028F6C0084E8A6 /* TaskTasksViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskTasksViewController.xib; sourceTree = "<group>"; };
+		D685369B1703A362006767EF /* CIALBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CIALBrowser.bundle; sourceTree = "<group>"; };
+		D685369F1703A8F5006767EF /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		D68536A01703A8F5006767EF /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		D68536A11703A8F5006767EF /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
 		D6D3CD3C16F25307003C0434 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SHCViewController.xib; sourceTree = "<group>"; };
 		D6D3CD3E16F25307003C0434 /* SHCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCAppDelegate.h; sourceTree = "<group>"; };
@@ -257,6 +264,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				D68536A41703A8FC006767EF /* ThirdParty */,
+				D685369B1703A362006767EF /* CIALBrowser.bundle */,
 				D62C37F716FF68EB00EF8CDE /* Default-568h@2x.png */,
 				D62C37F516FF68E200EF8CDE /* Default@2x.png */,
 				D62C37F316FF68D700EF8CDE /* Default.png */,
@@ -377,6 +386,24 @@
 			name = GTLTasks;
 			sourceTree = "<group>";
 		};
+		D68536A41703A8FC006767EF /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				D68536A51703A911006767EF /* SVProgressHUD */,
+			);
+			name = ThirdParty;
+			sourceTree = "<group>";
+		};
+		D68536A51703A911006767EF /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				D685369F1703A8F5006767EF /* SVProgressHUD.bundle */,
+				D68536A01703A8F5006767EF /* SVProgressHUD.h */,
+				D68536A11703A8F5006767EF /* SVProgressHUD.m */,
+			);
+			name = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		D6D3CD3616F25307003C0434 /* ClearStyle */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,6 +501,8 @@
 				D62C37F616FF68E200EF8CDE /* Default@2x.png in Resources */,
 				D62C37F816FF68EB00EF8CDE /* Default-568h@2x.png in Resources */,
 				D67ED23817028F6C0084E8A6 /* TaskTasksViewController.xib in Resources */,
+				D685369C1703A362006767EF /* CIALBrowser.bundle in Resources */,
+				D68536A21703A8F5006767EF /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +559,7 @@
 				D62C375A16FCDEFA00EF8CDE /* GTLTasksTaskLists.m in Sources */,
 				D62C375B16FCDEFA00EF8CDE /* GTLTasksTasks.m in Sources */,
 				D67ED23717028F6C0084E8A6 /* TaskTasksViewController.m in Sources */,
+				D68536A31703A8F5006767EF /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
