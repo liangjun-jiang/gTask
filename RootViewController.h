@@ -64,29 +64,8 @@
 - (IBAction)toggleShouldSaveInKeychain:(id)sender;
 
 - (void)signInToGoogle;
-//- (void)signInToDailyMotion;
 - (void)signOut;
 - (BOOL)isSignedIn;
-
 - (void)updateUI;
-
-// todo - new re-organized
-//- (IBAction)getTaskListsClicked:(id)sender;
-//- (IBAction)cancelTaskListsFetch:(id)sender;
-//- (IBAction)cancelTasksFetch:(id)sender;
-//
-//- (IBAction)addTaskListClicked:(id)sender;
-//- (IBAction)renameTaskListClicked:(id)sender;
-//- (IBAction)deleteTaskListClicked:(id)sender;
-//
-//- (IBAction)addTaskClicked:(id)sender;
-//- (IBAction)renameTaskClicked:(id)sender;
-//- (IBAction)deleteTaskClicked:(id)sender;
-//- (IBAction)completeTaskClicked:(id)sender;
-//- (IBAction)clearTasksClicked:(id)sender;
-//- (IBAction)completeAllTasksClicked:(id)sender;
-//- (IBAction)deleteAllTasksClicked:(id)sender;
-//- (IBAction)showTasksCheckboxClicked:(id)sender;
-
 
 @end
