@@ -104,6 +104,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
                                                                   clientSecret:clientSecret];
   }
 
+    DebugLog(@"keyChain auth: %@",auth);
   if (auth.canAuthorize) {
     // Select the Google service segment
     self.serviceSegments.selectedSegmentIndex = 0;
@@ -114,6 +115,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   // the auth object also holds the user's email address.
   self.auth = auth;
 
+    
   // Update the client ID value text fields to match the radio button selection
   [self loadClientIDValues];
 
@@ -136,12 +138,13 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   return [super shouldAutorotateToInterfaceOrientation:orientation];
 }
 
-//- (BOOL)isSignedIn {
-//    
-//    
-//  BOOL isSignedIn = self.auth.canAuthorize;
-//  return isSignedIn;
-//}
+// I think this one matters.
+- (BOOL)isSignedIn {
+    
+    
+  BOOL isSignedIn = self.auth.canAuthorize;
+  return isSignedIn;
+}
 
 - (BOOL)isGoogleSegmentSelected {
   int segmentIndex = self.serviceSegments.selectedSegmentIndex;
@@ -152,22 +155,21 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   [self loadClientIDValues];
 }
 
-// copy from GTasks Mac
-- (NSString *)signedInUsername {
-    // Get the email address of the signed-in user
-    GTMOAuth2Authentication *auth = self.tasksService.authorizer;
-    BOOL isSignedIn = auth.canAuthorize;
-    if (isSignedIn) {
-        return auth.userEmail;
-    } else {
-        return nil;
-    }
-}
+//- (NSString *)signedInUsername {
+//    // Get the email address of the signed-in user
+//    GTMOAuth2Authentication *auth = self.tasksService.authorizer;
+//    BOOL isSignedIn = auth.canAuthorize;
+//    if (isSignedIn) {
+//        return auth.userEmail;
+//    } else {
+//        return nil;
+//    }
+//}
 
-- (BOOL)isSignedIn {
-    NSString *name = [self signedInUsername];
-    return (name != nil);
-}
+//- (BOOL)isSignedIn {
+//    NSString *name = [self signedInUsername];
+//    return (name != nil);
+//}
 
 - (IBAction)signInOutClicked:(id)sender {
   [self saveClientIDValues];
@@ -361,7 +363,6 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     NSString *urlStr;
     if ([self isGoogleSegmentSelected]) {
     // Google tasks feed
-//    urlStr = @"https://www.googleapis.com/plus/v1/people/me/activities/public";
      urlStr = @"https://www.googleapis.com/tasks/v1/users/@me/lists";
   }
 
@@ -373,27 +374,33 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
               if (error) {
                 output = [error description];
               } else {
-                // Synchronous fetches like this are a really bad idea in Cocoa applications
-                //
-                // For a very easy async alternative, we could use GTMHTTPFetcher
-                NSURLResponse *response = nil;
-                NSData *data = [NSURLConnection sendSynchronousRequest:request
-                                                     returningResponse:&response
-                                                                 error:&error];
-                if (data) {
-                  // API fetch succeeded
-                  output = [[NSString alloc] initWithData:data
-                                                  encoding:NSUTF8StringEncoding];
-                } else {
-                  // fetch failed
-                  output = [error description];
-                }
+               
+                  self.tasksService.authorizer = self.auth;
+                  TaskListViewController *tasksListViewController = [[TaskListViewController alloc] initWithStyle:UITableViewStylePlain];
+                  tasksListViewController.tasksService = self.tasksService;
+                  
+                  [self.navigationController pushViewController:tasksListViewController animated:YES];
+                  
+                // We can get json data, but seems it's better to keep
+                // the business logic to TaskListViewController
+//                NSURLResponse *response = nil;
+//                NSData *data = [NSURLConnection sendSynchronousRequest:request
+//                                                     returningResponse:&response
+//                                                                 error:&error];
+//                if (data) {
+//                  // API fetch succeeded
+//                  output = [[NSString alloc] initWithData:data
+//                                                  encoding:NSUTF8StringEncoding];
+//                } else {
+//                  // fetch failed
+//                  output = [error description];
+//                }
               }
 
-              [self displayAlertWithMessage:output];
+//              [self displayAlertWithMessage:output];
 
               // the access token may have changed
-              [self updateUI];
+//              [self updateUI];
             }];
     
 }
