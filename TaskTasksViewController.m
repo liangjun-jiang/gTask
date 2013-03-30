@@ -7,6 +7,7 @@
 //
 
 #import "TaskTasksViewController.h"
+#import "SVProgressHUD.h"
 
 @interface TaskTasksViewController ()<UIAlertViewDelegate>
 {
@@ -76,30 +77,24 @@
 #pragma mark - UI Related
 - (void)updateUI
 {
-    
-
-//    if (self.tasksTicket != nil) {
-//        DebugLog(@"self.tasksTicket is not nil");
-//        //        [tasksProgressIndicator_ startAnimation:self];
-//    } else {
-//        //        [tasksProgressIndicator_ stopAnimation:self];
-//        DebugLog(@"self.tasksticket is nil");
-//    }
+    if (self.tasksTicket != nil) {
+        [SVProgressHUD showWithStatus:@"Loading..."];
+    } else {
+        [SVProgressHUD dismiss];
+    }
     
     // Get the description of the selected item, or the feed fetch error
     NSString *resultStr = @"";
     if (self.tasksFetchError) {
         resultStr = [self.tasksFetchError description];
     } else {
-        DebugLog(@"the all tasks %@",self.tasks);
-//        GTLTasksTask *item = [self selectedTask];
-//        if (item) {
-//            resultStr = [item description];
-//        }
+        GTLTasksTask *item = [self selectedTask];
+        if (item) {
+            resultStr = [item description];
+        }
     }
     //    [tasksResultTextView_ setString:resultStr];
-    DebugLog(@"this is the task we got: %@", resultStr);
-
+    
     // Enable tasks buttons
     GTLTasksTask *selectedTask = [self selectedTask];
     BOOL hasTasks = (self.tasks != nil);
@@ -365,18 +360,12 @@
 
 - (GTLTasksTask *)selectedTask {
     //    int rowIndex = [tasksOutline_ selectedRow];
-    GTLTasksTask *item = nil;
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    if (indexPath != nil){
-         item = self.tasks.items[indexPath.row];
-
-    } else {  // this might not be necessary
-        int rowIndex = 0;
-        item = self.tasks.items[rowIndex];
-    }
-    
-       return item;
-    //    return nil;
+    if (indexPath.row > -1) {// != nil){
+        GTLTasksTask *item = self.tasks.items[indexPath.row];
+        return item;
+    } else
+        return nil;
 }
 
 - (NSArray *)completedTasks {

@@ -11,7 +11,13 @@
 #import "SVProgressHUD.h"
 
 @interface TaskListViewController ()
+{
+    UIBarButtonItem *addTaskListButton_;
+    UIBarButtonItem *renameTaskListButton_;
+    UIBarButtonItem *deleteTaskListButton_;
 
+    
+}
 @property (strong) GTLTasksTaskLists *taskLists;
 @property (strong) GTLServiceTicket *taskListsTicket;
 @property (strong) NSError *taskListsFetchError;
@@ -60,42 +66,95 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 {
     // Toolbar
     NSMutableArray *items = [NSMutableArray arrayWithCapacity:9];
+    
+    addTaskListButton_ = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonSystemItemAdd target:self action:@selector(addTaskListClicked:)];
+    renameTaskListButton_ = [[UIBarButtonItem alloc] initWithTitle:@"R" style:UIBarButtonSystemItemEdit target:self action:@selector(renameTaskListClicked:)];
+    deleteTaskListButton_ = [[UIBarButtonItem alloc] initWithTitle:@"X" style:UIBarButtonSystemItemAction target:self action:@selector(deleteTaskListClicked:)];
+    
     UIBarButtonItem *flexibleSpaceButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                              target:nil
                                                                                              action:nil];
     //add a task item
-    UIBarButtonItem *addATaskListItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CIALBrowser.bundle/images/browserBack.png"]
-                                                                     style:UIBarButtonItemStylePlain
-                                                                    target:self
-                                                                    action:@selector(addATaskList)];
-    //rename a task item
-    UIBarButtonItem *renameATaskListItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CIALBrowser.bundle/images/browserForward.png"]
-                                                                        style:UIBarButtonItemStylePlain
-                                                                       target:self
-                                                                       action:@selector(renameSelectedTaskList)];
-    
-    //complete all tasks
-    UIBarButtonItem *completeAllListItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                                     target:self
-                                                                                     action:@selector(renameSelectedTaskList)];
-    
-    //delete all tasks
-    UIBarButtonItem *deleteAllListItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
-                                                                                   target:self
-                                                                                   action:@selector(viewBookmark:)];
+//    UIBarButtonItem *addATaskListItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CIALBrowser.bundle/images/browserBack.png"]
+//                                                                     style:UIBarButtonItemStylePlain
+//                                                                    target:self
+//                                                                    action:@selector(addATaskList)];
+   
     
     [items addObject:flexibleSpaceButtonItem];
-    [items addObject:addATaskListItem];
+    [items addObject:addTaskListButton_];
     [items addObject:flexibleSpaceButtonItem];
-    [items addObject:renameATaskListItem];
+    [items addObject:renameTaskListButton_];
     [items addObject:flexibleSpaceButtonItem];
-    [items addObject:completeAllListItem];
-    [items addObject:flexibleSpaceButtonItem];
-    [items addObject:deleteAllListItem];
+    [items addObject:deleteTaskListButton_];
     [items addObject:flexibleSpaceButtonItem];
     
     return items;
 }
+
+#pragma mark - IBAction
+- (void)addTaskListClicked:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"New Task"
+                          message:@""
+                          delegate:self
+                          cancelButtonTitle: @"Cancel"
+                          otherButtonTitles:@"OK", nil ];
+    
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField* titleField = [alert textFieldAtIndex:0];
+    titleField.keyboardType = UIKeyboardAppearanceDefault;
+    titleField.placeholder = @"Type...";
+    alert.tag = 110;
+    [alert show];
+}
+
+- (void)renameTaskListClicked:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Rename A Task"
+                          message:@""
+                          delegate:self
+                          cancelButtonTitle: @"Cancel"
+                          otherButtonTitles:@"OK", nil ];
+    
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField* titleField = [alert textFieldAtIndex:0];
+    titleField.keyboardType = UIKeyboardAppearanceDefault;
+    titleField.placeholder = @"Type...";
+    alert.tag = 111;
+    [alert show];
+}
+
+- (void)deleteTaskListClicked:(id)sender {
+    GTLTasksTaskList *tasklist = [self selectedTaskList];
+    NSString *title = tasklist.title;
+    [self displayAlert:@"Delete" format:@"Delete \"%@\"?", title];
+
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == alertView.cancelButtonIndex) {
+        [alertView dismissWithClickedButtonIndex:alertView.cancelButtonIndex animated:YES];
+    } else {
+        if (alertView.tag == 110 || alertView.tag == 111) {
+            UITextField *taskString = [alertView textFieldAtIndex:0];
+            if (alertView.tag  == 110) {
+                [self addATaskList:taskString.text];
+            } else if(alertView.tag == 111) {
+                [self renameSelectedTaskList:taskString.text];
+            }
+        } else
+            // from other alertView
+            // might do other things
+        {
+            [alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
+            
+        }
+        
+    }
+}
+
 
 #pragma mark - TasksList
 
@@ -126,17 +185,14 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 
 - (void)updateUI
 {
-    [self.navigationController setToolbarHidden:NO];
-    [self setToolbarItems:[self toolbarItems]];
+   
     
     // todo: needs to handle errors!
-//    if (self.taskListsTicket != nil || self.editTaskListTicket != nil) {
-//        DebugLog(@"we got some tasks");
-//        //        [taskListsProgressIndicator_ startAnimation:self];
-//    } else {
-//        //        [taskListsProgressIndicator_ stopAnimation:self];
-//        DebugLog(@"we didn't get anything");
-//    }
+    if (self.taskListsTicket != nil || self.editTaskListTicket != nil) {
+        [SVProgressHUD showWithStatus:@"Loading..."];
+    } else {
+        [SVProgressHUD dismiss];
+    }
     
     // Get the description of the selected item, or the feed fetch error
     NSString *resultStr = @"";
@@ -161,7 +217,21 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
         }
     }
     //    [taskListsResultTextView_ setString:resultStr];
-    DebugLog(@"this is the task lists we got: %@", resultStr);
+    
+    BOOL hasTaskLists = (self.taskLists != nil);
+    BOOL isTaskListSelected = ([self selectedTaskList] != nil);
+    GTLTasksTaskList *item = [self selectedTaskList];
+    
+    BOOL hasTaskListTitle = ([item.title length] > 0);
+    
+    [addTaskListButton_ setEnabled:(hasTaskListTitle && hasTaskLists)];
+    [renameTaskListButton_ setEnabled:(hasTaskListTitle && isTaskListSelected)];
+    [deleteTaskListButton_ setEnabled:(isTaskListSelected)];
+
+    // todo: we also allow the user canceling the fetching!
+//    BOOL isFetchingTaskLists = (self.taskListsTicket != nil);
+//    BOOL isEditingTaskList = (self.editTaskListTicket != nil);
+//    [taskListsCancelButton_ setEnabled:(isFetchingTaskLists || isEditingTaskList)];
     
     [self.tableView reloadData];
     
@@ -181,9 +251,13 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.navigationController setToolbarHidden:NO];
+    [self setToolbarItems:[self toolbarItems]];
 
     // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.clearsSelectionOnViewWillAppear = NO;
+    
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -287,38 +361,18 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 #pragma mark - setter & getter
 
 - (GTLTasksTaskList *)selectedTaskList {
-    //    int rowIndex = [taskListsTable__ selectedRow];
-    // todo: the default is always the first one
-    int rowIndex = 0;
-    if (rowIndex > -1) {
-        GTLTasksTaskList *item = [self.taskLists itemAtIndex:rowIndex];
+  
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    if (indexPath.row > -1) {
+        GTLTasksTaskList *item = [self.taskLists itemAtIndex:indexPath.row];
         return item;
     }
     return nil;
 }
 
-- (GTLTasksTask *)selectedTask {
-    //    int rowIndex = [tasksOutline_ selectedRow];
-    int rowIndex = 0;
-    //    GTLTasksTask *item = [tasksOutline_ itemAtRow:rowIndex];
-    
-    GTLTasksTask *item = self.tasks.items[rowIndex];
-    return item;
-    //    return nil;
-}
-
-- (NSArray *)completedTasks {
-    NSArray *array = [GTLUtilities objectsFromArray:self.tasks.items
-                                          withValue:kTaskStatusCompleted
-                                         forKeyPath:@"status"];
-    return array;
-}
-
 #pragma mark Add a Task List
 
-- (void)addATaskList {
-    //    NSString *title = [taskListNameField_ stringValue];
-    NSString *title = @"";
+- (void)addATaskList:(NSString *)title {
     if ([title length] > 0) {
         // Make a new task list
         GTLTasksTaskList *tasklist = [GTLTasksTaskList object];
@@ -353,10 +407,8 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 
 #pragma mark Rename a Task List
 
-- (void)renameSelectedTaskList {
-    //    NSString *title = [taskListNameField_ stringValue];
+- (void)renameSelectedTaskList:(NSString *)title{
     
-    NSString *title = @"";
     if ([title length] > 0) {
         // Rename the selected task list
         
