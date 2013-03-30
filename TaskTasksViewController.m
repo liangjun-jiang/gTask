@@ -9,6 +9,15 @@
 #import "TaskTasksViewController.h"
 
 @interface TaskTasksViewController ()<UIAlertViewDelegate>
+{
+    UIBarButtonItem *addTaskButton_;
+    UIBarButtonItem *renameTaskButton_;
+     UIBarButtonItem *deleteTaskButton_;
+     UIBarButtonItem *completeTaskButton_;
+     UIBarButtonItem *clearTasksButton_;
+     UIBarButtonItem *completeAllTasksButton_;
+     UIBarButtonItem *deleteAllTasksButton_;
+}
 @property (strong) GTLTasksTasks *tasks;
 @property (strong) GTLServiceTicket *tasksTicket;
 @property (strong) NSError *tasksFetchError;
@@ -67,16 +76,15 @@
 #pragma mark - UI Related
 - (void)updateUI
 {
-    [self.navigationController setToolbarHidden:NO];
-    [self setToolbarItems:[self toolbarItems]];
+    
 
-    if (self.tasksTicket != nil) {
-        DebugLog(@"self.tasksTicket is not nil");
-        //        [tasksProgressIndicator_ startAnimation:self];
-    } else {
-        //        [tasksProgressIndicator_ stopAnimation:self];
-        DebugLog(@"self.tasksticket is nil");
-    }
+//    if (self.tasksTicket != nil) {
+//        DebugLog(@"self.tasksTicket is not nil");
+//        //        [tasksProgressIndicator_ startAnimation:self];
+//    } else {
+//        //        [tasksProgressIndicator_ stopAnimation:self];
+//        DebugLog(@"self.tasksticket is nil");
+//    }
     
     // Get the description of the selected item, or the feed fetch error
     NSString *resultStr = @"";
@@ -92,48 +100,95 @@
     //    [tasksResultTextView_ setString:resultStr];
     DebugLog(@"this is the task we got: %@", resultStr);
 
+    // Enable tasks buttons
+    GTLTasksTask *selectedTask = [self selectedTask];
+    BOOL hasTasks = (self.tasks != nil);
+    BOOL isTaskSelected = (selectedTask != nil);
+    BOOL hasTaskTitle = ([selectedTask.title length] > 0);
     
+    [addTaskButton_ setEnabled:(hasTaskTitle && hasTasks)];
+    [renameTaskButton_ setEnabled:(hasTaskTitle && isTaskSelected)];
+    [deleteTaskButton_ setEnabled:(isTaskSelected)];
+    
+    BOOL isCompleted = [selectedTask.status isEqual:kTaskStatusCompleted];
+    [completeTaskButton_ setEnabled:isTaskSelected];
+//    [completeTaskButton_ setTitle:(isCompleted ? @"Uncomplete" : @"Complete")];
+    [completeTaskButton_ setTitle:(isCompleted ? @"UC" : @"C")];
+
+    
+    NSArray *completedTasks = [self completedTasks];
+    NSUInteger numberOfCompletedTasks = [completedTasks count];
+    [clearTasksButton_ setEnabled:(numberOfCompletedTasks > 0)];
+    
+    NSUInteger numberOfTasks = [self.tasks.items count];
+    [deleteAllTasksButton_ setEnabled:(numberOfTasks > 0)];
+    
+    BOOL areAllTasksCompleted = (numberOfCompletedTasks == numberOfTasks);
+    [completeAllTasksButton_ setEnabled:(numberOfTasks > 0)];
+//    [completeAllTasksButton_ setTitle:(areAllTasksCompleted ?
+//                                       @"Uncomplete All" : @"Complete All")];
+    [completeAllTasksButton_ setTitle:(areAllTasksCompleted ?
+                                       @"UA" : @"CA")];
     
     [self.tableView reloadData];
 }
 
 - (NSArray *)toolbarItems
 {
+    // can we add 7 bar item?
     // Toolbar
-    NSMutableArray *items = [NSMutableArray arrayWithCapacity:9];
+    NSMutableArray *items = [NSMutableArray arrayWithCapacity:13];
+    addTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonSystemItemAdd target:self action:@selector(addATask)];
+    renameTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"R" style:UIBarButtonSystemItemEdit target:self action:@selector(renameATask)];
+    deleteTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"X" style:UIBarButtonSystemItemDone target:self action:@selector(deleteSelectedTask)];
+    completeTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"C" style:UIBarButtonItemStylePlain target:self action:@selector(completeSelectedTask:)];
+    clearTasksButton_ = [[UIBarButtonItem alloc] initWithTitle:@"CL" style:UIBarButtonItemStylePlain target:self action:@selector(completeSelectedTask:)];;
+    completeAllTasksButton_ = [[UIBarButtonItem alloc] initWithTitle:@"C" style:UIBarButtonItemStylePlain target:self action:@selector(completeAllTasks:)];
+    deleteAllTasksButton_ = [[UIBarButtonItem alloc] initWithTitle:@"D" style:UIBarButtonItemStylePlain target:self action:@selector(deleteAllTasks:)];
+    
+    
     UIBarButtonItem *flexibleSpaceButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                              target:nil
                                                                                              action:nil];
+    [items addObject:flexibleSpaceButtonItem];
+    [items addObject:addTaskButton_];
+    [items addObject:flexibleSpaceButtonItem];
+    [items addObject:renameTaskButton_];
+    [items addObject:flexibleSpaceButtonItem];
+    [items addObject:deleteTaskButton_];
+    [items addObject:flexibleSpaceButtonItem];
+
+    [items addObject:completeTaskButton_];
+    [items addObject:flexibleSpaceButtonItem];
+    [items addObject:clearTasksButton_];
+    [items addObject:flexibleSpaceButtonItem];
+    [items addObject:completeAllTasksButton_];
+    [items addObject:flexibleSpaceButtonItem];
+    [items addObject:deleteAllTasksButton_];
+    [items addObject:flexibleSpaceButtonItem];
+    
     //add a task item
-    UIBarButtonItem *addATaskItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CIALBrowser.bundle/images/browserBack.png"]
-                                                      style:UIBarButtonItemStylePlain
-                                                     target:self
-                                                     action:@selector(addATask)];
-    //rename a task item
-    UIBarButtonItem *renameATaskItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CIALBrowser.bundle/images/browserForward.png"]
-                                                         style:UIBarButtonItemStylePlain
-                                                        target:self
-                                                        action:@selector(renameSelectedTask:)];
+//    UIBarButtonItem *addATaskItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CIALBrowser.bundle/images/browserBack.png"]
+//                                                      style:UIBarButtonItemStylePlain
+//                                                     target:self
+//                                                     action:@selector(addATask)];
+//    //rename a task item
+//    UIBarButtonItem *renameATaskItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CIALBrowser.bundle/images/browserForward.png"]
+//                                                         style:UIBarButtonItemStylePlain
+//                                                        target:self
+//                                                        action:@selector(renameSelectedTask:)];
+//    
+//    //complete all tasks
+//    UIBarButtonItem *completeAllItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+//                                                                     target:self
+//                                                                     action:@selector(completeAllTasks)];
+//    
+//    //delete all tasks
+//    UIBarButtonItem *deleteAllItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
+//                                                                                        target:self
+//                                                                                        action:@selector(viewBookmark:)];
     
-    //complete all tasks
-    UIBarButtonItem *completeAllItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                     target:self
-                                                                     action:@selector(actionButton:)];
     
-    //delete all tasks
-    UIBarButtonItem *deleteAllItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
-                                                                                        target:self
-                                                                                        action:@selector(viewBookmark:)];
-    
-    [items addObject:flexibleSpaceButtonItem];
-    [items addObject:addATaskItem];
-    [items addObject:flexibleSpaceButtonItem];
-    [items addObject:renameATaskItem];
-    [items addObject:flexibleSpaceButtonItem];
-    [items addObject:completeAllItem];
-    [items addObject:flexibleSpaceButtonItem];
-    [items addObject:deleteAllItem];
-    [items addObject:flexibleSpaceButtonItem];
     
     return items;
 }
@@ -152,6 +207,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.navigationController setToolbarHidden:NO];
+    [self setToolbarItems:[self toolbarItems]];
 
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
@@ -195,21 +253,57 @@
     }
     
     // Configure the cell...
-    GTLTasksTask *item = self.tasks.items[indexPath.row];
-    cell.textLabel.text = item.title;
+    GTLTasksTask *task = self.tasks.items[indexPath.row];
+    
+    NSString *str = task.title;
+    
+    if ([str length] == 0) {
+        // If the task has no title, make one from its identifier
+        str = [NSString stringWithFormat:@"<task %@>", task.identifier];
+    }
+    
+    if ([task.notes length] > 0) {
+        // append a pencil to indicate this task has notes
+        str = [str stringByAppendingString:@" \u270E"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
+    if ([task.status isEqual:kTaskStatusCompleted]) {
+        // append a checkmark to indicate this task has been completed
+        NSMutableAttributedString *attributedSring = [[NSMutableAttributedString alloc] initWithString:str];
+        // we only need to add a strike through
+        [attributedSring addAttribute:NSStrikethroughStyleAttributeName
+                                value:[NSNumber numberWithInt:2]
+                                range:NSMakeRange(0, str.length)];
+        
+        // todo: why this doesn't work?
+        [cell.textLabel setAttributedText:attributedSring];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        str = [str stringByAppendingString:@" \u2713"];
+    }
+    
+    if ([task.hidden boolValue]) {
+        // append a moon to indicate this task is hidden
+        str = [str stringByAppendingString:@" \u263E"];
+    }
+    
+    if ([task.deleted boolValue]) {
+        // prepend an X mark if this is a deleted task
+        str = [NSString stringWithFormat:@"\u2717 %@", str];
+    }
+
+    cell.textLabel.text = str;
     return cell;
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -221,23 +315,18 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
 
-/*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
 }
-*/
 
-/*
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the item to be re-orderable.
     return YES;
 }
-*/
 
 #pragma mark - Table view delegate
 
@@ -285,14 +374,26 @@
     }
 }
 
-#pragma mark - updat another table
+#pragma mark 
+// for stupid compatiable purpose
+- (GTLTasksTaskList *)selectedTaskList
+{
+    return self.selectedTasklist;
+}
+
 - (GTLTasksTask *)selectedTask {
     //    int rowIndex = [tasksOutline_ selectedRow];
-    int rowIndex = 0;
-    //    GTLTasksTask *item = [tasksOutline_ itemAtRow:rowIndex];
+    GTLTasksTask *item = nil;
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    if (indexPath != nil){
+         item = self.tasks.items[indexPath.row];
+
+    } else {  // this might not be necessary
+        int rowIndex = 0;
+        item = self.tasks.items[rowIndex];
+    }
     
-    GTLTasksTask *item = self.tasks.items[rowIndex];
-    return item;
+       return item;
     //    return nil;
 }
 
@@ -303,6 +404,7 @@
     return array;
 }
 
+#pragma mark - add a task
 - (void)addATask {
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"New Task"
@@ -315,20 +417,11 @@
     UITextField* titleField = [alert textFieldAtIndex:0];
     titleField.keyboardType = UIKeyboardAppearanceDefault;
     titleField.placeholder = @"Type...";
-    
+    alert.tag = 110;
     [alert show];
     
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == alertView.cancelButtonIndex) {
-        [alertView dismissWithClickedButtonIndex:alertView.cancelButtonIndex animated:YES];
-    } else {
-        UITextField *taskString = [alertView textFieldAtIndex:0];
-        [self addBTask:taskString.text];
-    }
-}
 
 - (void)addBTask:(NSString *)taskTitle {
     //    NSString *title = [taskNameField_ stringValue];
@@ -367,16 +460,49 @@
 }
 
 #pragma mark Rename a Task
-
-// for stupid compatiable purpose
-- (GTLTasksTaskList *)selectedTaskList
+- (void)renameATask
 {
-    return self.selectedTasklist;
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Rename A Task"
+                          message:@""
+                          delegate:self
+                          cancelButtonTitle: @"Cancel"
+                          otherButtonTitles:@"OK", nil ];
+    
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField* titleField = [alert textFieldAtIndex:0];
+    titleField.keyboardType = UIKeyboardAppearanceDefault;
+    titleField.placeholder = @"Type...";
+    alert.tag = 111;
+    [alert show];
+
+    
 }
 
-- (void)renameSelectedTask {
-    //    NSString *title = [taskNameField_ stringValue];
-    NSString *title = @"";
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == alertView.cancelButtonIndex) {
+        [alertView dismissWithClickedButtonIndex:alertView.cancelButtonIndex animated:YES];
+    } else {
+        if (alertView.tag == 110 || alertView.tag == 111) {
+            UITextField *taskString = [alertView textFieldAtIndex:0];
+            if (alertView.tag  == 110) {
+                [self addBTask:taskString.text];
+            } else if(alertView.tag == 111)
+                [self renameSelectedTask:taskString.text];
+        } else
+            // from other alertView
+            // might do other things
+        {
+            [alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
+            
+        }
+        
+    }
+}
+
+
+- (void)renameSelectedTask:(NSString *)title{
     if ([title length] > 0) {
         // Rename the selected task
         
@@ -758,5 +884,139 @@ static NSString *const kGTLChildTasksProperty = @"childTasks";
     NSArray *array = [obj propertyForKey:kGTLChildTasksProperty];
     return array;
 }
+
+#pragma mark OutlineView delegate and data source methods
+
+- (NSArray *)childTasksOfItem:(GTLTasksTask *)item {
+    // This is a utility routine for getting the children of a task
+    // list or of a task
+    //
+    // We added child task arrays by calling -createPropertiesForTasks
+    // above after fetching the tasks
+    NSArray *children;
+    if (item == nil) {
+        // item is the top level
+        children = [self taskChildrenForObject:self.tasks];
+    } else {
+        // item is a task entry
+        children = [self taskChildrenForObject:item];
+    }
+    return children;
+}
+
+//- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
+//    NSArray *childTasks = [self childTasksOfItem:item];
+//    GTLTasksTask *task = [childTasks objectAtIndex:index];
+//    return task;
+//}
+//
+//- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
+//    NSArray *childTasks = [self childTasksOfItem:item];
+//    NSUInteger numberOfChildren = [childTasks count];
+//    return (numberOfChildren > 0);
+//}
+//
+//- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
+//    NSArray *childTasks = [self childTasksOfItem:item];
+//    NSUInteger numberOfChildren = [childTasks count];
+//    return numberOfChildren;
+//}
+//
+//- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
+//    GTLTasksTask *task = (GTLTasksTask *)item;
+//    NSString *str = task.title;
+//    
+//    if ([str length] == 0) {
+//        // If the task has no title, make one from its identifier
+//        str = [NSString stringWithFormat:@"<task %@>", task.identifier];
+//    }
+//    
+//    if ([task.notes length] > 0) {
+//        // append a pencil to indicate this task has notes
+//        str = [str stringByAppendingString:@" \u270E"];
+//    }
+//    
+//    if ([task.status isEqual:kTaskStatusCompleted]) {
+//        // append a checkmark to indicate this task has been completed
+//        str = [str stringByAppendingString:@" \u2713"];
+//    }
+//    
+//    if ([task.hidden boolValue]) {
+//        // append a moon to indicate this task is hidden
+//        str = [str stringByAppendingString:@" \u263E"];
+//    }
+//    
+//    if ([task.deleted boolValue]) {
+//        // prepend an X mark if this is a deleted task
+//        str = [NSString stringWithFormat:@"\u2717 %@", str];
+//    }
+//    return str;
+//}
+//
+//- (void)outlineViewSelectionDidChange:(NSNotification *)notification {
+//    // We want to update the UI when the selection changes, but we need to avoid
+//    // doing so immediately as a result of selection changes from reloading the
+//    // data when updating the UI, since that would cause recursive calls to
+//    // reloadData
+//    [self performSelector:@selector(updateUI)
+//               withObject:nil
+//               afterDelay:0.01];
+//}
+//
+//// OutlineView Dragging Support
+//
+//- (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)flag {
+//    return NSDragOperationMove;
+//}
+//
+//- (BOOL)outlineView:(NSOutlineView *)outlineView
+//         writeItems:(NSArray *)items
+//       toPasteboard:(NSPasteboard *)pasteboard {
+//    // Only one task can be selected, so one task will be in the items;
+//    // we'll put its identifier into an array for the pasteboard
+//    NSArray *identifiers = [items valueForKey:@"identifier"];
+//    
+//    [pasteboard clearContents];
+//    [pasteboard writeObjects:identifiers];
+//    return YES;
+//}
+//
+//- (NSDragOperation)outlineView:(NSOutlineView *)outlineView
+//                  validateDrop:(id <NSDraggingInfo>)info
+//                  proposedItem:(id)item
+//            proposedChildIndex:(NSInteger)index {
+//    // Verify that the item being dragged is a task ID
+//    NSPasteboard *pb = [info draggingPasteboard];
+//    NSArray *classes = [NSArray arrayWithObject:[NSString class]];
+//    NSArray *taskIDs = [pb readObjectsForClasses:classes
+//                                         options:nil];
+//    if ([taskIDs count] == 1) {
+//        NSString *taskID = [taskIDs lastObject];
+//        GTLTasksTask *task = [self taskWithIdentifier:taskID
+//                                            fromTasks:self.tasks];
+//        if (task != nil) {
+//            // There is a task object for this ID
+//            return NSDragOperationMove;
+//        }
+//    }
+//    return NSDragOperationNone;
+//}
+//
+//- (BOOL)outlineView:(NSOutlineView *)outlineView
+//         acceptDrop:(id <NSDraggingInfo>)info
+//               item:(id)item
+//         childIndex:(NSInteger)index {
+//    // A task was dropped at a new location
+//    NSPasteboard *pb = [info draggingPasteboard];
+//    NSArray *classes = [NSArray arrayWithObject:[NSString class]];
+//    NSArray *taskIDs = [pb readObjectsForClasses:classes
+//                                         options:nil];
+//    
+//    [self moveTaskWithIdentifier:[taskIDs objectAtIndex:0]
+//                      toParentID:[item identifier]
+//                           index:index];
+//    return YES;
+//}
+
 
 @end
