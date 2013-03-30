@@ -69,9 +69,9 @@
     [self deleteAllTasks];
 }
 
-- (IBAction)showTasksCheckboxClicked:(id)sender {
-    [self fetchTasksForSelectedList];
-}
+//- (IBAction)showTasksCheckboxClicked:(id)sender {
+//    [self fetchTasksForSelectedList];
+//}
 
 #pragma mark - UI Related
 - (void)updateUI
@@ -140,11 +140,11 @@
     NSMutableArray *items = [NSMutableArray arrayWithCapacity:13];
     addTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonSystemItemAdd target:self action:@selector(addATask)];
     renameTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"R" style:UIBarButtonSystemItemEdit target:self action:@selector(renameATask)];
-    deleteTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"X" style:UIBarButtonSystemItemDone target:self action:@selector(deleteSelectedTask)];
-    completeTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"C" style:UIBarButtonItemStylePlain target:self action:@selector(completeSelectedTask:)];
-    clearTasksButton_ = [[UIBarButtonItem alloc] initWithTitle:@"CL" style:UIBarButtonItemStylePlain target:self action:@selector(completeSelectedTask:)];;
-    completeAllTasksButton_ = [[UIBarButtonItem alloc] initWithTitle:@"C" style:UIBarButtonItemStylePlain target:self action:@selector(completeAllTasks:)];
-    deleteAllTasksButton_ = [[UIBarButtonItem alloc] initWithTitle:@"D" style:UIBarButtonItemStylePlain target:self action:@selector(deleteAllTasks:)];
+    deleteTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"X" style:UIBarButtonSystemItemDone target:self action:@selector(deleteSelectedTask:)];
+    completeTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"C" style:UIBarButtonItemStylePlain target:self action:@selector(completeTaskClicked:)];
+    clearTasksButton_ = [[UIBarButtonItem alloc] initWithTitle:@"CL" style:UIBarButtonItemStylePlain target:self action:@selector(clearTasksClicked:)];;
+    completeAllTasksButton_ = [[UIBarButtonItem alloc] initWithTitle:@"CA" style:UIBarButtonItemStylePlain target:self action:@selector(completeAllTasksClicked:)];
+    deleteAllTasksButton_ = [[UIBarButtonItem alloc] initWithTitle:@"DA" style:UIBarButtonItemStylePlain target:self action:@selector(deleteAllTasksClicked:)];
     
     
     UIBarButtonItem *flexibleSpaceButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
@@ -172,24 +172,6 @@
 //                                                      style:UIBarButtonItemStylePlain
 //                                                     target:self
 //                                                     action:@selector(addATask)];
-//    //rename a task item
-//    UIBarButtonItem *renameATaskItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CIALBrowser.bundle/images/browserForward.png"]
-//                                                         style:UIBarButtonItemStylePlain
-//                                                        target:self
-//                                                        action:@selector(renameSelectedTask:)];
-//    
-//    //complete all tasks
-//    UIBarButtonItem *completeAllItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-//                                                                     target:self
-//                                                                     action:@selector(completeAllTasks)];
-//    
-//    //delete all tasks
-//    UIBarButtonItem *deleteAllItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
-//                                                                                        target:self
-//                                                                                        action:@selector(viewBookmark:)];
-    
-    
-    
     return items;
 }
 
@@ -560,10 +542,7 @@
                                   
                                   if (error == nil) {
                                       [self displayAlertWithMessage:[NSString stringWithFormat:@"Deleted task \"%@\"", task.title]];
-                                      //                                          [self displayAlert:@"Task Updated"
-                                      //                                                      format:@"Renamed task to \"%@\"", task.title];
-                                      //                                          [self fetchTasksForSelectedList];
-                                      //                                          [taskNameField_ setStringValue:@""];
+                                      
                                   } else {
                                       [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
                                       //                                          [self displayAlert:@"Error"
@@ -571,16 +550,7 @@
                                       [self updateUI];
                                   }
                                   
-                                  //                                  if (error == nil) {
-                                  //                                      [self displayAlert:@"Task Deleted"
-                                  //                                                  format:@"Deleted task \"%@\"", taskTitle];
-                                  //                                      [self fetchTasksForSelectedList];
-                                  //                                  } else {
-                                  //                                      [self displayAlert:@"Error"
-                                  //                                                  format:@"%@", error];
-                                  //                                      [self updateUI];
-                                  //                                  }
-                              }];
+                            }];
     [self updateUI];
 }
 
