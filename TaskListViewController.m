@@ -292,6 +292,7 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     }
     
     // Configure the cell...
@@ -340,10 +341,9 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 
 
 #pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-     GTLTasksTaskList *selectedTasklist = [self selectedTaskList];
+    GTLTasksTaskList *selectedTasklist = [self selectedTaskList];
     
     // Navigation logic may go here. Create and push another view controller.
     TaskTasksViewController *detailViewController = [[TaskTasksViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -351,10 +351,17 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     // todo: super stupid
     detailViewController.selectedTasklist = selectedTasklist;
     detailViewController.tasksService = self.tasksService;
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
+    // ...
+    // Pass the selected object to the new view controller.
+    [self.navigationController pushViewController:detailViewController animated:YES];
     
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+//    [self updateUI];
 }
 
 
