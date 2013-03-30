@@ -8,7 +8,7 @@
 
 #import "TaskTasksViewController.h"
 
-@interface TaskTasksViewController ()
+@interface TaskTasksViewController ()<UIAlertViewDelegate>
 @property (strong) GTLTasksTasks *tasks;
 @property (strong) GTLServiceTicket *tasksTicket;
 @property (strong) NSError *tasksFetchError;
@@ -303,10 +303,36 @@
     return array;
 }
 
-
 - (void)addATask {
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"New Task"
+                          message:@""
+                          delegate:self
+                          cancelButtonTitle: @"Cancel"
+                          otherButtonTitles:@"OK", nil ];
+    
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField* titleField = [alert textFieldAtIndex:0];
+    titleField.keyboardType = UIKeyboardAppearanceDefault;
+    titleField.placeholder = @"Type...";
+    
+    [alert show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == alertView.cancelButtonIndex) {
+        [alertView dismissWithClickedButtonIndex:alertView.cancelButtonIndex animated:YES];
+    } else {
+        UITextField *taskString = [alertView textFieldAtIndex:0];
+        [self addBTask:taskString.text];
+    }
+}
+
+- (void)addBTask:(NSString *)taskTitle {
     //    NSString *title = [taskNameField_ stringValue];
-    NSString *title = @"";
+    NSString *title = taskTitle;
     if ([title length] > 0) {
         // Make a new task
         GTLTasksTask *task = [GTLTasksTask object];
