@@ -362,6 +362,17 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 {
 //    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 //    [self updateUI];
+    GTLTasksTaskList *selectedTasklist = [self selectedTaskList];
+    
+    // Navigation logic may go here. Create and push another view controller.
+    TaskTasksViewController *detailViewController = [[TaskTasksViewController alloc] initWithStyle:UITableViewStylePlain];
+    
+    // todo: super stupid
+    detailViewController.selectedTasklist = selectedTasklist;
+    detailViewController.tasksService = self.tasksService;
+    // ...
+    // Pass the selected object to the new view controller.
+    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 
@@ -397,13 +408,8 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
                                           
                                           if (error == nil) {
                                               [self displayAlertWithMessage:[NSString stringWithFormat:@"Added task list \"%@\"", tasklist.title]];
-                                              //                                              [self displayAlert:@"Task List Added"
-                                              //                                                          format:@"Added task list \"%@\"", tasklist.title];
                                               [self fetchTaskLists];
-                                              //                                              [taskListNameField_ setStringValue:@""];
                                           } else {
-                                              //                                              [self displayAlert:@"Error"
-                                              //                                                          format:@"%@", error];
                                               [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
                                               [self updateUI];
                                           }
@@ -469,13 +475,9 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
                                       
                                       if (error == nil) {
                                           [self displayAlertWithMessage:[NSString stringWithFormat:@"Delete task list \"%@\"", tasklist.title]];
-                                          //                                          [self displayAlert:@"Task List Deleted"
-                                          //                                                      format:@"Deleted task list \"%@\"", tasklist.title];
                                           [self fetchTaskLists];
                                       } else {
                                           [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
-                                          //                                          [self displayAlert:@"Error"
-                                          //                                                      format:@"%@", error];
                                           [self updateUI];
                                       }
                                   }];
