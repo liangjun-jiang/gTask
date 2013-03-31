@@ -60,7 +60,6 @@
 		D62EC16216FCC2C5005E65F5 /* TaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D62EC16016FCC2C5005E65F5 /* TaskListViewController.xib */; };
 		D67ED23717028F6C0084E8A6 /* TaskTasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D67ED23517028F6C0084E8A6 /* TaskTasksViewController.m */; };
 		D67ED23817028F6C0084E8A6 /* TaskTasksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D67ED23617028F6C0084E8A6 /* TaskTasksViewController.xib */; };
-		D685369C1703A362006767EF /* CIALBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D685369B1703A362006767EF /* CIALBrowser.bundle */; };
 		D68536A21703A8F5006767EF /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D685369F1703A8F5006767EF /* SVProgressHUD.bundle */; };
 		D68536A31703A8F5006767EF /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D68536A11703A8F5006767EF /* SVProgressHUD.m */; };
 		D6D3CD0616F24CD9003C0434 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */; };
@@ -77,6 +76,8 @@
 		D6D3CD6316F25307003C0434 /* SHCToDoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD5316F25307003C0434 /* SHCToDoItem.m */; };
 		D6D3CD6416F25307003C0434 /* SHCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3CD5516F25307003C0434 /* SHCViewController.m */; };
 		D6D3CD6616F253BE003C0434 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D3CD6516F253BE003C0434 /* QuartzCore.framework */; };
+		D6DA4F1D1708969D00E27CF0 /* TaskNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DA4F1C1708969D00E27CF0 /* TaskNoteViewController.m */; };
+		D6DA4F1F1708982800E27CF0 /* TaskNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6DA4F1E1708982800E27CF0 /* TaskNoteViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -173,7 +174,6 @@
 		D67ED23417028F6C0084E8A6 /* TaskTasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTasksViewController.h; sourceTree = "<group>"; };
 		D67ED23517028F6C0084E8A6 /* TaskTasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTasksViewController.m; sourceTree = "<group>"; };
 		D67ED23617028F6C0084E8A6 /* TaskTasksViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskTasksViewController.xib; sourceTree = "<group>"; };
-		D685369B1703A362006767EF /* CIALBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CIALBrowser.bundle; sourceTree = "<group>"; };
 		D685369F1703A8F5006767EF /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		D68536A01703A8F5006767EF /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		D68536A11703A8F5006767EF /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
@@ -204,6 +204,9 @@
 		D6D3CD5416F25307003C0434 /* SHCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCViewController.h; sourceTree = "<group>"; };
 		D6D3CD5516F25307003C0434 /* SHCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCViewController.m; sourceTree = "<group>"; };
 		D6D3CD6516F253BE003C0434 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D6DA4F1B1708969D00E27CF0 /* TaskNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskNoteViewController.h; sourceTree = "<group>"; };
+		D6DA4F1C1708969D00E27CF0 /* TaskNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskNoteViewController.m; sourceTree = "<group>"; };
+		D6DA4F1E1708982800E27CF0 /* TaskNoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskNoteViewController.xib; sourceTree = "<group>"; };
 		F49B45D213315AA200EAA732 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -238,6 +241,9 @@
 				D67ED23417028F6C0084E8A6 /* TaskTasksViewController.h */,
 				D67ED23517028F6C0084E8A6 /* TaskTasksViewController.m */,
 				D67ED23617028F6C0084E8A6 /* TaskTasksViewController.xib */,
+				D6DA4F1B1708969D00E27CF0 /* TaskNoteViewController.h */,
+				D6DA4F1C1708969D00E27CF0 /* TaskNoteViewController.m */,
+				D6DA4F1E1708982800E27CF0 /* TaskNoteViewController.xib */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -265,7 +271,6 @@
 			isa = PBXGroup;
 			children = (
 				D68536A41703A8FC006767EF /* ThirdParty */,
-				D685369B1703A362006767EF /* CIALBrowser.bundle */,
 				D62C37F716FF68EB00EF8CDE /* Default-568h@2x.png */,
 				D62C37F516FF68E200EF8CDE /* Default@2x.png */,
 				D62C37F316FF68D700EF8CDE /* Default.png */,
@@ -501,8 +506,8 @@
 				D62C37F616FF68E200EF8CDE /* Default@2x.png in Resources */,
 				D62C37F816FF68EB00EF8CDE /* Default-568h@2x.png in Resources */,
 				D67ED23817028F6C0084E8A6 /* TaskTasksViewController.xib in Resources */,
-				D685369C1703A362006767EF /* CIALBrowser.bundle in Resources */,
 				D68536A21703A8F5006767EF /* SVProgressHUD.bundle in Resources */,
+				D6DA4F1F1708982800E27CF0 /* TaskNoteViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,6 +565,7 @@
 				D62C375B16FCDEFA00EF8CDE /* GTLTasksTasks.m in Sources */,
 				D67ED23717028F6C0084E8A6 /* TaskTasksViewController.m in Sources */,
 				D68536A31703A8F5006767EF /* SVProgressHUD.m in Sources */,
+				D6DA4F1D1708969D00E27CF0 /* TaskNoteViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

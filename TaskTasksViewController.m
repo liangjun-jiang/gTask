@@ -8,6 +8,7 @@
 
 #import "TaskTasksViewController.h"
 #import "SVProgressHUD.h"
+#import "TaskNoteViewController.h"
 
 @interface TaskTasksViewController ()<UIAlertViewDelegate>
 {
@@ -236,7 +237,7 @@
     
     if ([str length] == 0) {
         // If the task has no title, make one from its identifier
-        str = [NSString stringWithFormat:@"<task %@>", task.identifier];
+        str = [NSString stringWithFormat:@"untitiled"];//<task %@>", task.identifier];
     }
     
     if ([task.notes length] > 0) {
@@ -247,14 +248,15 @@
     
     if ([task.status isEqual:kTaskStatusCompleted]) {
         // append a checkmark to indicate this task has been completed
-        NSMutableAttributedString *attributedSring = [[NSMutableAttributedString alloc] initWithString:str];
-        // we only need to add a strike through
-        [attributedSring addAttribute:NSStrikethroughStyleAttributeName
-                                value:[NSNumber numberWithInt:2]
-                                range:NSMakeRange(0, str.length)];
-        
-        // todo: why this doesn't work?
-        [cell.textLabel setAttributedText:attributedSring];
+        // todo: doesn't work
+//        NSMutableAttributedString *attributedSring = [[NSMutableAttributedString alloc] initWithString:str];
+//        // we only need to add a strike through
+//        [attributedSring addAttribute:NSStrikethroughStyleAttributeName
+//                                value:[NSNumber numberWithInt:2]
+//                                range:NSMakeRange(0, str.length)];
+//        
+//        // todo: why this doesn't work?
+//        [cell.textLabel setAttributedText:attributedSring];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         str = [str stringByAppendingString:@" \u2713"];
     }
@@ -310,12 +312,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    // Configure the cell...
+    GTLTasksTask *task = self.tasks.items[indexPath.row];
+    if ([task.notes length] > 0) {
+        TaskNoteViewController *taskNoteViewController = [[TaskNoteViewController alloc] initWithTask:task];
+        // Pass the selected object to the new view controller.
+        [self.navigationController pushViewController:taskNoteViewController animated:YES];
+
+    } else {
+        // we should show fancy actions!
+    }
+    
 }
 
 #pragma mark - Tasks
