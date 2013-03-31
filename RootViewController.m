@@ -2,10 +2,8 @@
 #import "RootViewController.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTMOAuth2SignIn.h"
-
 #import "GTLUtilities.h"
 #import "GTMHTTPFetcherLogging.h"
-
 #import "TaskListViewController.h"
 
 static NSString *const kShouldSaveInKeychainKey = @"shouldSaveInKeychain";
@@ -37,8 +35,8 @@ static NSString *const kSampleClientSecretKey = @"clientSecret";
 - (void)doAnAuthenticatedAPIFetch;
 - (void)displayAlertWithMessage:(NSString *)str;
 - (BOOL)shouldSaveInKeychain;
-- (void)saveClientIDValues;
-- (void)loadClientIDValues;
+//- (void)saveClientIDValues;
+//- (void)loadClientIDValues;
 - (void)displayAlert:(NSString *)title format:(NSString *)format, ...;
 
 @end
@@ -48,10 +46,7 @@ NSString *const kKeychainItemName = @"gTasks: Google Tasks";
 
 @implementation RootViewController
 
-@synthesize clientIDField = mClientIDField,
-            clientSecretField = mClientSecretField,
-            serviceNameField = mServiceNameField,
-            emailField = mEmailField,
+@synthesize emailField = mEmailField,
             expirationField = mExpirationField,
             accessTokenField = mAccessTokenField,
             refreshTokenField = mRefreshTokenField,
@@ -100,10 +95,10 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   }
 
     DebugLog(@"keyChain auth: %@",auth);
-  if (auth.canAuthorize) {
-    // Select the Google service segment
-    self.serviceSegments.selectedSegmentIndex = 0;
-  }
+//  if (auth.canAuthorize) {
+//    // Select the Google service segment
+//    self.serviceSegments.selectedSegmentIndex = 0;
+//  }
   
   // Save the authentication object, which holds the auth tokens and
   // the scope string used to obtain the token.  For Google services,
@@ -112,7 +107,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 
     
   // Update the client ID value text fields to match the radio button selection
-  [self loadClientIDValues];
+//  [self loadClientIDValues];
 
   BOOL isRemembering = [self shouldSaveInKeychain];
   self.shouldSaveInKeychainSwitch.on = isRemembering;
@@ -139,24 +134,12 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   return isSignedIn;
 }
 
-- (BOOL)isGoogleSegmentSelected {
-  int segmentIndex = self.serviceSegments.selectedSegmentIndex;
-  return (segmentIndex == 0);
-}
-
-- (IBAction)serviceSegmentClicked:(id)sender {
-  [self loadClientIDValues];
-}
-
 
 - (IBAction)signInOutClicked:(id)sender {
-  [self saveClientIDValues];
+//  [self saveClientIDValues];
 
   if (![self isSignedIn]) {
-    // Sign in
-    if ([self isGoogleSegmentSelected]) {
       [self signInToGoogle];
-    }
   } else {
     // Sign out
     [self signOut];
@@ -223,8 +206,6 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     NSString *clientID = myClientId; // self.clientIDField.text;
     NSString *clientSecret = mySecretKey; //self.clientSecretField.text;
 
-    
-    
   if ([clientID length] == 0 || [clientSecret length] == 0) {
     NSString *msg = @"This requires a valid client ID and client secret to sign in.";
     [self displayAlertWithMessage:msg];
@@ -337,11 +318,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 }
 
 - (void)doAnAuthenticatedAPIFetch {
-    NSString *urlStr;
-    if ([self isGoogleSegmentSelected]) {
-    // Google tasks feed
-     urlStr = @"https://www.googleapis.com/tasks/v1/users/@me/lists";
-  }
+    NSString *urlStr = @"https://www.googleapis.com/tasks/v1/users/@me/lists";
 
   NSURL *url = [NSURL URLWithString:urlStr];
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -417,7 +394,6 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   // A real program would use NSLocalizedString() for strings shown to the user.
   if ([self isSignedIn]) {
     // signed in
-    self.serviceNameField.text = self.auth.serviceProvider;
     self.emailField.text = self.auth.userEmail;
     self.accessTokenField.text = self.auth.accessToken;
     self.expirationField.text = [self.auth.expirationDate description];
@@ -428,7 +404,6 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     self.expireNowButton.enabled = YES;
   } else {
     // signed out
-    self.serviceNameField.text = @"-Not signed in-";
     self.emailField.text = @"";
     self.accessTokenField.text = @"-No access token-";
     self.expirationField.text = @"";
@@ -453,14 +428,14 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   [alert show];
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
-  [textField resignFirstResponder];
-  return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-  [self saveClientIDValues];
-}
+//-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+//  [textField resignFirstResponder];
+//  return YES;
+//}
+//
+//- (void)textFieldDidEndEditing:(UITextField *)textField {
+//  [self saveClientIDValues];
+//}
 
 - (BOOL)shouldSaveInKeychain {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -476,27 +451,16 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 // entered by the developer, so we'll save them across runs into preferences.
 //
 
-- (void)saveClientIDValues {
-  // Save the client ID and secret from the text fields into the prefs
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *clientID = myClientId;// self.clientIDField.text;
-    NSString *clientSecret = mySecretKey; // self.clientSecretField.text;
+//- (void)saveClientIDValues {
+//  // Save the client ID and secret from the text fields into the prefs
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSString *clientID = myClientId;// self.clientIDField.text;
+//    NSString *clientSecret = mySecretKey; // self.clientSecretField.text;
+//
+//    [defaults setObject:clientID forKey:kGoogleClientIDKey];
+//    [defaults setObject:clientSecret forKey:kGoogleClientSecretKey];
+//}
 
-  if ([self isGoogleSegmentSelected]) {
-    [defaults setObject:clientID forKey:kGoogleClientIDKey];
-    [defaults setObject:clientSecret forKey:kGoogleClientSecretKey];
-  }
-}
-
-- (void)loadClientIDValues {
-  // Load the client ID and secret from the prefs into the text fields
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-  if ([self isGoogleSegmentSelected]) {
-    self.clientIDField.text = [defaults stringForKey:kGoogleClientIDKey];
-    self.clientSecretField.text = [defaults stringForKey:kGoogleClientSecretKey];
-  } 
-}
 
 #pragma mark - Tasks
 

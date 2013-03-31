@@ -7,11 +7,6 @@
 @class GTMOAuth2Authentication;
 
 @interface RootViewController : UIViewController <UINavigationControllerDelegate, UITextFieldDelegate> {
-  UISegmentedControl *mServiceSegments;
-  UITextField *mClientIDField;
-  UITextField *mClientSecretField;
-
-  UILabel *mServiceNameField;
   UILabel *mEmailField;
   UILabel *mAccessTokenField;
   UILabel *mExpirationField;
@@ -42,9 +37,6 @@
     GTLServiceTicket *editTaskTicket_;
 }
 
-@property (nonatomic, strong) IBOutlet UITextField *clientIDField;
-@property (nonatomic, strong) IBOutlet UITextField *clientSecretField;
-@property (nonatomic, strong) IBOutlet UILabel *serviceNameField;
 @property (nonatomic, strong) IBOutlet UILabel *emailField;
 @property (nonatomic, strong) IBOutlet UILabel *accessTokenField;
 @property (nonatomic, strong) IBOutlet UILabel *expirationField;
@@ -57,7 +49,6 @@
 
 @property (nonatomic, strong) GTMOAuth2Authentication *auth;
 
-- (IBAction)serviceSegmentClicked:(id)sender;
 - (IBAction)signInOutClicked:(id)sender;
 - (IBAction)fetchClicked:(id)sender;
 - (IBAction)expireNowClicked:(id)sender;
