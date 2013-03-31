@@ -10,6 +10,8 @@ static NSString *const kShouldSaveInKeychainKey = @"shouldSaveInKeychain";
 static NSString *const kSampleClientIDKey = @"clientID";
 static NSString *const kSampleClientSecretKey = @"clientSecret";
 
+#define kViewTag				1		// for tagging our embedded controls for removal at cell recycle time
+
 @interface RootViewController()
 {
     UIBarButtonItem *signInOutButton_;
@@ -21,6 +23,8 @@ static NSString *const kSampleClientSecretKey = @"clientSecret";
 @property (nonatomic, strong) UIBarButtonItem *signInOutButton;
 @property (nonatomic, strong) UIBarButtonItem *fetchButton;
 @property (nonatomic, strong) UIBarButtonItem *expireNowButton;
+
+@property (nonatomic, strong, readonly) UISwitch *shouldSaveInKeychainSwitch;
 
 
 - (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
@@ -39,11 +43,13 @@ NSString *const kKeychainItemName = @"gTasks: Google Tasks";
 
 @implementation RootViewController
 
-@synthesize emailField = mEmailField,
+@synthesize mTableView,
+            shouldSaveInKeychainSwitch,
             fetchButton = fetchButton_,
             expireNowButton = expireNowButton_,
-            shouldSaveInKeychainSwitch = mShouldSaveInKeychainSwitch,
+//            shouldSaveInKeychainSwitch = mShouldSaveInKeychainSwitch,
             signInOutButton = signInOutButton_;
+
 
 @synthesize auth = mAuth;
 
@@ -90,21 +96,21 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     
   // Update the client ID value text fields to match the radio button selection
 
-  BOOL isRemembering = [self shouldSaveInKeychain];
-  self.shouldSaveInKeychainSwitch.on = isRemembering;
     
-    [self.navigationController setToolbarHidden:NO];
-    
-    [self setToolbarItems:[self toolbarItems]];
+    self.mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    self.mTableView.dataSource = self;
+    self.mTableView.delegate = self;
+    [self.view addSubview:self.mTableView];
 
-  [self updateUI];
+    BOOL isRemembering = [self shouldSaveInKeychain];
+    self.shouldSaveInKeychainSwitch.on = isRemembering;
+
+//  [self updateUI];
 }
 
 
 - (void)dealloc {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-
-
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
@@ -148,7 +154,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 }
 
 // UISwitch does the toggling for us. We just need to read the state.
-- (IBAction)toggleShouldSaveInKeychain:(UISwitch *)sender {
+- (void)toggleShouldSaveInKeychain:(UISwitch *)sender {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:sender.isOn forKey:kShouldSaveInKeychainKey];
 }
@@ -353,32 +359,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 
 - (void)updateUI {
   // update the text showing the signed-in state and the button title
-  // A real program would use NSLocalizedString() for strings shown to the user.
-  if ([self isSignedIn]) {
-    // signed in
-    self.emailField.text = self.auth.userEmail;
-//    self.accessTokenField.text = self.auth.accessToken;
-//    self.expirationField.text = [self.auth.expirationDate description];
-//    self.refreshTokenField.text = self.auth.refreshToken;
-
-    self.signInOutButton.title = @"Sign Out";
-    self.fetchButton.enabled = YES;
-    self.expireNowButton.enabled = YES;
-  } else {
-    // signed out
-    self.emailField.text = @"";
-//    self.accessTokenField.text = @"-No access token-";
-//    self.expirationField.text = @"";
-//    self.refreshTokenField.text = @"-No refresh token-";
-
-    self.signInOutButton.title = @"Sign In";
-    self.fetchButton.enabled = NO;
-    self.expireNowButton.enabled = NO;
-  }
-
-  BOOL isRemembering = [self shouldSaveInKeychain];
-  self.shouldSaveInKeychainSwitch.on = isRemembering;
-    
+    [self.mTableView reloadData];
 }
 
 
@@ -413,30 +394,145 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     return service;
 }
 
-#pragma mark - toolbar items
-- (NSArray *)toolbarItems
+
+#pragma mark - uitableview datasource & delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    // Toolbar
-    NSMutableArray *items = [NSMutableArray arrayWithCapacity:9];
     
-    signInOutButton_ = [[UIBarButtonItem alloc] initWithTitle:@"Sign In" style:UIBarButtonItemStyleBordered target:self action:@selector(signInOutClicked:)];
-    fetchButton_ = [[UIBarButtonItem alloc] initWithTitle:@"Fetch" style:UIBarButtonItemStyleBordered target:self action:@selector(fetchClicked:)];
-    expireNowButton_ = [[UIBarButtonItem alloc] initWithTitle:@"Expire Now" style:UIBarButtonItemStyleBordered target:self action:@selector(expireNowClicked:)];
+    return (section == 0) ?44.0:20.0;
     
-    UIBarButtonItem *flexibleSpaceButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                             target:nil
-                                                                                             action:nil];
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return (section == 0)?1:4;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    } else
+    {
+        // the cell is being recycled, remove old embedded controls
+        UIView *viewToRemove = nil;
+        viewToRemove = [cell.contentView viewWithTag:kViewTag];
+        if (viewToRemove)
+            [viewToRemove removeFromSuperview];
+    }
     
+    // Configure the cell...
+    NSString *title = @"";
+    switch (indexPath.section) {
+        case 0:
+            title = [self isSignedIn]?self.auth.userEmail:NSLocalizedString(@"YOU_ARE_NOT_SIGNED_IN", @"You are not signed in");
+            break;
+            
+        case 1:
+        {
+            switch (indexPath.row) {
+                case 0:
+                    title = [self isSignedIn]? NSLocalizedString(@"SIGN_OUT", @"Sign Out"): NSLocalizedString(@"SIGN_IN", @"Sign In");
+                    break;
+                case 1:
+                {
+                    title = NSLocalizedString(@"Shoul Save In Key Chain?", @"Should_Save");
+                    UIControl *control = [self shouldSaveInKeychainSwitch];
+                    cell.accessoryView = control;
+                    BOOL isRemembering = [self shouldSaveInKeychain];
+                    self.shouldSaveInKeychainSwitch.on = isRemembering;
+                    break;
+
+                }
+                case 2:
+                    title = NSLocalizedString(@"FETCH", @"FETCH");
+                    break;
+                case 3:
+                    title = NSLocalizedString(@"Expire now", @"expire now");
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            break;
+        }
+        default:
+            break;
+    }
     
-    [items addObject:flexibleSpaceButtonItem];
-    [items addObject:signInOutButton_];
-    [items addObject:flexibleSpaceButtonItem];
-    [items addObject:fetchButton_];
-    [items addObject:flexibleSpaceButtonItem];
-    [items addObject:expireNowButton_];
-    [items addObject:flexibleSpaceButtonItem];
+    // todo:
+    if ([self isSignedIn]) {
+//        NSAttributedString 
+    } else {
+        
+    }
+    cell.textLabel.text = title;
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    } else {
+            switch (indexPath.row) {
+                case 0:
+                    [self signInOutClicked:nil];
+                    break;
+                case 2:
+                {
+                    if ([self isSignedIn])
+                        [self fetchClicked:nil];
+                    else
+                        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+                    break;
+                }
+                case 3:
+                {
+                    if ([self isSignedIn])
+                        [self expireNowClicked:nil];
+
+                    else
+                        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+                    break;
+                }
+                default:
+                    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+                    break;
+            }
+        
+    }
     
-    return items;
+}
+
+- (UISwitch *)shouldSaveInKeychainSwitch
+{
+    if (shouldSaveInKeychainSwitch == nil)
+    {
+        CGRect frame = CGRectMake(198.0, 12.0, 94.0, 27.0);
+        shouldSaveInKeychainSwitch = [[UISwitch alloc] initWithFrame:frame];
+        [shouldSaveInKeychainSwitch addTarget:self action:@selector(toggleShouldSaveInKeychain:) forControlEvents:UIControlEventValueChanged];
+        
+        // in case the parent view draws with a custom color or gradient, use a transparent color
+        shouldSaveInKeychainSwitch.backgroundColor = [UIColor clearColor];
+		
+		[shouldSaveInKeychainSwitch setAccessibilityLabel:NSLocalizedString(@"StandardSwitch", @"")];
+		
+		shouldSaveInKeychainSwitch.tag = kViewTag;	// tag this view for later so we can remove it from recycled table cells
+    }
+    return shouldSaveInKeychainSwitch;
 }
 
 

@@ -6,19 +6,16 @@
 
 @class GTMOAuth2Authentication;
 
-@interface RootViewController : UIViewController <UINavigationControllerDelegate, UITextFieldDelegate> {
-  UILabel *mEmailField;
-  UISwitch *mShouldSaveInKeychainSwitch;
+@interface RootViewController : UIViewController <UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate> {
 
   int mNetworkActivityCounter;
   GTMOAuth2Authentication *mAuth;
     
 }
 
-@property (nonatomic, strong) IBOutlet UILabel *emailField;
-@property (nonatomic, strong) IBOutlet UISwitch *shouldSaveInKeychainSwitch;
 
 @property (nonatomic, strong) GTMOAuth2Authentication *auth;
+@property (nonatomic, strong) UITableView *mTableView;
 
 - (void)signInOutClicked:(id)sender;
 - (void)fetchClicked:(id)sender;
