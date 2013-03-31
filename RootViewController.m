@@ -8,7 +8,6 @@
 
 #import "TaskListViewController.h"
 
-//static NSString *const kKeychainItemName = @"OAuth Sample: Google Contacts";
 static NSString *const kShouldSaveInKeychainKey = @"shouldSaveInKeychain";
 static NSString *const kSampleClientIDKey = @"clientID";
 static NSString *const kSampleClientSecretKey = @"clientSecret";
@@ -35,7 +34,6 @@ static NSString *const kSampleClientSecretKey = @"clientSecret";
 - (void)incrementNetworkActivity:(NSNotification *)notify;
 - (void)decrementNetworkActivity:(NSNotification *)notify;
 - (void)signInNetworkLostOrFound:(NSNotification *)notify;
-//- (GTMOAuth2Authentication *)authForDailyMotion;
 - (void)doAnAuthenticatedAPIFetch;
 - (void)displayAlertWithMessage:(NSString *)str;
 - (BOOL)shouldSaveInKeychain;
@@ -44,9 +42,6 @@ static NSString *const kSampleClientSecretKey = @"clientSecret";
 - (void)displayAlert:(NSString *)title format:(NSString *)format, ...;
 
 @end
-// Constants that ought to be defined by the API
-//NSString *const kTaskStatusCompleted = @"completed";
-//NSString *const kTaskStatusNeedsAction = @"needsAction";
 
 // Keychain item name for saving the user's authentication information
 NSString *const kKeychainItemName = @"gTasks: Google Tasks";
@@ -140,8 +135,6 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 
 // I think this one matters.
 - (BOOL)isSignedIn {
-    
-    
   BOOL isSignedIn = self.auth.canAuthorize;
   return isSignedIn;
 }
@@ -155,21 +148,6 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   [self loadClientIDValues];
 }
 
-//- (NSString *)signedInUsername {
-//    // Get the email address of the signed-in user
-//    GTMOAuth2Authentication *auth = self.tasksService.authorizer;
-//    BOOL isSignedIn = auth.canAuthorize;
-//    if (isSignedIn) {
-//        return auth.userEmail;
-//    } else {
-//        return nil;
-//    }
-//}
-
-//- (BOOL)isSignedIn {
-//    NSString *name = [self signedInUsername];
-//    return (name != nil);
-//}
 
 - (IBAction)signInOutClicked:(id)sender {
   [self saveClientIDValues];
@@ -338,18 +316,18 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     //
     //
       DebugLog(@"auth: succesfully!");
-      if (error == nil) {
-          self.tasksService.authorizer = auth;
-          TaskListViewController *tasksListViewController = [[TaskListViewController alloc] initWithStyle:UITableViewStylePlain];
-          tasksListViewController.tasksService = self.tasksService;
-          
-          [self.navigationController pushViewController:tasksListViewController animated:YES];
-          
-          DebugLog(@"sign in succesfuuly");
-      } else {
-          self.taskListsFetchError = error;
-          [self updateUI];
-      }
+//      if (error == nil) {
+//          self.tasksService.authorizer = auth;
+//          TaskListViewController *tasksListViewController = [[TaskListViewController alloc] initWithStyle:UITableViewStylePlain];
+//          tasksListViewController.tasksService = self.tasksService;
+//          
+//          [self.navigationController pushViewController:tasksListViewController animated:YES];
+//          
+//          DebugLog(@"sign in succesfuuly");
+//      } else {
+//          self.taskListsFetchError = error;
+//          [self updateUI];
+//      }
 
     // save the authentication object
     self.auth = auth;
@@ -359,7 +337,6 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 }
 
 - (void)doAnAuthenticatedAPIFetch {
-//    [self fetchTaskLists];
     NSString *urlStr;
     if ([self isGoogleSegmentSelected]) {
     // Google tasks feed
