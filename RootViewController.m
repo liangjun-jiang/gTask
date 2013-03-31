@@ -11,20 +11,17 @@ static NSString *const kSampleClientIDKey = @"clientID";
 static NSString *const kSampleClientSecretKey = @"clientSecret";
 
 @interface RootViewController()
+{
+    UIBarButtonItem *signInOutButton_;
+    UIBarButtonItem *fetchButton_;
+    UIBarButtonItem *expireNowButton_;
+}
 
 @property (readonly) GTLServiceTasks *tasksService;
+@property (nonatomic, strong) UIBarButtonItem *signInOutButton;
+@property (nonatomic, strong) UIBarButtonItem *fetchButton;
+@property (nonatomic, strong) UIBarButtonItem *expireNowButton;
 
-@property (retain) GTLTasksTaskLists *taskLists;
-@property (retain) GTLServiceTicket *taskListsTicket;
-@property (retain) NSError *taskListsFetchError;
-
-@property (retain) GTLServiceTicket *editTaskListTicket;
-
-@property (retain) GTLTasksTasks *tasks;
-@property (retain) GTLServiceTicket *tasksTicket;
-@property (retain) NSError *tasksFetchError;
-
-@property (retain) GTLServiceTicket *editTaskTicket;
 
 - (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
       finishedWithAuth:(GTMOAuth2Authentication *)auth
@@ -33,11 +30,7 @@ static NSString *const kSampleClientSecretKey = @"clientSecret";
 - (void)decrementNetworkActivity:(NSNotification *)notify;
 - (void)signInNetworkLostOrFound:(NSNotification *)notify;
 - (void)doAnAuthenticatedAPIFetch;
-- (void)displayAlertWithMessage:(NSString *)str;
 - (BOOL)shouldSaveInKeychain;
-//- (void)saveClientIDValues;
-//- (void)loadClientIDValues;
-- (void)displayAlert:(NSString *)title format:(NSString *)format, ...;
 
 @end
 
@@ -47,14 +40,10 @@ NSString *const kKeychainItemName = @"gTasks: Google Tasks";
 @implementation RootViewController
 
 @synthesize emailField = mEmailField,
-            expirationField = mExpirationField,
-            accessTokenField = mAccessTokenField,
-            refreshTokenField = mRefreshTokenField,
-            fetchButton = mFetchButton,
-            expireNowButton = mExpireNowButton,
-            serviceSegments = mServiceSegments,
+            fetchButton = fetchButton_,
+            expireNowButton = expireNowButton_,
             shouldSaveInKeychainSwitch = mShouldSaveInKeychainSwitch,
-            signInOutButton = mSignInOutButton;
+            signInOutButton = signInOutButton_;
 
 @synthesize auth = mAuth;
 
@@ -93,13 +82,6 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
                                                                       clientID:clientID
                                                                   clientSecret:clientSecret];
   }
-
-    DebugLog(@"keyChain auth: %@",auth);
-//  if (auth.canAuthorize) {
-//    // Select the Google service segment
-//    self.serviceSegments.selectedSegmentIndex = 0;
-//  }
-  
   // Save the authentication object, which holds the auth tokens and
   // the scope string used to obtain the token.  For Google services,
   // the auth object also holds the user's email address.
@@ -107,12 +89,17 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 
     
   // Update the client ID value text fields to match the radio button selection
-//  [self loadClientIDValues];
 
   BOOL isRemembering = [self shouldSaveInKeychain];
   self.shouldSaveInKeychainSwitch.on = isRemembering;
+    
+    [self.navigationController setToolbarHidden:NO];
+    
+    [self setToolbarItems:[self toolbarItems]];
+
   [self updateUI];
 }
+
 
 - (void)dealloc {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -135,8 +122,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 }
 
 
-- (IBAction)signInOutClicked:(id)sender {
-//  [self saveClientIDValues];
+- (void)signInOutClicked:(id)sender {
 
   if (![self isSignedIn]) {
       [self signInToGoogle];
@@ -147,13 +133,13 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   [self updateUI];
 }
 
-- (IBAction)fetchClicked:(id)sender {
+- (void)fetchClicked:(id)sender {
   // Just to prove we're signed in, we'll attempt an authenticated fetch for the
   // signed-in user
   [self doAnAuthenticatedAPIFetch];
 }
 
-- (IBAction)expireNowClicked:(id)sender {
+- (void)expireNowClicked:(id)sender {
   NSDate *date = self.auth.expirationDate;
   if (date) {
     self.auth.expirationDate = [NSDate dateWithTimeIntervalSince1970:0];
@@ -205,12 +191,6 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   // But for this sample code, they are editable.
     NSString *clientID = myClientId; // self.clientIDField.text;
     NSString *clientSecret = mySecretKey; //self.clientSecretField.text;
-
-  if ([clientID length] == 0 || [clientSecret length] == 0) {
-    NSString *msg = @"This requires a valid client ID and client secret to sign in.";
-    [self displayAlertWithMessage:msg];
-    return;
-  }
 
   // Note:
   // GTMOAuth2ViewControllerTouch is not designed to be reused. Make a new
@@ -335,26 +315,8 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
                   
                   [self.navigationController pushViewController:tasksListViewController animated:YES];
                   
-                // We can get json data, but seems it's better to keep
-                // the business logic to TaskListViewController
-//                NSURLResponse *response = nil;
-//                NSData *data = [NSURLConnection sendSynchronousRequest:request
-//                                                     returningResponse:&response
-//                                                                 error:&error];
-//                if (data) {
-//                  // API fetch succeeded
-//                  output = [[NSString alloc] initWithData:data
-//                                                  encoding:NSUTF8StringEncoding];
-//                } else {
-//                  // fetch failed
-//                  output = [error description];
-//                }
               }
 
-//              [self displayAlertWithMessage:output];
-
-              // the access token may have changed
-//              [self updateUI];
             }];
     
 }
@@ -395,9 +357,9 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   if ([self isSignedIn]) {
     // signed in
     self.emailField.text = self.auth.userEmail;
-    self.accessTokenField.text = self.auth.accessToken;
-    self.expirationField.text = [self.auth.expirationDate description];
-    self.refreshTokenField.text = self.auth.refreshToken;
+//    self.accessTokenField.text = self.auth.accessToken;
+//    self.expirationField.text = [self.auth.expirationDate description];
+//    self.refreshTokenField.text = self.auth.refreshToken;
 
     self.signInOutButton.title = @"Sign Out";
     self.fetchButton.enabled = YES;
@@ -405,9 +367,9 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   } else {
     // signed out
     self.emailField.text = @"";
-    self.accessTokenField.text = @"-No access token-";
-    self.expirationField.text = @"";
-    self.refreshTokenField.text = @"-No refresh token-";
+//    self.accessTokenField.text = @"-No access token-";
+//    self.expirationField.text = @"";
+//    self.refreshTokenField.text = @"-No refresh token-";
 
     self.signInOutButton.title = @"Sign In";
     self.fetchButton.enabled = NO;
@@ -419,91 +381,11 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     
 }
 
-- (void)displayAlertWithMessage:(NSString *)message {
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"gTask"
-                                                   message:message
-                                                  delegate:nil
-                                         cancelButtonTitle:@"OK"
-                                         otherButtonTitles:nil];
-  [alert show];
-}
-
-//-(BOOL)textFieldShouldReturn:(UITextField *)textField {
-//  [textField resignFirstResponder];
-//  return YES;
-//}
-//
-//- (void)textFieldDidEndEditing:(UITextField *)textField {
-//  [self saveClientIDValues];
-//}
 
 - (BOOL)shouldSaveInKeychain {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   BOOL flag = [defaults boolForKey:kShouldSaveInKeychainKey];
   return flag;
-}
-
-#pragma mark Client ID and Secret
-
-//
-// Normally an application will hardwire the client ID and client secret
-// strings in the source code.  This sample app has to allow them to be
-// entered by the developer, so we'll save them across runs into preferences.
-//
-
-//- (void)saveClientIDValues {
-//  // Save the client ID and secret from the text fields into the prefs
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    NSString *clientID = myClientId;// self.clientIDField.text;
-//    NSString *clientSecret = mySecretKey; // self.clientSecretField.text;
-//
-//    [defaults setObject:clientID forKey:kGoogleClientIDKey];
-//    [defaults setObject:clientSecret forKey:kGoogleClientSecretKey];
-//}
-
-
-#pragma mark - Tasks
-
-- (void)displayAlert:(NSString *)title format:(NSString *)format, ... {
-    NSString *result = format;
-    if (format) {
-        va_list argList;
-        va_start(argList, format);
-        result = [[NSString alloc] initWithFormat:format
-                                         arguments:argList];
-        va_end(argList);
-    }
-    [[[UIAlertView alloc] initWithTitle:title message:result delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil] show];
-
-}
-
-- (IBAction)getTaskListsClicked:(id)sender {
-    if (![self isSignedIn]) {
-        [self signInOutClicked:nil];
-//        [self runSigninThenInvokeSelector:@selector(fetchTaskLists)];
-    } else {
-        [self fetchTaskLists];
-    }
-}
-
-- (IBAction)cancelTaskListsFetch:(id)sender {
-    [self.taskListsTicket cancelTicket];
-    self.taskListsTicket = nil;
-    
-    [self.editTaskListTicket cancelTicket];
-    self.editTaskListTicket = nil;
-    
-    [self updateUI];
-}
-
-- (IBAction)cancelTasksFetch:(id)sender {
-    [self.tasksTicket cancelTicket];
-    self.tasksTicket = nil;
-    
-    [self.editTaskTicket cancelTicket];
-    self.editTaskTicket = nil;
-    
-    [self updateUI];
 }
 
 #pragma mark -
@@ -531,29 +413,31 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     return service;
 }
 
-
-
-#pragma mark Fetch Task Lists
-
-- (void)fetchTaskLists {
-    self.taskLists = nil;
-    self.taskListsFetchError = nil;
+#pragma mark - toolbar items
+- (NSArray *)toolbarItems
+{
+    // Toolbar
+    NSMutableArray *items = [NSMutableArray arrayWithCapacity:9];
     
-    GTLServiceTasks *service = self.tasksService;
+    signInOutButton_ = [[UIBarButtonItem alloc] initWithTitle:@"Sign In" style:UIBarButtonItemStyleBordered target:self action:@selector(signInOutClicked:)];
+    fetchButton_ = [[UIBarButtonItem alloc] initWithTitle:@"Fetch" style:UIBarButtonItemStyleBordered target:self action:@selector(fetchClicked:)];
+    expireNowButton_ = [[UIBarButtonItem alloc] initWithTitle:@"Expire Now" style:UIBarButtonItemStyleBordered target:self action:@selector(expireNowClicked:)];
     
-    GTLQueryTasks *query = [GTLQueryTasks queryForTasklistsList];
+    UIBarButtonItem *flexibleSpaceButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                             target:nil
+                                                                                             action:nil];
     
-    self.taskListsTicket = [service executeQuery:query
-                               completionHandler:^(GTLServiceTicket *ticket,
-                                                   id taskLists, NSError *error) {
-                                   // callback
-                                   self.taskLists = taskLists;
-                                   self.taskListsFetchError = error;
-                                   self.taskListsTicket = nil;
-                                   
-                                   [self updateUI];
-                               }];
-    [self updateUI];
+    
+    [items addObject:flexibleSpaceButtonItem];
+    [items addObject:signInOutButton_];
+    [items addObject:flexibleSpaceButtonItem];
+    [items addObject:fetchButton_];
+    [items addObject:flexibleSpaceButtonItem];
+    [items addObject:expireNowButton_];
+    [items addObject:flexibleSpaceButtonItem];
+    
+    return items;
 }
+
 
 @end

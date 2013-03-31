@@ -266,11 +266,6 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [self.navigationController setToolbarHidden:YES];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
