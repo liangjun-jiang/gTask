@@ -12,6 +12,9 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
   [mWindow addSubview:[mNavigationController view]];
   [mWindow makeKeyAndVisible];
+    
+    [SSThemeManager customizeAppAppearance];
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

@@ -195,6 +195,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    [SSThemeManager customizeTableView:self.tableView];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self fetchTasksForSelectedList];
     });

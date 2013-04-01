@@ -94,9 +94,6 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   self.auth = auth;
 
     
-  // Update the client ID value text fields to match the radio button selection
-
-    
     self.mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
     self.mTableView.dataSource = self;
     self.mTableView.delegate = self;
@@ -105,7 +102,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     BOOL isRemembering = [self shouldSaveInKeychain];
     self.shouldSaveInKeychainSwitch.on = isRemembering;
 
-//  [self updateUI];
+    [SSThemeManager customizeTableView:self.mTableView];
 }
 
 
@@ -447,7 +444,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
                     break;
                 case 1:
                 {
-                    title = NSLocalizedString(@"Shoul Save In Key Chain?", @"Should_Save");
+                    title = NSLocalizedString(@"SHOULD_SAVE", @"Should Save?");
                     UIControl *control = [self shouldSaveInKeychainSwitch];
                     cell.accessoryView = control;
                     BOOL isRemembering = [self shouldSaveInKeychain];
@@ -456,10 +453,10 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 
                 }
                 case 2:
-                    title = NSLocalizedString(@"FETCH", @"FETCH");
+                    title = NSLocalizedString(@"FETCH", @"fetch");
                     break;
                 case 3:
-                    title = NSLocalizedString(@"Expire now", @"expire now");
+                    title = NSLocalizedString(@"EXPIRE_NOW", @"Expire Now");
                     break;
                     
                 default:

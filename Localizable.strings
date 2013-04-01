@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  gTask
+
+  Created by LIANGJUN JIANG on 4/1/13.
+
+*/
+"YOU_ARE_NOT_SIGNED_IN" = "Tap to sign in";
+"SIGN_IN" = "Sign In";
+"SIGN_OUT" = "Sign Out";
+"SHOULD_SAVE" = "Should Save?";
+"FETCH"  = "Fetch";
+"EXPIRE_NOW" = "Expire Now?";
+

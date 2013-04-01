@@ -260,6 +260,8 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    [SSThemeManager customizeTableView:self.tableView];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self fetchTaskLists];
     });
