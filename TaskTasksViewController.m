@@ -170,17 +170,23 @@
 
 #pragma mark -
 #pragma mark - Gesture
-- (void)onLongPress:(UILongPressGestureRecognizer *)gesture
+- (void)onLongPress:(UILongPressGestureRecognizer *)pGesture
 {
-    if (gesture.state == UIGestureRecognizerStateBegan)
+
+    if (pGesture.state == UIGestureRecognizerStateEnded)
     {
-        UITableViewCell *cell = (UITableViewCell *)[gesture view];
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        self.selectedIndexPath = indexPath;
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"ACTION", @"action") delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL", @"cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"EDIT_TASK",@"edit title"), NSLocalizedString(@"DELETE_TASK", @"delete"), NSLocalizedString(@"COMPLETE_TASK",@"complete task"), nil];
-        [actionSheet showFromBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
-        
+        UITableView* tableView = (UITableView*)self.view;
+        CGPoint touchPoint = [pGesture locationInView:self.view];
+        NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:touchPoint];
+        if (indexPath != nil) {
+            //Handle the long press on row
+            self.selectedIndexPath = indexPath;
+            DebugLog(@"the selected: %@",self.selectedIndexPath);
+            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"ACTION", @"action") delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL", @"cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"EDIT_TASK",@"edit title"), NSLocalizedString(@"DELETE_TASK", @"delete"), NSLocalizedString(@"COMPLETE_TASK",@"complete task"), nil];
+            [actionSheet showFromBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
+        }
     }
+    
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -226,6 +232,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self.navigationController setToolbarHidden:NO];
     [super viewWillAppear:animated];
 }
 
@@ -233,7 +240,7 @@
 {
     [super viewDidLoad];
     
-    [self.navigationController setToolbarHidden:NO];
+    
     [self setToolbarItems:[self toolbarItems]];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -265,6 +272,7 @@
     
 }
 
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -292,6 +300,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     // Configure the cell...
@@ -307,7 +316,7 @@
     if ([task.notes length] > 0) {
         // append a pencil to indicate this task has notes
         str = [str stringByAppendingString:@" \u270E"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
     }
     
     if ([task.status isEqual:kTaskStatusCompleted]) {
@@ -333,7 +342,7 @@
     if ([task.deleted boolValue]) {
         // prepend an X mark if this is a deleted task
 //        str = [NSString stringWithFormat:@"\u2717 %@", str];
-        DebugLog(@"should be deleted!");
+//        DebugLog(@"should be deleted!");
         str = [str stringByAppendingString:@" \u2717"];
     }
 
@@ -435,10 +444,10 @@
 
 - (GTLTasksTask *)selectedTask {
     //    int rowIndex = [tasksOutline_ selectedRow];
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    if (indexPath == nil) {
-        indexPath = self.selectedIndexPath;
-    }
+    NSIndexPath *indexPath = self.selectedIndexPath;// [self.tableView indexPathForSelectedRow];
+//    if (indexPath == nil) {
+//        indexPath = self.selectedIndexPath;
+//    }
     if (indexPath.row > -1) {// != nil){
         GTLTasksTask *item = self.tasks.items[indexPath.row];
         return item;
