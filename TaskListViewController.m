@@ -10,11 +10,12 @@
 #import "TaskTasksViewController.h"
 #import "SVProgressHUD.h"
 
-@interface TaskListViewController ()
+@interface TaskListViewController ()<UIActionSheetDelegate>
 {
     UIBarButtonItem *addTaskListButton_;
     UIBarButtonItem *renameTaskListButton_;
     UIBarButtonItem *deleteTaskListButton_;
+    NSIndexPath *selectedIndexPath_;
 
     
 }
@@ -29,7 +30,7 @@
 @property (strong) NSError *tasksFetchError;
 
 @property (strong) GTLServiceTicket *editTaskTicket;
-
+@property (strong)  NSIndexPath *selectedIndexPath;
 @end
 
 // Constants that ought to be defined by the API
@@ -37,7 +38,7 @@ NSString *const kTaskStatusCompleted = @"completed";
 NSString *const kTaskStatusNeedsAction = @"needsAction";
 
 @implementation TaskListViewController
-@synthesize tasksService;
+@synthesize tasksService, selectedIndexPath;
 
 #pragma mark - alert helper
 - (void)displayAlertWithMessage:(NSString *)message {
@@ -74,12 +75,6 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     UIBarButtonItem *flexibleSpaceButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                              target:nil
                                                                                              action:nil];
-    //add a task item
-//    UIBarButtonItem *addATaskListItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CIALBrowser.bundle/images/browserBack.png"]
-//                                                                     style:UIBarButtonItemStylePlain
-//                                                                    target:self
-//                                                                    action:@selector(addATaskList)];
-   
     
     [items addObject:flexibleSpaceButtonItem];
     [items addObject:addTaskListButton_];
@@ -260,15 +255,22 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     
     self.title = NSLocalizedString(@"TASK_LIST", @"");
     
+    [SSThemeManager customizeTableView:self.tableView];
+    
 //    [self.navigationController setToolbarHidden:NO];
     [self setToolbarItems:[self toolbarItems]];
 
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
     
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+//    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [SSThemeManager customizeTableView:self.tableView];
+    UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTaskListClicked:)];
+    self.navigationItem.rightBarButtonItem = addItem;
+
+    // Long press recognizer
+    UILongPressGestureRecognizer *longpressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
+    [self.tableView addGestureRecognizer:longpressRecognizer];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self fetchTaskLists];
@@ -279,7 +281,6 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-//    [self.navigationController setToolbarHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -308,13 +309,14 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     // Configure the cell...
     GTLTasksTaskList *item = self.taskLists[indexPath.row];
     cell.textLabel.text = item.title;
-    cell.textLabel.font = [UIFont fontWithName:@"Optima-Regular" size:14.0];
+    cell.textLabel.font = SYSTEM_TEXT_FONT;
+    cell.textLabel.textColor = SYSTEM_TEXT_COLOR;
     return cell;
 }
 
@@ -323,7 +325,7 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return NO;
 }
 
 
@@ -353,26 +355,26 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    return NO;
 }
 
 
 #pragma mark - Table view delegate
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-    GTLTasksTaskList *selectedTasklist = [self selectedTaskList];
-    
-    // Navigation logic may go here. Create and push another view controller.
-    TaskTasksViewController *detailViewController = [[TaskTasksViewController alloc] initWithStyle:UITableViewStylePlain];
-    
-    // todo: super stupid
-    detailViewController.selectedTasklist = selectedTasklist;
-    detailViewController.tasksService = self.tasksService;
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    
-}
+//- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+//{
+//    GTLTasksTaskList *selectedTasklist = [self selectedTaskList];
+//    
+//    // Navigation logic may go here. Create and push another view controller.
+//    TaskTasksViewController *detailViewController = [[TaskTasksViewController alloc] initWithStyle:UITableViewStylePlain];
+//    
+//    // todo: super stupid
+//    detailViewController.selectedTasklist = selectedTasklist;
+//    detailViewController.tasksService = self.tasksService;
+//    // ...
+//    // Pass the selected object to the new view controller.
+//    [self.navigationController pushViewController:detailViewController animated:YES];
+//    
+//}
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -398,12 +400,28 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 - (GTLTasksTaskList *)selectedTaskList {
   
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    
+    // to make it simple
+    if (indexPath == nil)
+        indexPath = self.selectedIndexPath;
+    
     if (indexPath.row > -1) {
         GTLTasksTaskList *item = [self.taskLists itemAtIndex:indexPath.row];
         return item;
     }
     return nil;
 }
+
+//- (GTLTasksTaskList *)selectedTaskListForIndexPath:(NSIndexPath *)indexPath {
+//    
+////    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//    if (indexPath.row > -1) {
+//        GTLTasksTaskList *item = [self.taskLists itemAtIndex:indexPath.row];
+//        return item;
+//    }
+//    return nil;
+//}
+
 
 #pragma mark Add a Task List
 
@@ -501,5 +519,30 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     [self updateUI];
 }
 
+#pragma mark - Gesture
+- (void)onLongPress:(UILongPressGestureRecognizer *)gesture
+{
+    if (gesture.state == UIGestureRecognizerStateBegan)
+    {
+        UITableViewCell *cell = (UITableViewCell *)[gesture view];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        self.selectedIndexPath = indexPath;
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"ACTION", @"action") delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL", @"cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"EDIT_TITLE",@"edit title"), NSLocalizedString(@"DELETE", @"delete"), nil];
+        [actionSheet showFromToolbar:self.navigationController.toolbar];
+        
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        [actionSheet dismissWithClickedButtonIndex:actionSheet.cancelButtonIndex animated:YES];
+    } else if (buttonIndex == 0){ //edit
+        [self renameTaskListClicked:nil];
+    } else if (buttonIndex == 1) { //delete
+        [self deleteTaskListClicked:nil];
+    }
+    
+}
 
 @end

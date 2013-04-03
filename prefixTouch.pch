@@ -27,3 +27,6 @@
 #endif
 
 #import  "SSTheme.h"
+
+#define SYSTEM_TEXT_FONT [UIFont fontWithName:@"Optima-Regular" size:16.0]
+#define SYSTEM_TEXT_COLOR [UIColor colorWithRed:241.0/255.0 green:48.0/255.0 blue:54.0/255.0 alpha:1]

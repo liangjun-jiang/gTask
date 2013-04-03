@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "GTLTasks.h"
-
 extern NSString* const kTaskStatusCompleted;
 extern NSString* const kTaskStatusNeedsAction;
 

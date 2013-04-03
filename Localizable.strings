@@ -12,4 +12,9 @@
 "SHOW_LIST"  = "Show List";
 "EXPIRE_NOW" = "Expire Now?";
 "TASK_LIST" = "Task List";
+"ACTION" = "Action";
+"CANCEL"  = "Cancel";
+"DELETE" = "Delete";
+"EDIT_TITLE" = "Edit Title";
+
 

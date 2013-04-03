@@ -476,6 +476,8 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
         
     }
     cell.textLabel.text = title;
+    cell.textLabel.font = SYSTEM_TEXT_FONT;
+    cell.textLabel.textColor =  SYSTEM_TEXT_COLOR;
     return cell;
 }
 

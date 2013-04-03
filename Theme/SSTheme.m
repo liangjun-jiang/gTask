@@ -244,7 +244,7 @@
     }
     
     [[UILabel appearance] setFont:[theme mainFont]];
-    [[UILabel appearance] setColor:[theme mainColor]];
+//    [[UILabel appearance] setColor:[theme mainColor]];
 }
 
 + (void)customizeView:(UIView *)view
