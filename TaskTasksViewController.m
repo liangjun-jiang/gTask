@@ -10,7 +10,7 @@
 #import "SVProgressHUD.h"
 #import "TaskNoteViewController.h"
 
-@interface TaskTasksViewController ()<UIAlertViewDelegate>
+@interface TaskTasksViewController ()<UIAlertViewDelegate, UIActionSheetDelegate>
 {
     UIBarButtonItem *addTaskButton_;
     UIBarButtonItem *renameTaskButton_;
@@ -25,12 +25,14 @@
 @property (strong) NSError *tasksFetchError;
 
 @property (strong) GTLServiceTicket *editTaskTicket;
+@property (strong) NSIndexPath *selectedIndexPath;
 
 @end
 
 @implementation TaskTasksViewController
 @synthesize selectedTasklist;
 @synthesize tasksService;
+@synthesize selectedIndexPath;
 
 #pragma mark - 
 - (void)displayAlert:(NSString *)title format:(NSString *)format, ... {
@@ -108,8 +110,8 @@
     
     BOOL isCompleted = [selectedTask.status isEqual:kTaskStatusCompleted];
     [completeTaskButton_ setEnabled:isTaskSelected];
-//    [completeTaskButton_ setTitle:(isCompleted ? @"Uncomplete" : @"Complete")];
-    [completeTaskButton_ setTitle:(isCompleted ? @"UC" : @"C")];
+    [completeTaskButton_ setTitle:(isCompleted ? @"Uncomplete" : @"Complete")];
+//    [completeTaskButton_ setTitle:(isCompleted ? @"UC" : @"C")];
 
     
     NSArray *completedTasks = [self completedTasks];
@@ -121,10 +123,10 @@
     
     BOOL areAllTasksCompleted = (numberOfCompletedTasks == numberOfTasks);
     [completeAllTasksButton_ setEnabled:(numberOfTasks > 0)];
-//    [completeAllTasksButton_ setTitle:(areAllTasksCompleted ?
-//                                       @"Uncomplete All" : @"Complete All")];
     [completeAllTasksButton_ setTitle:(areAllTasksCompleted ?
-                                       @"UA" : @"CA")];
+                                       @"Uncomplete All" : @"Complete All")];
+//    [completeAllTasksButton_ setTitle:(areAllTasksCompleted ?
+//                                       @"UA" : @"CA")];
     
     [self.tableView reloadData];
 }
@@ -133,43 +135,83 @@
 {
     // can we add 7 bar item?
     // Toolbar
-    NSMutableArray *items = [NSMutableArray arrayWithCapacity:13];
-    addTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonSystemItemAdd target:self action:@selector(addATask)];
-    renameTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"R" style:UIBarButtonSystemItemEdit target:self action:@selector(renameATask)];
-    deleteTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"X" style:UIBarButtonSystemItemDone target:self action:@selector(deleteSelectedTask:)];
-    completeTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"C" style:UIBarButtonItemStylePlain target:self action:@selector(completeTaskClicked:)];
-    clearTasksButton_ = [[UIBarButtonItem alloc] initWithTitle:@"CL" style:UIBarButtonItemStylePlain target:self action:@selector(clearTasksClicked:)];;
-    completeAllTasksButton_ = [[UIBarButtonItem alloc] initWithTitle:@"CA" style:UIBarButtonItemStylePlain target:self action:@selector(completeAllTasksClicked:)];
-    deleteAllTasksButton_ = [[UIBarButtonItem alloc] initWithTitle:@"DA" style:UIBarButtonItemStylePlain target:self action:@selector(deleteAllTasksClicked:)];
+    NSMutableArray *items = [NSMutableArray arrayWithCapacity:5];
+//    addTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonSystemItemAdd target:self action:@selector(addATask)];
+//    renameTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"R" style:UIBarButtonSystemItemEdit target:self action:@selector(renameATask)];
+//    deleteTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"X" style:UIBarButtonSystemItemDone target:self action:@selector(deleteSelectedTask:)];
+//    completeTaskButton_ = [[UIBarButtonItem alloc] initWithTitle:@"C" style:UIBarButtonItemStylePlain target:self action:@selector(completeTaskClicked:)];
+//    clearTasksButton_ = [[UIBarButtonItem alloc] initWithTitle:@"Archieve Completed" style:UIBarButtonItemStyleBordered target:self action:@selector(clearTasksClicked:)];
+    completeAllTasksButton_ = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"COMPLETE_ALL", @"complete all") style:UIBarButtonItemStyleBordered target:self action:@selector(completeAllTasksClicked:)];
+    deleteAllTasksButton_ = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"DELETE_ALL", @"delete all") style:UIBarButtonItemStyleBordered target:self action:@selector(deleteAllTasksClicked:)];
     
     
     UIBarButtonItem *flexibleSpaceButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                              target:nil
                                                                                              action:nil];
-    [items addObject:flexibleSpaceButtonItem];
-    [items addObject:addTaskButton_];
-    [items addObject:flexibleSpaceButtonItem];
-    [items addObject:renameTaskButton_];
-    [items addObject:flexibleSpaceButtonItem];
-    [items addObject:deleteTaskButton_];
-    [items addObject:flexibleSpaceButtonItem];
-
-    [items addObject:completeTaskButton_];
-    [items addObject:flexibleSpaceButtonItem];
-    [items addObject:clearTasksButton_];
+//    [items addObject:flexibleSpaceButtonItem];
+//    [items addObject:addTaskButton_];
+//    [items addObject:flexibleSpaceButtonItem];
+//    [items addObject:renameTaskButton_];
+//    [items addObject:flexibleSpaceButtonItem];
+//    [items addObject:deleteTaskButton_];
+//    [items addObject:flexibleSpaceButtonItem];
+//
+//    [items addObject:completeTaskButton_];
+//    [items addObject:flexibleSpaceButtonItem];
+//    [items addObject:clearTasksButton_];
     [items addObject:flexibleSpaceButtonItem];
     [items addObject:completeAllTasksButton_];
     [items addObject:flexibleSpaceButtonItem];
     [items addObject:deleteAllTasksButton_];
     [items addObject:flexibleSpaceButtonItem];
     
-    //add a task item
-//    UIBarButtonItem *addATaskItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CIALBrowser.bundle/images/browserBack.png"]
-//                                                      style:UIBarButtonItemStylePlain
-//                                                     target:self
-//                                                     action:@selector(addATask)];
     return items;
 }
+
+#pragma mark -
+#pragma mark - Gesture
+- (void)onLongPress:(UILongPressGestureRecognizer *)gesture
+{
+    if (gesture.state == UIGestureRecognizerStateBegan)
+    {
+        UITableViewCell *cell = (UITableViewCell *)[gesture view];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        self.selectedIndexPath = indexPath;
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"ACTION", @"action") delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL", @"cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"EDIT_TASK",@"edit title"), NSLocalizedString(@"DELETE_TASK", @"delete"), NSLocalizedString(@"COMPLETE_TASK",@"complete task"), nil];
+        [actionSheet showFromBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
+        
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        [actionSheet dismissWithClickedButtonIndex:actionSheet.cancelButtonIndex animated:YES];
+    } else {
+        switch (buttonIndex) {
+            case 0:  // Edit
+                [self renameATask];
+                break;
+            case 1:  // Delete
+            {
+                [self deleteSelectedTask];
+                break;
+            }
+            case 2:  // Complete
+                [self completeTaskClicked:nil];
+                break;
+//            case 3:  // Clear
+//                [self clearTasksClicked:nil];
+//                break;
+            
+            default:
+                break;
+        }
+        
+    }
+    
+}
+
 
 #pragma mark - views
 
@@ -191,6 +233,7 @@
 {
     [super viewDidLoad];
     
+    [self.navigationController setToolbarHidden:NO];
     [self setToolbarItems:[self toolbarItems]];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -204,11 +247,22 @@
     
     [SSThemeManager customizeTableView:self.tableView];
     
+    // Long press recognizer
+    UILongPressGestureRecognizer *longpressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
+    [self.tableView addGestureRecognizer:longpressRecognizer];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self fetchTasksForSelectedList];
     });
    
       
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setToolbarHidden:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -237,6 +291,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     // Configure the cell...
@@ -266,7 +321,7 @@
 //        
 //        // todo: why this doesn't work?
 //        [cell.textLabel setAttributedText:attributedSring];
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
         str = [str stringByAppendingString:@" \u2713"];
     }
     
@@ -277,7 +332,9 @@
     
     if ([task.deleted boolValue]) {
         // prepend an X mark if this is a deleted task
-        str = [NSString stringWithFormat:@"\u2717 %@", str];
+//        str = [NSString stringWithFormat:@"\u2717 %@", str];
+        DebugLog(@"should be deleted!");
+        str = [str stringByAppendingString:@" \u2717"];
     }
 
     cell.textLabel.text = str;
@@ -379,6 +436,9 @@
 - (GTLTasksTask *)selectedTask {
     //    int rowIndex = [tasksOutline_ selectedRow];
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    if (indexPath == nil) {
+        indexPath = self.selectedIndexPath;
+    }
     if (indexPath.row > -1) {// != nil){
         GTLTasksTask *item = self.tasks.items[indexPath.row];
         return item;
@@ -549,6 +609,8 @@
                                   
                                   if (error == nil) {
                                       [self displayAlertWithMessage:[NSString stringWithFormat:@"Deleted task \"%@\"", task.title]];
+                                      
+                                      [self fetchTasksForSelectedList];
                                       
                                   } else {
                                       [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
@@ -880,6 +942,7 @@ static NSString *const kGTLChildTasksProperty = @"childTasks";
     }
     return children;
 }
+
 
 //- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
 //    NSArray *childTasks = [self childTasksOfItem:item];

@@ -63,29 +63,29 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     [[[UIAlertView alloc] initWithTitle:title message:result delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil] show];
 }
 
-- (NSArray *)toolbarItems
-{
-    // Toolbar
-    NSMutableArray *items = [NSMutableArray arrayWithCapacity:9];
-    
-    addTaskListButton_ = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonSystemItemAdd target:self action:@selector(addTaskListClicked:)];
-    renameTaskListButton_ = [[UIBarButtonItem alloc] initWithTitle:@"R" style:UIBarButtonSystemItemEdit target:self action:@selector(renameTaskListClicked:)];
-    deleteTaskListButton_ = [[UIBarButtonItem alloc] initWithTitle:@"X" style:UIBarButtonSystemItemAction target:self action:@selector(deleteTaskListClicked:)];
-    
-    UIBarButtonItem *flexibleSpaceButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                             target:nil
-                                                                                             action:nil];
-    
-    [items addObject:flexibleSpaceButtonItem];
-    [items addObject:addTaskListButton_];
-    [items addObject:flexibleSpaceButtonItem];
-    [items addObject:renameTaskListButton_];
-    [items addObject:flexibleSpaceButtonItem];
-    [items addObject:deleteTaskListButton_];
-    [items addObject:flexibleSpaceButtonItem];
-    
-    return items;
-}
+//- (NSArray *)toolbarItems
+//{
+//    // Toolbar
+//    NSMutableArray *items = [NSMutableArray arrayWithCapacity:9];
+//    
+//    addTaskListButton_ = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonSystemItemAdd target:self action:@selector(addTaskListClicked:)];
+//    renameTaskListButton_ = [[UIBarButtonItem alloc] initWithTitle:@"R" style:UIBarButtonSystemItemEdit target:self action:@selector(renameTaskListClicked:)];
+//    deleteTaskListButton_ = [[UIBarButtonItem alloc] initWithTitle:@"X" style:UIBarButtonSystemItemAction target:self action:@selector(deleteTaskListClicked:)];
+//    
+//    UIBarButtonItem *flexibleSpaceButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+//                                                                                             target:nil
+//                                                                                             action:nil];
+//    
+//    [items addObject:flexibleSpaceButtonItem];
+//    [items addObject:addTaskListButton_];
+//    [items addObject:flexibleSpaceButtonItem];
+//    [items addObject:renameTaskListButton_];
+//    [items addObject:flexibleSpaceButtonItem];
+//    [items addObject:deleteTaskListButton_];
+//    [items addObject:flexibleSpaceButtonItem];
+//    
+//    return items;
+//}
 
 #pragma mark - IBAction
 - (void)addTaskListClicked:(id)sender {
@@ -258,7 +258,7 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     [SSThemeManager customizeTableView:self.tableView];
     
 //    [self.navigationController setToolbarHidden:NO];
-    [self setToolbarItems:[self toolbarItems]];
+//    [self setToolbarItems:[self toolbarItems]];
 
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
@@ -528,7 +528,7 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         self.selectedIndexPath = indexPath;
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"ACTION", @"action") delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL", @"cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"EDIT_TITLE",@"edit title"), NSLocalizedString(@"DELETE", @"delete"), nil];
-        [actionSheet showFromToolbar:self.navigationController.toolbar];
+        [actionSheet showFromBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
         
     }
 }

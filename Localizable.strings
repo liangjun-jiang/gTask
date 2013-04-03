@@ -16,5 +16,12 @@
 "CANCEL"  = "Cancel";
 "DELETE" = "Delete";
 "EDIT_TITLE" = "Edit Title";
+"EDIT_TASK" = "Edit";
+"DELETE_TASK" = "Delete";
+"COMPLETE_TASK" = "Complete";
+"ARCHIEVE_COMPLETED" = "Archieve";
+"COMPLETE_ALL" = "Complete All";
+"DELETE_ALL" = "Delete All";
+
 
 
