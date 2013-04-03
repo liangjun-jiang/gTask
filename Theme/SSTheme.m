@@ -212,6 +212,10 @@
     [searchBarAppearance setScopeBarButtonTitleTextAttributes:titleTextAttributes forState:UIControlStateNormal];
     
     UILabel *headerLabelAppearance = [UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil];
+    
+    //custom the label in tablecell
+    // doesn't work?!
+//    UILabel *tableCellLabelAppearance = [UILabel appearanceWhenContainedIn:[UITableViewCell class], nil];
     UIColor *accentTintColor = [theme accentTintColor];
     if (accentTintColor) {
         [sliderAppearance setMaximumTrackTintColor:accentTintColor];
@@ -233,9 +237,14 @@
         [progressAppearance setProgressTintColor:baseTintColor];
         [stepperAppearance setTintColor:baseTintColor];
         [headerLabelAppearance setTextColor:baseTintColor];
+//        [tableCellLabelAppearance setTextColor:[UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:1]];
     } else if (mainColor) {
         [headerLabelAppearance setTextColor:mainColor];
+//        [tableCellLabelAppearance setTextColor:[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1]];
     }
+    
+    [[UILabel appearance] setFont:[theme mainFont]];
+    [[UILabel appearance] setColor:[theme mainColor]];
 }
 
 + (void)customizeView:(UIView *)view

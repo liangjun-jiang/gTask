@@ -182,11 +182,15 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self.navigationController setToolbarHidden:NO];
     [self setToolbarItems:[self toolbarItems]];
 
     // Uncomment the following line to preserve selection between presentations.

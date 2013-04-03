@@ -10,6 +10,11 @@
 #import "SSMetalTheme.h"
 
 @implementation SSMetalTheme
+- (UIFont *)mainFont
+{
+    return [UIFont fontWithName:@"Optima-Bold" size:14.0];
+}
+
 
 - (UIColor *)mainColor
 {

@@ -453,7 +453,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 
                 }
                 case 2:
-                    title = NSLocalizedString(@"FETCH", @"fetch");
+                    title = NSLocalizedString(@"SHOW_LIST", @"show list");
                     break;
                 case 3:
                     title = NSLocalizedString(@"EXPIRE_NOW", @"Expire Now");

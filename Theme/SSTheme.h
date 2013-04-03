@@ -100,6 +100,8 @@ typedef NS_ENUM(NSInteger, SSThemeTab) {
 
 @protocol SSTheme <NSObject>
 
+- (UIFont *)mainFont;
+
 - (UIColor *)mainColor;
 - (UIColor *)highlightColor;
 - (UIColor *)shadowColor;

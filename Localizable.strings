@@ -9,6 +9,7 @@
 "SIGN_IN" = "Sign In";
 "SIGN_OUT" = "Sign Out";
 "SHOULD_SAVE" = "Should Save?";
-"FETCH"  = "Fetch";
+"SHOW_LIST"  = "Show List";
 "EXPIRE_NOW" = "Expire Now?";
+"TASK_LIST" = "Task List";
 

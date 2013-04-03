@@ -248,11 +248,19 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self.navigationController setToolbarHidden:NO];
+    self.title = NSLocalizedString(@"TASK_LIST", @"");
+    
+//    [self.navigationController setToolbarHidden:NO];
     [self setToolbarItems:[self toolbarItems]];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -271,7 +279,7 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [self.navigationController setToolbarHidden:YES];
+//    [self.navigationController setToolbarHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -306,6 +314,7 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     // Configure the cell...
     GTLTasksTaskList *item = self.taskLists[indexPath.row];
     cell.textLabel.text = item.title;
+    cell.textLabel.font = [UIFont fontWithName:@"Optima-Regular" size:14.0];
     return cell;
 }
 
