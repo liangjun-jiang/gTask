@@ -109,7 +109,7 @@ static NSString *kViewKey = @"viewKey";
     NSDictionary *dict1 = @{kTitleKey:@"Status", kSourceKey:self.task.status, kViewKey:[NSNumber numberWithInt:UIKeyboardAppearanceDefault]};
     NSDictionary *dict2 = @{kTitleKey:@"complete At", kSourceKey:[self.task.completed description], kViewKey:[NSNumber numberWithInt:UIKeyboardTypeNamePhonePad]};
     NSDictionary *dict3 = @{kTitleKey:@"Update At", kSourceKey:[self.task.updated description], kViewKey:[NSNumber numberWithInt:UIKeyboardTypeNamePhonePad]};
-    NSDictionary *dict4 = @{kTitleKey:@"note", kSourceKey:self.task.notes, kViewKey:[NSNumber numberWithInt:UIKeyboardTypeDefault]};
+    NSDictionary *dict4 = @{kTitleKey:@"note", kSourceKey:(self.task.notes==nil)?@"":self.task.notes , kViewKey:[NSNumber numberWithInt:UIKeyboardTypeDefault]};
    
     
     self.dataSourceArray = @[dict0, dict1,dict2,dict3,dict4];
