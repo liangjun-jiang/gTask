@@ -9,6 +9,8 @@
 #import "TaskTasksViewController.h"
 #import "SVProgressHUD.h"
 #import "TaskNoteViewController.h"
+#import "TaskTasksDetailViewController.h"
+
 
 @interface TaskTasksViewController ()<UIAlertViewDelegate, UIActionSheetDelegate>
 {
@@ -391,14 +393,10 @@
     // Navigation logic may go here. Create and push another view controller.
     // Configure the cell...
     GTLTasksTask *task = self.tasks.items[indexPath.row];
-    if ([task.notes length] > 0) {
-        TaskNoteViewController *taskNoteViewController = [[TaskNoteViewController alloc] initWithTask:task];
-        // Pass the selected object to the new view controller.
-        [self.navigationController pushViewController:taskNoteViewController animated:YES];
+    
+    TaskTasksDetailViewController *taskDetailViewController = [[TaskTasksDetailViewController alloc] initWithTask:task];
+    [self.navigationController pushViewController:taskDetailViewController animated:YES];
 
-    } else {
-        // we should show fancy actions!
-    }
     
 }
 

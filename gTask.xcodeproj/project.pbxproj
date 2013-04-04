@@ -192,6 +192,8 @@
 		D6DA5079170A2D2B00E27CF0 /* SSSmallButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DA4FFB170A2D2B00E27CF0 /* SSSmallButton.m */; };
 		D6DA507A170A2D2B00E27CF0 /* SSTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DA4FFD170A2D2B00E27CF0 /* SSTheme.m */; };
 		D6DA507C170A2F9C00E27CF0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D6DA507B170A2F9C00E27CF0 /* Localizable.strings */; };
+		D6DA508E170D10ED00E27CF0 /* TaskTasksDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DA508C170D10ED00E27CF0 /* TaskTasksDetailViewController.m */; };
+		D6DA508F170D10ED00E27CF0 /* TaskTasksDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6DA508D170D10ED00E27CF0 /* TaskTasksDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -425,6 +427,9 @@
 		D6DA4FFC170A2D2B00E27CF0 /* SSTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTheme.h; sourceTree = "<group>"; };
 		D6DA4FFD170A2D2B00E27CF0 /* SSTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTheme.m; sourceTree = "<group>"; };
 		D6DA507B170A2F9C00E27CF0 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		D6DA508B170D10ED00E27CF0 /* TaskTasksDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaskTasksDetailViewController.h; path = feedback/TaskTasksDetailViewController.h; sourceTree = "<group>"; };
+		D6DA508C170D10ED00E27CF0 /* TaskTasksDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaskTasksDetailViewController.m; path = feedback/TaskTasksDetailViewController.m; sourceTree = "<group>"; };
+		D6DA508D170D10ED00E27CF0 /* TaskTasksDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TaskTasksDetailViewController.xib; path = feedback/TaskTasksDetailViewController.xib; sourceTree = "<group>"; };
 		F49B45D213315AA200EAA732 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -448,6 +453,9 @@
 		13C82E9111373B3000ACAEDD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D6DA508B170D10ED00E27CF0 /* TaskTasksDetailViewController.h */,
+				D6DA508C170D10ED00E27CF0 /* TaskTasksDetailViewController.m */,
+				D6DA508D170D10ED00E27CF0 /* TaskTasksDetailViewController.xib */,
 				13C82E9311373B3000ACAEDD /* AppDelegate.h */,
 				13C82E9411373B3000ACAEDD /* AppDelegate.m */,
 				13C82E9511373B3000ACAEDD /* RootViewController.h */,
@@ -960,6 +968,7 @@
 				D6DA5076170A2D2B00E27CF0 /* topShadow.png in Resources */,
 				D6DA5077170A2D2B00E27CF0 /* topShadow@2x.png in Resources */,
 				D6DA507C170A2F9C00E27CF0 /* Localizable.strings in Resources */,
+				D6DA508F170D10ED00E27CF0 /* TaskTasksDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1010,6 +1019,7 @@
 				D6DA5078170A2D2B00E27CF0 /* SSMetalTheme.m in Sources */,
 				D6DA5079170A2D2B00E27CF0 /* SSSmallButton.m in Sources */,
 				D6DA507A170A2D2B00E27CF0 /* SSTheme.m in Sources */,
+				D6DA508E170D10ED00E27CF0 /* TaskTasksDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
