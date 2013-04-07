@@ -11,6 +11,7 @@
 #import "TaskNoteViewController.h"
 #import "TaskTasksDetailViewController.h"
 
+#define kAddTaskDueDate @"kAddTaskDueDate"
 
 @interface TaskTasksViewController ()<UIAlertViewDelegate, UIActionSheetDelegate>
 {
@@ -228,6 +229,10 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addTaskDueDate) name:kAddTaskDueDate object:nil];
+        
+        
+        return self;
     }
     return self;
 }
@@ -631,6 +636,13 @@
 }
 
 #pragma mark Change a Task's Complete Status
+- (void)addTAskDueDate:(NSNotification *) notification
+{
+    
+    
+    
+}
+
 
 - (void)completeSelectedTask {
     // Mark a task as completed or incomplete
