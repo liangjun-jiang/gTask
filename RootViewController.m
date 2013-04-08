@@ -154,6 +154,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 - (void)toggleShouldSaveInKeychain:(UISwitch *)sender {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:sender.isOn forKey:kShouldSaveInKeychainKey];
+    [defaults synchronize];
 }
 
 - (void)signOut {

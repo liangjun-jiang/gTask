@@ -3,17 +3,11 @@
 
 #import "TaskTasksDetailViewController.h"
 
-
-static NSString *kTitleKey = @"sectionTitleKey";
-static NSString *kSourceKey = @"sourceKey";
-static NSString *kViewKey = @"viewKey";
-
 #define kTextFieldWidth	195.0
 #define kTextHeight		34.0
 
 @interface CustomTableViewCell : UITableViewCell
 @property (nonatomic, strong) UITextField *textField;
-- (void)setContentForTableCellLabel:(NSString *)title textField:(NSString *)placeHolder keyBoardType:(NSNumber *)keyboardType;
 @end
 
 @implementation CustomTableViewCell
@@ -45,33 +39,23 @@ static NSString *kViewKey = @"viewKey";
     return self;
 }
 
-- (void)setContentForTableCellLabel:(NSString *)title textField:(NSString *)textFieldText keyBoardType:(NSNumber *)keyboardType
-{
-    
-    self.textLabel.text = title;
-    self.textField.text = textFieldText;
-    self.textField.keyboardType = [keyboardType intValue];
-    
-}
-
 @end;
 
 
-@interface TaskTasksDetailViewController ()<UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate>
+@interface TaskTasksDetailViewController ()<UITextFieldDelegate, UITextViewDelegate>//, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate>
 {
     NSUInteger selected;  
 }
 
-@property (nonatomic, strong) NSArray *dataSourceArray;
-@property (nonatomic, strong) NSMutableArray *dataArray;
-@property (nonatomic, strong) NSArray *statusList;
-@property (nonatomic, strong) NSArray *alertMinsList;
+
+//@property (nonatomic, strong) NSArray *statusList;
+//@property (nonatomic, strong) NSArray *alertMinsList;
 
 
 @end
 
 @implementation TaskTasksDetailViewController
-@synthesize dataSourceArray, dataArray, statusList;
+//@synthesize statusList,alertMinsList;
 
 
 -(id)initWithTask:(GTLTasksTask *)mTask
@@ -104,18 +88,16 @@ static NSString *kViewKey = @"viewKey";
    self.title = self.task.title;
     
     // due, status, title, notes, completed at :time stamp
-    self.statusList = @[@"completed",@"uncomplete",@"archieved", @"delete"];
-    self.alertMinsList = @[@"15",@"30",@"45",@"60",@"120",@"180"];
-  
-    NSDictionary *dict0 = @{kTitleKey:@"Title", kSourceKey:self.task.title, kViewKey:[NSNumber numberWithInt:UIKeyboardAppearanceDefault]};
-    NSDictionary *dict1 = @{kTitleKey:@"Status", kSourceKey:self.task.status, kViewKey:[NSNumber numberWithInt:UIKeyboardAppearanceDefault]};
-    NSDictionary *dict2 = @{kTitleKey:@"Due At", kSourceKey:(self.task.due == nil)?@"":[self.task.due description], kViewKey:[NSNumber numberWithInt:UIKeyboardTypeNamePhonePad]};
-    NSDictionary *dict3 = @{kTitleKey:@"Alert At", kSourceKey:(self.task.updated == nil)?@"":[self.task.updated description], kViewKey:[NSNumber numberWithInt:UIKeyboardTypeNamePhonePad]};
-    NSDictionary *dict4 = @{kTitleKey:@"note", kSourceKey:(self.task.notes==nil)?@"":self.task.notes , kViewKey:[NSNumber numberWithInt:UIKeyboardTypeDefault]};
-   
+//    self.statusList = @[@"completed",@"uncomplete",@"archieved", @"delete"];
+//    self.alertMinsList = @[@"15",@"30",@"45",@"60",@"120",@"180"];
     
-    self.dataSourceArray = @[dict0, dict1,dict2,dict3,dict4];
-    self.dataArray = [NSMutableArray arrayWithCapacity:[self.dataSourceArray count]];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"kAddTaskDueDate" object:self.task];
     
 }
 
@@ -140,7 +122,7 @@ static NSString *kViewKey = @"viewKey";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.dataSourceArray count];
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -151,16 +133,13 @@ static NSString *kViewKey = @"viewKey";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == [self.dataSourceArray count] -1)
-        return 100.0;
+    if (indexPath.row == 1)
+        return 150.0;
     else
         return 44.0;
     
 }
 
-//- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return indexPath;
-//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -168,18 +147,49 @@ static NSString *kViewKey = @"viewKey";
     static NSString *TextViewCellIdentifier = @"TextViewCell";
     UITableViewCell *tableViewCell = nil;
     
-    if (indexPath.row != [self.dataSourceArray count] -1) {
+    if (indexPath.row == 0) {
         CustomTableViewCell *cell = (CustomTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[CustomTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         }
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:13.0];
+        cell.textLabel.font = SYSTEM_TEXT_FONT;
+        cell.textField.font = SYSTEM_TEXT_FONT;
         cell.textField.delegate = self;
         cell.textField.tag = indexPath.row + 10;
         // Configure the cell...
-        NSDictionary *infoDict = self.dataSourceArray[indexPath.row];
-        [cell setContentForTableCellLabel:infoDict[kTitleKey] textField:infoDict[kSourceKey] keyBoardType:infoDict[kViewKey]];
+        NSString *title = NSLocalizedString(@"TITILE", @"");
+        NSString *textFieldText = self.task.title;
+//        switch (indexPath.row) {
+//            case 0:
+//            {
+//                title = NSLocalizedString(@"TITILE", @"");;
+//                textFieldText = self.task.title;
+//                break;
+//            }
+//            case 1:
+//            {
+//                title = NSLocalizedString(@"STATUS", @"");
+//                textFieldText = self.task.status;
+//                break;
+//            }
+//            case 2:
+//            {
+//                title = NSLocalizedString(@"DUE_DATE", @"");;
+//                textFieldText = (self.task.updated == nil)?@"":[self.task.updated description];
+//                break;
+//            }
+//            case 3:
+//            {
+//                title = NSLocalizedString(@"ALERT_AT", @"");;
+//                textFieldText = @"";
+//                break;
+//            }
+//            default:
+//                break;
+//        }
+        cell.textLabel.text = title;
+        cell.textField.text = textFieldText;
         tableViewCell = cell;
     } else
     {
@@ -188,20 +198,14 @@ static NSString *kViewKey = @"viewKey";
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TextViewCellIdentifier];
         }
         cell.textLabel.font = SYSTEM_TEXT_FONT;
-        cell.textLabel.text = self.dataSourceArray[indexPath.row][kTitleKey];
-    
-        // this should be reused!!!
-        
+        cell.textLabel.text = NSLocalizedString(@"NOTES", @"");
         UITextView *notesTextView = [[UITextView alloc] initWithFrame:CGRectMake(100, 5.0, kTextFieldWidth, 80.0)];
         notesTextView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
-        // We also don't want to set the returnkey of keyboard "Done" for the TextView
-        // because the user might just want to change to new line
-        notesTextView.returnKeyType = UIReturnKeyDefault; 
-        notesTextView.font = [UIFont systemFontOfSize:14.0f];
+        notesTextView.returnKeyType = UIReturnKeyDefault;
+        notesTextView.font = SYSTEM_TEXT_FONT;
         notesTextView.delegate = self;
         notesTextView.backgroundColor = [UIColor clearColor];
         notesTextView.tag = indexPath.row + 10;
-        notesTextView.text = self.dataSourceArray[indexPath.row][kSourceKey];
         cell.accessoryView = notesTextView;
         
         return cell;
@@ -213,68 +217,41 @@ static NSString *kViewKey = @"viewKey";
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // we row this to top
-    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // we row this to top
+//    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+//}
 
-
-#pragma mark  - IBAction Method
-
-- (IBAction)onSubmit:(id)sender
-{
-    self.navigationItem.rightBarButtonItem = nil;
-    
-    // I don't want to collect those content from UITextField & UITextView Until right now
-    // Since it will be another process of iterating the cells, and decide it is textfield or textview
-    // Even though the user doesn't fill up with anything, the user email, name and device info will still be sent out
-//    if (feedback.comments.length > 0) {
-//        // we send the info to server
-//        NSLog(@"feedback will be sent out: %@",feedback);
-//    } else {
-//        CustomAlertView *error = [[CustomAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"") message:NSLocalizedString(@"Comment can't be blank", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"Okay", @"") otherButtonTitles:nil, nil];
-//        [error show];
-//        
-//    }
-    
-    
-}
 
 #pragma mark - UITextField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    NSDictionary *contentDictionary = nil;
-    NSString *key = nil;
-    // just don't want to iterate to rewrite those key titles again
-    NSInteger index = textField.tag / 10;
-    
-    contentDictionary = self.dataSourceArray[index];
-    key = contentDictionary[kTitleKey];  // we only care the section title
-    [self.dataArray addObject:@{key:textField.text}];
-    
-    //Crap, I still need to iterate those
-    switch (index) {
-        case 0:
-            self.task.title = textField.text;
-            break;
-        case 1:
-            self.task.status = textField.text;
-            break;
-        case 2:
-//            self.task.updated = textField.text;
-            break;
-        case 3:
-            self.task.notes = textField.text;
-            break;
-        default:
-            break;
-    }
-    
+   self.task.title = textField.text;
+//    NSInteger index = textField.tag / 10;
+//    //Crap, I still need to iterate those
+//    switch (index) {
+//        case 0:
+//            self.task.title = textField.text;
+//            break;
+//        case 1:
+//            self.task.status = textField.text;
+//            break;
+//        case 2:
+////            self.task.due = textField.text;
+//            break;
+//        case 3:
+////            self.task.notes = textField.text;
+//            break;
+//        default:
+//            break;
+//    }
+//    
   	[textField resignFirstResponder];
     self.navigationItem.rightBarButtonItem = nil;
-     
+    
+//    [self.tableView reloadData];
 	return YES;
 }
 
@@ -283,106 +260,110 @@ static NSString *kViewKey = @"viewKey";
     // create a "done" item as the right barButtonItem so user can dismiss the keyboard
      UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(onDone:)];
     self.navigationItem.rightBarButtonItem = doneItem;
-    selected = textField.tag - 10;
     
-    if (textField.tag == 12)  // this is for due date
-    {
-        UIDatePicker *datePickerView = [[UIDatePicker alloc] initWithFrame:CGRectZero];
-        datePickerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-        datePickerView.datePickerMode = UIDatePickerModeDate;
-
-        textField.inputView = datePickerView;
-        
-        // this animiation was from Apple Sample Code: DateCell
-        CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-		CGSize pickerSize = [datePickerView sizeThatFits:CGSizeZero];
-		CGRect startRect = CGRectMake(0.0,
-									  screenRect.origin.y + screenRect.size.height,
-									  pickerSize.width, pickerSize.height);
-		datePickerView.frame = startRect;
-		
-		// compute the end frame
-		CGRect pickerRect = CGRectMake(0.0,
-									   screenRect.origin.y + screenRect.size.height - pickerSize.height,
-									   pickerSize.width,
-									   pickerSize.height);
-        
-        [UIView animateWithDuration:0.3 animations:^{
-            datePickerView.frame = pickerRect;
-        }];
- 
-    } else if (textField.tag == 11 || textField.tag == 13 ) {
-        UIPickerView *categoryPicker = [[UIPickerView alloc] initWithFrame:CGRectZero];
-        categoryPicker.showsSelectionIndicator = YES;	// note this is default to NO
-        
-        
-        // this view controller is the data source and delegate
-        categoryPicker.delegate = self;
-        categoryPicker.dataSource = self;
-        
-        categoryPicker.tag = (textField.tag == 11)? 101:102;
-        
-        textField.inputView = categoryPicker;
-        
-        // this animiation was from Apple Sample Code: DateCell
-        CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-		CGSize pickerSize = [categoryPicker sizeThatFits:CGSizeZero];
-		CGRect startRect = CGRectMake(0.0,
-									  screenRect.origin.y + screenRect.size.height,
-									  pickerSize.width, pickerSize.height);
-		categoryPicker.frame = startRect;
-		
-		// compute the end frame
-		CGRect pickerRect = CGRectMake(0.0,
-									   screenRect.origin.y + screenRect.size.height - pickerSize.height,
-									   pickerSize.width,
-									   pickerSize.height);
-        
-        [UIView animateWithDuration:0.3 animations:^{
-            categoryPicker.frame = pickerRect;
-        }];
-    }
+    selected = 0;
+//    selected = textField.tag - 10;
+//    
+//    if (textField.tag == 12)  // this is for due date
+//    {
+//        UIDatePicker *datePickerView = [[UIDatePicker alloc] initWithFrame:CGRectZero];
+//        datePickerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+//        datePickerView.datePickerMode = UIDatePickerModeDate;
+//
+//        textField.inputView = datePickerView;
+//        
+//        // this animiation was from Apple Sample Code: DateCell
+//        CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+//		CGSize pickerSize = [datePickerView sizeThatFits:CGSizeZero];
+//		CGRect startRect = CGRectMake(0.0,
+//									  screenRect.origin.y + screenRect.size.height,
+//									  pickerSize.width, pickerSize.height);
+//		datePickerView.frame = startRect;
+//		
+//		// compute the end frame
+//		CGRect pickerRect = CGRectMake(0.0,
+//									   screenRect.origin.y + screenRect.size.height - pickerSize.height,
+//									   pickerSize.width,
+//									   pickerSize.height);
+//        
+//        [UIView animateWithDuration:0.3 animations:^{
+//            datePickerView.frame = pickerRect;
+//        }];
+// 
+//    } else if (textField.tag == 11 || textField.tag == 13 ) {
+//        UIPickerView *categoryPicker = [[UIPickerView alloc] initWithFrame:CGRectZero];
+//        categoryPicker.showsSelectionIndicator = YES;	// note this is default to NO
+//        
+//        
+//        // this view controller is the data source and delegate
+//        categoryPicker.delegate = self;
+//        categoryPicker.dataSource = self;
+//        
+//        categoryPicker.tag = (textField.tag == 11)? 101:102;
+//        
+//        textField.inputView = categoryPicker;
+//        
+//        // this animiation was from Apple Sample Code: DateCell
+//        CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+//		CGSize pickerSize = [categoryPicker sizeThatFits:CGSizeZero];
+//		CGRect startRect = CGRectMake(0.0,
+//									  screenRect.origin.y + screenRect.size.height,
+//									  pickerSize.width, pickerSize.height);
+//		categoryPicker.frame = startRect;
+//		
+//		// compute the end frame
+//		CGRect pickerRect = CGRectMake(0.0,
+//									   screenRect.origin.y + screenRect.size.height - pickerSize.height,
+//									   pickerSize.width,
+//									   pickerSize.height);
+//        
+//        [UIView animateWithDuration:0.3 animations:^{
+//            categoryPicker.frame = pickerRect;
+//        }];
+//    }
     
 }
 
 #pragma mark - UITextView Delegate method
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    selected = textView.tag-10;
+    self.navigationItem.rightBarButtonItem = nil;
+    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(onDone:)];
+    self.navigationItem.rightBarButtonItem = doneItem;
+    
+    selected = 1;
+//    selected = textView.tag-10;
     
 }
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
 //    feedback.comments = textView.text;
     [textView resignFirstResponder];
+    self.navigationItem.rightBarButtonItem = nil;
 }
 
 #pragma mark - private method
 
 - (void)onDone:(id)sender
 {
-    // we resign the textfield
-    // Apple creates a numberpad (also decimal number pad) without "Done" which has a good reason.
-    // It's not necessary to have to comply with it. But it's better to do so. The common practice in Apple's app is..
-    // make the RightBarButtonItem dismiss the numberkeypad.
-    
     
     UITableViewCell *activeCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:selected inSection:0]];
     if ([activeCell.accessoryView isKindOfClass:[UITextField class]])
     {
         UITextField *textField = (UITextField*)activeCell.accessoryView;
-        if (textField.tag == 11) // for status
+        if (textField.tag == 10) // for status
         {
             self.task.status = textField.text;
-        } else if (textField.tag == 13) // for alert date
-        {
-            //todo:
-//            feedback.category = textField.text;
-        } else if (textField.tag == 12)
-        {
-            //todo
-            self.task.due = nil;
         }
+//        else if (textField.tag == 13) // for alert date
+//        {
+//            //todo:
+////            feedback.category = textField.text;
+//        } else if (textField.tag == 12)
+//        {
+//            //todo
+//            self.task.due = nil;
+//        }
         
         [textField resignFirstResponder];
     } else if ([activeCell.accessoryView isKindOfClass:[UITextView class]])
@@ -396,55 +377,50 @@ static NSString *kViewKey = @"viewKey";
     }
 }
 
-#pragma mark -
 #pragma mark UIPickerViewDelegate
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    NSIndexPath *indexPath;
-    CustomTableViewCell *cell;
-    if (pickerView.tag == 101) {
-        self.task.status = self.statusList[row];
-//        indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+//- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+//{
+//    NSIndexPath *indexPath;
+//    CustomTableViewCell *cell;
+//    if (pickerView.tag == 101) {
+//        self.task.status = self.statusList[row];
+//    } else {
+//        indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
 //        cell = (CustomTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-//        cell.textField.text = self.statusList[row];
-    } else {
-        indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
-        cell = (CustomTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-        cell.textField.text = self.alertMinsList[row];
-    }
-    [self.tableView reloadData];
-//    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
-
-#pragma mark -
-#pragma mark UIPickerViewDataSource
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return (pickerView.tag == 101)?self.statusList[row]:[NSString stringWithFormat:@"%@ mins", self.alertMinsList[row]];
-}
-
-- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
-{
-	CGFloat componentWidth = 280.0;
- 	return componentWidth;
-}
-
-- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
-{
-	return 40.0;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-	return (pickerView.tag == 101)?self.statusList.count:self.alertMinsList.count;
-}
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-	return 1;
-}
+//        cell.textField.text = self.alertMinsList[row];
+//    }
+//    [self.tableView reloadData];
+//}
+//
+//
+//#pragma mark -
+//#pragma mark UIPickerViewDataSource
+//
+//- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+//{
+//    return (pickerView.tag == 101)?self.statusList[row]:[NSString stringWithFormat:@"%@ mins", self.alertMinsList[row]];
+//}
+//
+//- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
+//{
+//	CGFloat componentWidth = 280.0;
+// 	return componentWidth;
+//}
+//
+//- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+//{
+//	return 40.0;
+//}
+//
+//- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+//{
+//	return (pickerView.tag == 101)?self.statusList.count:self.alertMinsList.count;
+//}
+//
+//- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+//{
+//	return 1;
+//}
 
 @end

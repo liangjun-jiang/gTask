@@ -229,7 +229,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addTaskDueDate) name:kAddTaskDueDate object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addTaskDueDate:) name:kAddTaskDueDate object:nil];
         
         
         return self;
@@ -533,7 +533,7 @@
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     UITextField* titleField = [alert textFieldAtIndex:0];
     titleField.keyboardType = UIKeyboardAppearanceDefault;
-    titleField.placeholder = @"Type...";
+    titleField.placeholder = @"New Title...";
     alert.tag = 111;
     [alert show];
 
@@ -636,11 +636,11 @@
 }
 
 #pragma mark Change a Task's Complete Status
-- (void)addTAskDueDate:(NSNotification *) notification
+- (void)addTaskDueDate:(NSNotification *) notification
 {
     
-    
-    
+    DebugLog(@"new task: %@",notification.object);
+    DebugLog(@"selected: %@",[self selectedTask]);
 }
 
 
