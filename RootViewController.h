@@ -1,12 +1,10 @@
 
 #import "GTLTasks.h"
-
-#define client_id @"580813237419.apps.googleusercontent.com"
-#define client_secret @"1XLt_eUMs7hdIiqSDt04qe4-"
+#import "Constants.h"
 
 @class GTMOAuth2Authentication;
 
-@interface RootViewController : UIViewController <UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface RootViewController : UITableViewController <UINavigationControllerDelegate> {
 
   int mNetworkActivityCounter;
   GTMOAuth2Authentication *mAuth;
@@ -15,7 +13,7 @@
 
 
 @property (nonatomic, strong) GTMOAuth2Authentication *auth;
-@property (nonatomic, strong) UITableView *mTableView;
+//@property (nonatomic, strong) UITableView *mTableView;
 
 - (void)signInOutClicked:(id)sender;
 - (void)fetchClicked:(id)sender;

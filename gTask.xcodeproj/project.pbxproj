@@ -10,7 +10,6 @@
 		1301BB45119CB4B100A33D6C /* OAuth2SampleMainiPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1301BB44119CB4B100A33D6C /* OAuth2SampleMainiPad.xib */; };
 		13E350A0119CA9AE00B2EB5A /* mainTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C82E9211373B3000ACAEDD /* mainTouch.m */; };
 		13E350A1119CA9AE00B2EB5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C82E9411373B3000ACAEDD /* AppDelegate.m */; };
-		13E350A2119CA9AE00B2EB5A /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C82E9611373B3000ACAEDD /* RootViewController.m */; };
 		13E350A8119CA9AE00B2EB5A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		13E350A9119CA9AE00B2EB5A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		13E350AA119CA9AE00B2EB5A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
@@ -56,6 +55,12 @@
 		D62C37F416FF68D700EF8CDE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37F316FF68D700EF8CDE /* Default.png */; };
 		D62C37F616FF68E200EF8CDE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37F516FF68E200EF8CDE /* Default@2x.png */; };
 		D62C37F816FF68EB00EF8CDE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37F716FF68EB00EF8CDE /* Default-568h@2x.png */; };
+		D62C5F2E172B2BCB00F01D39 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5F2C172B2BCB00F01D39 /* LoginViewController.m */; };
+		D62C5F2F172B2BCB00F01D39 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D62C5F2D172B2BCB00F01D39 /* LoginViewController.xib */; };
+		D62C5F31172B2BE800F01D39 /* december-12@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D62C5F30172B2BE800F01D39 /* december-12@2x.jpg */; };
+		D62C5F33172B2EFD00F01D39 /* december-12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D62C5F32172B2EFD00F01D39 /* december-12.jpg */; };
+		D62C5F35172B308800F01D39 /* december-12-568h@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D62C5F34172B308800F01D39 /* december-12-568h@2x.jpg */; };
+		D62C5F6B172B430600F01D39 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5F69172B430600F01D39 /* RootViewController.m */; };
 		D62EC16116FCC2C5005E65F5 /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62EC15F16FCC2C5005E65F5 /* TaskListViewController.m */; };
 		D62EC16216FCC2C5005E65F5 /* TaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D62EC16016FCC2C5005E65F5 /* TaskListViewController.xib */; };
 		D67ED23717028F6C0084E8A6 /* TaskTasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D67ED23517028F6C0084E8A6 /* TaskTasksViewController.m */; };
@@ -202,8 +207,6 @@
 		13C82E9211373B3000ACAEDD /* mainTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mainTouch.m; sourceTree = "<group>"; };
 		13C82E9311373B3000ACAEDD /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		13C82E9411373B3000ACAEDD /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		13C82E9511373B3000ACAEDD /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		13C82E9611373B3000ACAEDD /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		13C82E9711373B3000ACAEDD /* prefixTouch.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prefixTouch.pch; sourceTree = "<group>"; };
 		13E350B0119CA9AE00B2EB5A /* gTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13FA93DF113867A700E1AAA4 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
@@ -284,6 +287,15 @@
 		D62C37F316FF68D700EF8CDE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D62C37F516FF68E200EF8CDE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D62C37F716FF68EB00EF8CDE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		D62C5F2B172B2BCB00F01D39 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		D62C5F2C172B2BCB00F01D39 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		D62C5F2D172B2BCB00F01D39 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		D62C5F30172B2BE800F01D39 /* december-12@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "december-12@2x.jpg"; path = "Resources/december-12@2x.jpg"; sourceTree = "<group>"; };
+		D62C5F32172B2EFD00F01D39 /* december-12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "december-12.jpg"; path = "Resources/december-12.jpg"; sourceTree = "<group>"; };
+		D62C5F34172B308800F01D39 /* december-12-568h@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "december-12-568h@2x.jpg"; path = "Resources/december-12-568h@2x.jpg"; sourceTree = "<group>"; };
+		D62C5F36172B3D4400F01D39 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		D62C5F69172B430600F01D39 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		D62C5F6A172B430600F01D39 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		D62EC15E16FCC2C5005E65F5 /* TaskListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListViewController.h; sourceTree = "<group>"; };
 		D62EC15F16FCC2C5005E65F5 /* TaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListViewController.m; sourceTree = "<group>"; };
 		D62EC16016FCC2C5005E65F5 /* TaskListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskListViewController.xib; sourceTree = "<group>"; };
@@ -453,13 +465,13 @@
 		13C82E9111373B3000ACAEDD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D62C5F69172B430600F01D39 /* RootViewController.m */,
+				D62C5F6A172B430600F01D39 /* RootViewController.h */,
 				D6DA508B170D10ED00E27CF0 /* TaskTasksDetailViewController.h */,
 				D6DA508C170D10ED00E27CF0 /* TaskTasksDetailViewController.m */,
 				D6DA508D170D10ED00E27CF0 /* TaskTasksDetailViewController.xib */,
 				13C82E9311373B3000ACAEDD /* AppDelegate.h */,
 				13C82E9411373B3000ACAEDD /* AppDelegate.m */,
-				13C82E9511373B3000ACAEDD /* RootViewController.h */,
-				13C82E9611373B3000ACAEDD /* RootViewController.m */,
 				13C82E9B11373B6A00ACAEDD /* Resources */,
 				D62EC15E16FCC2C5005E65F5 /* TaskListViewController.h */,
 				D62EC15F16FCC2C5005E65F5 /* TaskListViewController.m */,
@@ -470,6 +482,10 @@
 				D6DA4F1B1708969D00E27CF0 /* TaskNoteViewController.h */,
 				D6DA4F1C1708969D00E27CF0 /* TaskNoteViewController.m */,
 				D6DA4F1E1708982800E27CF0 /* TaskNoteViewController.xib */,
+				D62C5F2B172B2BCB00F01D39 /* LoginViewController.h */,
+				D62C5F2C172B2BCB00F01D39 /* LoginViewController.m */,
+				D62C5F2D172B2BCB00F01D39 /* LoginViewController.xib */,
+				D62C5F36172B3D4400F01D39 /* Constants.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -515,6 +531,9 @@
 		29B97315FDCFA39411CA2CEA /* Other App Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D62C5F34172B308800F01D39 /* december-12-568h@2x.jpg */,
+				D62C5F32172B2EFD00F01D39 /* december-12.jpg */,
+				D62C5F30172B2BE800F01D39 /* december-12@2x.jpg */,
 				D62C37E916FF679300EF8CDE /* Icon-72.png */,
 				D62C37EA16FF679300EF8CDE /* Icon-72@2x.png */,
 				D62C37EB16FF679300EF8CDE /* Icon-Small.png */,
@@ -969,6 +988,10 @@
 				D6DA5077170A2D2B00E27CF0 /* topShadow@2x.png in Resources */,
 				D6DA507C170A2F9C00E27CF0 /* Localizable.strings in Resources */,
 				D6DA508F170D10ED00E27CF0 /* TaskTasksDetailViewController.xib in Resources */,
+				D62C5F2F172B2BCB00F01D39 /* LoginViewController.xib in Resources */,
+				D62C5F31172B2BE800F01D39 /* december-12@2x.jpg in Resources */,
+				D62C5F33172B2EFD00F01D39 /* december-12.jpg in Resources */,
+				D62C5F35172B308800F01D39 /* december-12-568h@2x.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -981,7 +1004,6 @@
 			files = (
 				13E350A0119CA9AE00B2EB5A /* mainTouch.m in Sources */,
 				13E350A1119CA9AE00B2EB5A /* AppDelegate.m in Sources */,
-				13E350A2119CA9AE00B2EB5A /* RootViewController.m in Sources */,
 				D62EC16116FCC2C5005E65F5 /* TaskListViewController.m in Sources */,
 				D62C364916FCD2C600EF8CDE /* GTLObject.m in Sources */,
 				D62C364A16FCD2C600EF8CDE /* GTLQuery.m in Sources */,
@@ -1020,6 +1042,8 @@
 				D6DA5079170A2D2B00E27CF0 /* SSSmallButton.m in Sources */,
 				D6DA507A170A2D2B00E27CF0 /* SSTheme.m in Sources */,
 				D6DA508E170D10ED00E27CF0 /* TaskTasksDetailViewController.m in Sources */,
+				D62C5F2E172B2BCB00F01D39 /* LoginViewController.m in Sources */,
+				D62C5F6B172B430600F01D39 /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1044,7 +1068,7 @@
 				OTHER_CFLAGS = "-DDEBUG=1";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = gTask;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1064,7 +1088,7 @@
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = gTask;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1072,6 +1096,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Liangjun Jiang (NLHVYBKJKH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -1081,6 +1106,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DDEBUG=1";
 				OTHER_LDFLAGS = "-ObjC";
+				PROVISIONING_PROFILE = "FFFFD1B6-53BF-47D1-93B7-14B8A5852B3C";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1089,6 +1115,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Liangjun Jiang (NLHVYBKJKH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -1097,6 +1124,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
+				PROVISIONING_PROFILE = "FFFFD1B6-53BF-47D1-93B7-14B8A5852B3C";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

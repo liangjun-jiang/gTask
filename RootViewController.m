@@ -6,24 +6,13 @@
 #import "GTMHTTPFetcherLogging.h"
 #import "TaskListViewController.h"
 
-static NSString *const kShouldSaveInKeychainKey = @"shouldSaveInKeychain";
-static NSString *const kSampleClientIDKey = @"clientID";
-static NSString *const kSampleClientSecretKey = @"clientSecret";
+
 
 #define kViewTag				1		// for tagging our embedded controls for removal at cell recycle time
 
 @interface RootViewController()
-{
-    UIBarButtonItem *signInOutButton_;
-    UIBarButtonItem *fetchButton_;
-    UIBarButtonItem *expireNowButton_;
-}
 
 @property (readonly) GTLServiceTasks *tasksService;
-@property (nonatomic, strong) UIBarButtonItem *signInOutButton;
-@property (nonatomic, strong) UIBarButtonItem *fetchButton;
-@property (nonatomic, strong) UIBarButtonItem *expireNowButton;
-
 @property (nonatomic, strong, readonly) UISwitch *shouldSaveInKeychainSwitch;
 
 
@@ -38,26 +27,65 @@ static NSString *const kSampleClientSecretKey = @"clientSecret";
 
 @end
 
-// Keychain item name for saving the user's authentication information
-NSString *const kKeychainItemName = @"gTasks: Google Tasks";
 
 @implementation RootViewController
 
-@synthesize mTableView,
-            shouldSaveInKeychainSwitch,
-            fetchButton = fetchButton_,
-            expireNowButton = expireNowButton_,
-//            shouldSaveInKeychainSwitch = mShouldSaveInKeychainSwitch,
-            signInOutButton = signInOutButton_;
-
-
+//@synthesize mTableView,
+@synthesize shouldSaveInKeychainSwitch;
 @synthesize auth = mAuth;
 
-// NSUserDefaults keys
-static NSString *const kGoogleClientIDKey          = @"GoogleClientID";
-static NSString *const kGoogleClientSecretKey      = @"GoogleClientSecret";
-static NSString *const kDailyMotionClientIDKey     = @"DailyMotionClientID";
-static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
+-(id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        // Listen for network change notifications
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self selector:@selector(incrementNetworkActivity:) name:kGTMOAuth2WebViewStartedLoading object:nil];
+        [nc addObserver:self selector:@selector(decrementNetworkActivity:) name:kGTMOAuth2WebViewStoppedLoading object:nil];
+        [nc addObserver:self selector:@selector(incrementNetworkActivity:) name:kGTMOAuth2FetchStarted object:nil];
+        [nc addObserver:self selector:@selector(decrementNetworkActivity:) name:kGTMOAuth2FetchStopped object:nil];
+        [nc addObserver:self selector:@selector(signInNetworkLostOrFound:) name:kGTMOAuth2NetworkLost  object:nil];
+        [nc addObserver:self selector:@selector(signInNetworkLostOrFound:) name:kGTMOAuth2NetworkFound object:nil];
+        
+        // Fill in the Client ID and Client Secret text fields
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+        // First, we'll try to get the saved Google authentication, if any, from
+        // the keychain
+        
+        // Normal applications will hardcode in their client ID and client secret,
+        // but the sample app allows the user to enter them in a text field, and
+        // saves them in the preferences
+        NSString *clientID = [defaults stringForKey:kGoogleClientIDKey];
+        NSString *clientSecret = [defaults stringForKey:kGoogleClientSecretKey];
+        
+        GTMOAuth2Authentication *auth = nil;
+        
+        if (clientID && clientSecret) {
+            auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
+                                                                         clientID:clientID
+                                                                     clientSecret:clientSecret];
+        }
+        // Save the authentication object, which holds the auth tokens and
+        // the scope string used to obtain the token.  For Google services,
+        // the auth object also holds the user's email address.
+        self.auth = auth;
+        
+        
+        //    self.mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        //    self.mTableView.dataSource = self;
+        //    self.mTableView.delegate = self;
+        //    [self.view addSubview:self.mTableView];
+        
+        BOOL isRemembering = [self shouldSaveInKeychain];
+        self.shouldSaveInKeychainSwitch.on = isRemembering;
+        
+        [SSThemeManager customizeTableView:self.tableView];
+    }
+    
+    return self;
+    
+}
 
 - (void)awakeFromNib {
   // Listen for network change notifications
@@ -94,15 +122,15 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   self.auth = auth;
 
     
-    self.mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
-    self.mTableView.dataSource = self;
-    self.mTableView.delegate = self;
-    [self.view addSubview:self.mTableView];
+//    self.mTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+//    self.mTableView.dataSource = self;
+//    self.mTableView.delegate = self;
+//    [self.view addSubview:self.mTableView];
 
     BOOL isRemembering = [self shouldSaveInKeychain];
     self.shouldSaveInKeychainSwitch.on = isRemembering;
 
-    [SSThemeManager customizeTableView:self.mTableView];
+    [SSThemeManager customizeTableView:self.tableView];
 }
 
 
@@ -174,8 +202,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   [self updateUI];
 }
 
-#define myClientId @"580813237419.apps.googleusercontent.com"
-#define mySecretKey @"1XLt_eUMs7hdIiqSDt04qe4-"
+
 
 - (void)signInToGoogle {
   [self signOut];
@@ -249,8 +276,8 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
   // Optional: display some html briefly before the sign-in page loads
   NSString *html = @"<html><body bgcolor=silver><div align=center>Loading sign-in page...</div></body></html>";
   viewController.initialHTMLString = html;
-
-  [[self navigationController] pushViewController:viewController animated:YES];
+    [self presentViewController:viewController animated:YES completion:nil];
+//  [[self navigationController] pushViewController:viewController animated:YES];
 
   // The view controller will be popped before signing in has completed, as
   // there are some additional fetches done by the sign-in controller.
@@ -280,6 +307,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
     // Authentication succeeded
     //
     //
+      [self dismissViewControllerAnimated:YES completion:nil];
       DebugLog(@"auth: succesfully!");
 //      if (error == nil) {
 //          self.tasksService.authorizer = auth;
@@ -357,7 +385,7 @@ static NSString *const kDailyMotionClientSecretKey = @"DailyMotionClientSecret";
 
 - (void)updateUI {
   // update the text showing the signed-in state and the button title
-    [self.mTableView reloadData];
+    [self.tableView reloadData];
 }
 
 

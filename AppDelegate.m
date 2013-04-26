@@ -1,20 +1,22 @@
 
 #import "AppDelegate.h"
 #import "RootViewController.h"
-#import "TaskListViewController.h"
+#import "LoginViewController.h"
 
 @implementation AppDelegate
 
-@synthesize window = mWindow;
-@synthesize navigationController = mNavigationController;
+//@synthesize window = mWindow;
+//@synthesize navigationController = mNavigationController;
 
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-  [mWindow addSubview:[mNavigationController view]];
-  [mWindow makeKeyAndVisible];
+     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    RootViewController *rootViewController = [[RootViewController alloc] initWithStyle:UITableViewStyleGrouped];
+//    self.window.rootViewController = rootViewController;
     
-    [SSThemeManager customizeAppAppearance];
-    
+    LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    self.window.rootViewController = loginViewController;
+    [self.window makeKeyAndVisible];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
