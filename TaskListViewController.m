@@ -233,6 +233,10 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 }
 
 #pragma mark - UI
+-(void)cancel:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -248,12 +252,13 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     [super viewWillAppear:animated];
     
 }
-
+// ymao78
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"TASK_LIST", @"");
+    self.navigationController.navigationBar.alpha = 1.0;
     
     [SSThemeManager customizeTableView:self.tableView];
     
@@ -267,6 +272,9 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTaskListClicked:)];
     self.navigationItem.rightBarButtonItem = addItem;
+    
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+    self.navigationItem.leftBarButtonItem = cancelItem;
 
     // Long press recognizer
     UILongPressGestureRecognizer *longpressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];

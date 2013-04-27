@@ -18,7 +18,7 @@
 #import "GTLUtilities.h"
 #import "GTMHTTPFetcherLogging.h"
 #import "TaskListViewController.h"
-
+#import "AppDelegate.h"
 
 
 @interface LoginViewController ()
@@ -36,12 +36,6 @@
 
 @implementation LoginViewController
 @synthesize auth = mAuth;
-
-// NSUserDefaults keys
-//static NSString *const kShouldSaveInKeychainKey = @"shouldSaveInKeychain";
-//static NSString *const kGoogleClientIDKey          = @"GoogleClientID";
-//static NSString *const kGoogleClientSecretKey      = @"GoogleClientSecret";
-//NSString *const kKeychainItemName = @"gTasks: Google Tasks";
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -92,7 +86,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [SSThemeManager customizeDoorButton:self.signInButton];
+    self.navigationController.navigationBar.alpha = 0;
+    
+//    [SSThemeManager customizeDoorButton:self.signInButton];
     
     NSString *wallpaperName = @"";
     switch ([self currentMonth]) {
@@ -189,10 +185,10 @@
 }
 
 - (void)signOut {
-    if ([self.auth.serviceProvider isEqual:kGTMOAuth2ServiceProviderGoogle]) {
+//    if ([self.auth.serviceProvider isEqual:kGTMOAuth2ServiceProviderGoogle]) {
         // remove the token from Google's servers
         [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:self.auth];
-    }
+//    }
     
     // remove the stored Google authentication from the keychain, if any
     [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kKeychainItemName];
@@ -207,10 +203,11 @@
 - (void)signInToGoogle {
     [self signOut];
     
-    NSString *keychainItemName = nil;
-    if ([self shouldSaveInKeychain]) {
-        keychainItemName = kKeychainItemName;
-    }
+    NSString *keychainItemName = kKeychainItemName;;
+    // we always save 
+//    if ([self shouldSaveInKeychain]) {
+//        keychainItemName = kKeychainItemName;
+//    }
     
     // For Google APIs, the scope strings are available
     // in the service constant header files.
@@ -277,9 +274,9 @@
     NSString *html = @"<html><body bgcolor=silver><div align=center>Loading sign-in page...</div></body></html>";
     viewController.initialHTMLString = html;
     
-    [self presentViewController:viewController animated:YES completion:nil];
+//    [self presentViewController:viewController animated:YES completion:nil];
     
-//    [[self navigationController] pushViewController:viewController animated:YES];
+    [[self navigationController] pushViewController:viewController animated:YES];
     
     // The view controller will be popped before signing in has completed, as
     // there are some additional fetches done by the sign-in controller.
@@ -307,20 +304,17 @@
         self.auth = nil;
     } else {
         // Authentication succeeded
-        //
-        //
-        DebugLog(@"auth: succesfully!");
       if (error == nil) {
-          [self dismissViewControllerAnimated:YES completion:^{
-              [self doAnAuthenticatedAPIFetch];
-          }];
-//          self.tasksService.authorizer = auth;
-//          TaskListViewController *tasksListViewController = [[TaskListViewController alloc] initWithStyle:UITableViewStylePlain];
-//          tasksListViewController.tasksService = self.tasksService;
-//
-//          [self.navigationController pushViewController:tasksListViewController animated:YES];
-//
-//          DebugLog(@"sign in succesfuuly");
+          self.tasksService.authorizer = auth;
+          TaskListViewController *tasksListViewController = [[TaskListViewController alloc] initWithStyle:UITableViewStylePlain];
+          tasksListViewController.tasksService = self.tasksService;
+          
+          UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tasksListViewController];
+
+          AppDelegate *delegate = [AppDelegate appDelegate];
+          delegate.window.rootViewController = navController;
+          
+
       } else {
 //          self.taskListsFetchError = error;
 //          [self updateUI];
@@ -348,10 +342,7 @@
                       self.tasksService.authorizer = self.auth;
                       TaskListViewController *tasksListViewController = [[TaskListViewController alloc] initWithStyle:UITableViewStylePlain];
                       tasksListViewController.tasksService = self.tasksService;
-                      [self presentViewController:tasksListViewController animated:YES completion:nil];
-                      
-//                      [self.navigationController pushViewController:tasksListViewController animated:YES];
-                      
+                      [self.navigationController pushViewController:tasksListViewController animated:YES];
                   }
                   
               }];

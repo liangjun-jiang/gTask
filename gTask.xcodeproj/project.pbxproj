@@ -521,7 +521,6 @@
 				D62C366416FCD38B00EF8CDE /* GTL */,
 				29B97315FDCFA39411CA2CEA /* Other App Sources */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				D6D3CD6516F253BE003C0434 /* QuartzCore.framework */,
 				13FA93DF113867A700E1AAA4 /* README.txt */,
 				29B97323FDCFA39411CA2CEA /* System Frameworks */,
 			);
@@ -549,6 +548,7 @@
 		29B97323FDCFA39411CA2CEA /* System Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D6D3CD6516F253BE003C0434 /* QuartzCore.framework */,
 				4FF23DC011754C0300E96C5A /* SystemConfiguration.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
