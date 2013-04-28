@@ -89,52 +89,8 @@
     self.navigationController.navigationBar.alpha = 0;
     
 //    [SSThemeManager customizeDoorButton:self.signInButton];
-    
-    NSString *wallpaperName = @"";
-    switch ([self currentMonth]) {
-        case 1:
-            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
-            break;
-        case 2:
-            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
-            break;
-        case 3:
-            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
-            break;
-        case 4:
-            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
-            break;
-        case 5:
-            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
-            break;
-        case 6:
-            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
-            break;
-        case 7:
-            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
-            break;
-        case 8:
-            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
-            break;
-        case 9:
-            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
-            break;
-        case 10:
-            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
-            break;
-        case 11:
-            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
-            break;
-        case 12:
-            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
-            break;
-
-            
-        default:
-            break;
-    }
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:wallpaperName]];
-    
+    id <SSTheme> theme = [SSThemeManager sharedTheme];
+        self.view.backgroundColor = [theme mainColor];
     
 }
 
@@ -417,13 +373,5 @@
 }
 
 
-#pragma mark -
-
--(NSUInteger)currentMonth
-{
-    NSCalendar * calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:NSMonthCalendarUnit fromDate:[NSDate date]];
-    return [components month];
-}
 
 @end

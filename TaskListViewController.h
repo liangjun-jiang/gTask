@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "GTLTasks.h"
-extern NSString* const kTaskStatusCompleted;
-extern NSString* const kTaskStatusNeedsAction;
+#import "Constants.h"
+//extern NSString* const kTaskStatusCompleted;
+//extern NSString* const kTaskStatusNeedsAction;
 
 
 @interface TaskListViewController : UITableViewController{

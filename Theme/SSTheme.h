@@ -91,6 +91,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "Constants.h"
 
 typedef NS_ENUM(NSInteger, SSThemeTab) {
     SSThemeTabDoor,

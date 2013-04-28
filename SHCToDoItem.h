@@ -7,15 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GTLTasksTaskList.h"
 
 // A model object that represents a single to-do item and its state.
 //
-@interface SHCToDoItem : NSObject
+@interface SHCToDoItem : GTLTasksTaskList
 
 // A text description of this item.
 @property (nonatomic, copy) NSString *text;
-
-// A boolean value that determines the completed state of this item.
+//
+//// A boolean value that determines the completed state of this item.
 @property (nonatomic) BOOL completed;
 
 // Returns an SHCToDoItem item initialised with the given text. 

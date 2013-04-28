@@ -36,8 +36,8 @@
 @end
 
 // Constants that ought to be defined by the API
-NSString *const kTaskStatusCompleted = @"completed";
-NSString *const kTaskStatusNeedsAction = @"needsAction";
+//NSString *const kTaskStatusCompleted = @"completed";
+//NSString *const kTaskStatusNeedsAction = @"needsAction";
 
 @implementation TaskListViewController
 @synthesize tasksService, selectedIndexPath;

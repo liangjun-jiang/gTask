@@ -4,6 +4,7 @@
 #import "LoginViewController.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "TaskListViewController.h"
+#import "SHCViewController.h"
 
 @implementation AppDelegate
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
@@ -26,10 +27,13 @@
                       } else {
                           
                           self.tasksService.authorizer = self.auth;
-                          TaskListViewController *tasksListViewController = [[TaskListViewController alloc] initWithStyle:UITableViewStylePlain];
-                          tasksListViewController.tasksService = self.tasksService;
+//                          TaskListViewController *tasksListViewController = [[TaskListViewController alloc] initWithStyle:UITableViewStylePlain];
+//                          tasksListViewController.tasksService = self.tasksService;
+                          SHCViewController *shcViewController = [[SHCViewController alloc] initWithNibName:@"SHCViewController" bundle:nil];
+                          shcViewController.tasksService = self.tasksService;
                           
-                          navController = [[UINavigationController alloc] initWithRootViewController:tasksListViewController];
+                          
+                          navController = [[UINavigationController alloc] initWithRootViewController:shcViewController];
                            self.window.rootViewController = navController;
                           
                       }

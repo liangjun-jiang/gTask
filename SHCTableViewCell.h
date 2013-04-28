@@ -9,6 +9,7 @@
 #import "SHCToDoItem.h"
 #import "SHCTableViewCellDelegate.h"
 #import "SHCStrikethroughLabel.h"
+#import "GTLTasksTaskList.h"
 
 #import <UIKit/UIKit.h>
 
@@ -17,7 +18,7 @@
 @interface SHCTableViewCell : UITableViewCell <UITextFieldDelegate>
 
 // The item that this cell renders
-@property (nonatomic) SHCToDoItem* todoItem;
+@property (nonatomic) GTLTasksTaskList* todoItem;
 
 // The object that acts as delegate for this cell. 
 @property (nonatomic, assign) id<SHCTableViewCellDelegate> delegate;

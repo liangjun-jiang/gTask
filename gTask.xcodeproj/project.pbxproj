@@ -63,7 +63,6 @@
 		D62C5F6B172B430600F01D39 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5F69172B430600F01D39 /* RootViewController.m */; };
 		D62C5F71172D7CA500F01D39 /* TaskTasksDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5F6E172D7CA500F01D39 /* TaskTasksDetailViewController.m */; };
 		D62C5F72172D7CA500F01D39 /* TaskTasksDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D62C5F6F172D7CA500F01D39 /* TaskTasksDetailViewController.xib */; };
-		D62C5FCF172D7E7600F01D39 /* SHCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FB8172D7E7600F01D39 /* SHCAppDelegate.m */; };
 		D62C5FD0172D7E7600F01D39 /* SHCMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FBA172D7E7600F01D39 /* SHCMulticastDelegate.m */; };
 		D62C5FD1172D7E7600F01D39 /* SHCMulticastDelegateUITableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FBC172D7E7600F01D39 /* SHCMulticastDelegateUITableViewDelegate.m */; };
 		D62C5FD2172D7E7600F01D39 /* SHCPinchToAddNewBehaviour.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FBE172D7E7600F01D39 /* SHCPinchToAddNewBehaviour.m */; };
@@ -74,6 +73,7 @@
 		D62C5FD7172D7E7600F01D39 /* SHCTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FC8172D7E7600F01D39 /* SHCTableViewCell.m */; };
 		D62C5FD8172D7E7600F01D39 /* SHCToDoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FCC172D7E7600F01D39 /* SHCToDoItem.m */; };
 		D62C5FD9172D7E7600F01D39 /* SHCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FCE172D7E7600F01D39 /* SHCViewController.m */; };
+		D62C5FDB172D81B500F01D39 /* SHCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D62C5FDA172D81B500F01D39 /* SHCViewController.xib */; };
 		D62EC16116FCC2C5005E65F5 /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62EC15F16FCC2C5005E65F5 /* TaskListViewController.m */; };
 		D62EC16216FCC2C5005E65F5 /* TaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D62EC16016FCC2C5005E65F5 /* TaskListViewController.xib */; };
 		D67ED23717028F6C0084E8A6 /* TaskTasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D67ED23517028F6C0084E8A6 /* TaskTasksViewController.m */; };
@@ -310,8 +310,6 @@
 		D62C5F6E172D7CA500F01D39 /* TaskTasksDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTasksDetailViewController.m; sourceTree = "<group>"; };
 		D62C5F6F172D7CA500F01D39 /* TaskTasksDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskTasksDetailViewController.xib; sourceTree = "<group>"; };
 		D62C5F70172D7CA500F01D39 /* TaskTasksDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTasksDetailViewController.h; sourceTree = "<group>"; };
-		D62C5FB7172D7E7600F01D39 /* SHCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCAppDelegate.h; sourceTree = "<group>"; };
-		D62C5FB8172D7E7600F01D39 /* SHCAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCAppDelegate.m; sourceTree = "<group>"; };
 		D62C5FB9172D7E7600F01D39 /* SHCMulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCMulticastDelegate.h; sourceTree = "<group>"; };
 		D62C5FBA172D7E7600F01D39 /* SHCMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCMulticastDelegate.m; sourceTree = "<group>"; };
 		D62C5FBB172D7E7600F01D39 /* SHCMulticastDelegateUITableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCMulticastDelegateUITableViewDelegate.h; sourceTree = "<group>"; };
@@ -334,6 +332,7 @@
 		D62C5FCC172D7E7600F01D39 /* SHCToDoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCToDoItem.m; sourceTree = "<group>"; };
 		D62C5FCD172D7E7600F01D39 /* SHCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCViewController.h; sourceTree = "<group>"; };
 		D62C5FCE172D7E7600F01D39 /* SHCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCViewController.m; sourceTree = "<group>"; };
+		D62C5FDA172D81B500F01D39 /* SHCViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHCViewController.xib; sourceTree = "<group>"; };
 		D62EC15E16FCC2C5005E65F5 /* TaskListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListViewController.h; sourceTree = "<group>"; };
 		D62EC15F16FCC2C5005E65F5 /* TaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListViewController.m; sourceTree = "<group>"; };
 		D62EC16016FCC2C5005E65F5 /* TaskListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskListViewController.xib; sourceTree = "<group>"; };
@@ -675,8 +674,6 @@
 		D62C5F93172D7D1800F01D39 /* clear-style */ = {
 			isa = PBXGroup;
 			children = (
-				D62C5FB7172D7E7600F01D39 /* SHCAppDelegate.h */,
-				D62C5FB8172D7E7600F01D39 /* SHCAppDelegate.m */,
 				D62C5FB9172D7E7600F01D39 /* SHCMulticastDelegate.h */,
 				D62C5FBA172D7E7600F01D39 /* SHCMulticastDelegate.m */,
 				D62C5FBB172D7E7600F01D39 /* SHCMulticastDelegateUITableViewDelegate.h */,
@@ -697,6 +694,7 @@
 				D62C5FCA172D7E7600F01D39 /* SHCTableViewDataSource.h */,
 				D62C5FCB172D7E7600F01D39 /* SHCToDoItem.h */,
 				D62C5FCC172D7E7600F01D39 /* SHCToDoItem.m */,
+				D62C5FDA172D81B500F01D39 /* SHCViewController.xib */,
 				D62C5FCD172D7E7600F01D39 /* SHCViewController.h */,
 				D62C5FCE172D7E7600F01D39 /* SHCViewController.m */,
 			);
@@ -1059,6 +1057,7 @@
 				D62C5F33172B2EFD00F01D39 /* december-12.jpg in Resources */,
 				D62C5F35172B308800F01D39 /* december-12-568h@2x.jpg in Resources */,
 				D62C5F72172D7CA500F01D39 /* TaskTasksDetailViewController.xib in Resources */,
+				D62C5FDB172D81B500F01D39 /* SHCViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1111,7 +1110,6 @@
 				D62C5F2E172B2BCB00F01D39 /* LoginViewController.m in Sources */,
 				D62C5F6B172B430600F01D39 /* RootViewController.m in Sources */,
 				D62C5F71172D7CA500F01D39 /* TaskTasksDetailViewController.m in Sources */,
-				D62C5FCF172D7E7600F01D39 /* SHCAppDelegate.m in Sources */,
 				D62C5FD0172D7E7600F01D39 /* SHCMulticastDelegate.m in Sources */,
 				D62C5FD1172D7E7600F01D39 /* SHCMulticastDelegateUITableViewDelegate.m in Sources */,
 				D62C5FD2172D7E7600F01D39 /* SHCPinchToAddNewBehaviour.m in Sources */,
