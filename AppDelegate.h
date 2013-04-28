@@ -11,5 +11,6 @@
 @property (readonly) GTLServiceTasks *tasksService;
 +(AppDelegate *)appDelegate;
 - (GTMOAuth2Authentication *)auth;
+- (void)signOut;
 @end
 

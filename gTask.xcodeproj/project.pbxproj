@@ -61,6 +61,19 @@
 		D62C5F33172B2EFD00F01D39 /* december-12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D62C5F32172B2EFD00F01D39 /* december-12.jpg */; };
 		D62C5F35172B308800F01D39 /* december-12-568h@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D62C5F34172B308800F01D39 /* december-12-568h@2x.jpg */; };
 		D62C5F6B172B430600F01D39 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5F69172B430600F01D39 /* RootViewController.m */; };
+		D62C5F71172D7CA500F01D39 /* TaskTasksDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5F6E172D7CA500F01D39 /* TaskTasksDetailViewController.m */; };
+		D62C5F72172D7CA500F01D39 /* TaskTasksDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D62C5F6F172D7CA500F01D39 /* TaskTasksDetailViewController.xib */; };
+		D62C5FCF172D7E7600F01D39 /* SHCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FB8172D7E7600F01D39 /* SHCAppDelegate.m */; };
+		D62C5FD0172D7E7600F01D39 /* SHCMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FBA172D7E7600F01D39 /* SHCMulticastDelegate.m */; };
+		D62C5FD1172D7E7600F01D39 /* SHCMulticastDelegateUITableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FBC172D7E7600F01D39 /* SHCMulticastDelegateUITableViewDelegate.m */; };
+		D62C5FD2172D7E7600F01D39 /* SHCPinchToAddNewBehaviour.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FBE172D7E7600F01D39 /* SHCPinchToAddNewBehaviour.m */; };
+		D62C5FD3172D7E7600F01D39 /* SHCPullToAddNewBehaviour.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FC0172D7E7600F01D39 /* SHCPullToAddNewBehaviour.m */; };
+		D62C5FD4172D7E7600F01D39 /* SHCStrikethroughLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FC2172D7E7600F01D39 /* SHCStrikethroughLabel.m */; };
+		D62C5FD5172D7E7600F01D39 /* SHCTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FC4172D7E7600F01D39 /* SHCTableView.m */; };
+		D62C5FD6172D7E7600F01D39 /* SHCTableView+Multicast.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FC6172D7E7600F01D39 /* SHCTableView+Multicast.m */; };
+		D62C5FD7172D7E7600F01D39 /* SHCTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FC8172D7E7600F01D39 /* SHCTableViewCell.m */; };
+		D62C5FD8172D7E7600F01D39 /* SHCToDoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FCC172D7E7600F01D39 /* SHCToDoItem.m */; };
+		D62C5FD9172D7E7600F01D39 /* SHCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FCE172D7E7600F01D39 /* SHCViewController.m */; };
 		D62EC16116FCC2C5005E65F5 /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62EC15F16FCC2C5005E65F5 /* TaskListViewController.m */; };
 		D62EC16216FCC2C5005E65F5 /* TaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D62EC16016FCC2C5005E65F5 /* TaskListViewController.xib */; };
 		D67ED23717028F6C0084E8A6 /* TaskTasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D67ED23517028F6C0084E8A6 /* TaskTasksViewController.m */; };
@@ -197,8 +210,6 @@
 		D6DA5079170A2D2B00E27CF0 /* SSSmallButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DA4FFB170A2D2B00E27CF0 /* SSSmallButton.m */; };
 		D6DA507A170A2D2B00E27CF0 /* SSTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DA4FFD170A2D2B00E27CF0 /* SSTheme.m */; };
 		D6DA507C170A2F9C00E27CF0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D6DA507B170A2F9C00E27CF0 /* Localizable.strings */; };
-		D6DA508E170D10ED00E27CF0 /* TaskTasksDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DA508C170D10ED00E27CF0 /* TaskTasksDetailViewController.m */; };
-		D6DA508F170D10ED00E27CF0 /* TaskTasksDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6DA508D170D10ED00E27CF0 /* TaskTasksDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -296,6 +307,33 @@
 		D62C5F36172B3D4400F01D39 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		D62C5F69172B430600F01D39 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		D62C5F6A172B430600F01D39 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		D62C5F6E172D7CA500F01D39 /* TaskTasksDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTasksDetailViewController.m; sourceTree = "<group>"; };
+		D62C5F6F172D7CA500F01D39 /* TaskTasksDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskTasksDetailViewController.xib; sourceTree = "<group>"; };
+		D62C5F70172D7CA500F01D39 /* TaskTasksDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTasksDetailViewController.h; sourceTree = "<group>"; };
+		D62C5FB7172D7E7600F01D39 /* SHCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCAppDelegate.h; sourceTree = "<group>"; };
+		D62C5FB8172D7E7600F01D39 /* SHCAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCAppDelegate.m; sourceTree = "<group>"; };
+		D62C5FB9172D7E7600F01D39 /* SHCMulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCMulticastDelegate.h; sourceTree = "<group>"; };
+		D62C5FBA172D7E7600F01D39 /* SHCMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCMulticastDelegate.m; sourceTree = "<group>"; };
+		D62C5FBB172D7E7600F01D39 /* SHCMulticastDelegateUITableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCMulticastDelegateUITableViewDelegate.h; sourceTree = "<group>"; };
+		D62C5FBC172D7E7600F01D39 /* SHCMulticastDelegateUITableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCMulticastDelegateUITableViewDelegate.m; sourceTree = "<group>"; };
+		D62C5FBD172D7E7600F01D39 /* SHCPinchToAddNewBehaviour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCPinchToAddNewBehaviour.h; sourceTree = "<group>"; };
+		D62C5FBE172D7E7600F01D39 /* SHCPinchToAddNewBehaviour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCPinchToAddNewBehaviour.m; sourceTree = "<group>"; };
+		D62C5FBF172D7E7600F01D39 /* SHCPullToAddNewBehaviour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCPullToAddNewBehaviour.h; sourceTree = "<group>"; };
+		D62C5FC0172D7E7600F01D39 /* SHCPullToAddNewBehaviour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCPullToAddNewBehaviour.m; sourceTree = "<group>"; };
+		D62C5FC1172D7E7600F01D39 /* SHCStrikethroughLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCStrikethroughLabel.h; sourceTree = "<group>"; };
+		D62C5FC2172D7E7600F01D39 /* SHCStrikethroughLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCStrikethroughLabel.m; sourceTree = "<group>"; };
+		D62C5FC3172D7E7600F01D39 /* SHCTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCTableView.h; sourceTree = "<group>"; };
+		D62C5FC4172D7E7600F01D39 /* SHCTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCTableView.m; sourceTree = "<group>"; };
+		D62C5FC5172D7E7600F01D39 /* SHCTableView+Multicast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SHCTableView+Multicast.h"; sourceTree = "<group>"; };
+		D62C5FC6172D7E7600F01D39 /* SHCTableView+Multicast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SHCTableView+Multicast.m"; sourceTree = "<group>"; };
+		D62C5FC7172D7E7600F01D39 /* SHCTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCTableViewCell.h; sourceTree = "<group>"; };
+		D62C5FC8172D7E7600F01D39 /* SHCTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCTableViewCell.m; sourceTree = "<group>"; };
+		D62C5FC9172D7E7600F01D39 /* SHCTableViewCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCTableViewCellDelegate.h; sourceTree = "<group>"; };
+		D62C5FCA172D7E7600F01D39 /* SHCTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCTableViewDataSource.h; sourceTree = "<group>"; };
+		D62C5FCB172D7E7600F01D39 /* SHCToDoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCToDoItem.h; sourceTree = "<group>"; };
+		D62C5FCC172D7E7600F01D39 /* SHCToDoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCToDoItem.m; sourceTree = "<group>"; };
+		D62C5FCD172D7E7600F01D39 /* SHCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCViewController.h; sourceTree = "<group>"; };
+		D62C5FCE172D7E7600F01D39 /* SHCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCViewController.m; sourceTree = "<group>"; };
 		D62EC15E16FCC2C5005E65F5 /* TaskListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListViewController.h; sourceTree = "<group>"; };
 		D62EC15F16FCC2C5005E65F5 /* TaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListViewController.m; sourceTree = "<group>"; };
 		D62EC16016FCC2C5005E65F5 /* TaskListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskListViewController.xib; sourceTree = "<group>"; };
@@ -439,9 +477,6 @@
 		D6DA4FFC170A2D2B00E27CF0 /* SSTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTheme.h; sourceTree = "<group>"; };
 		D6DA4FFD170A2D2B00E27CF0 /* SSTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTheme.m; sourceTree = "<group>"; };
 		D6DA507B170A2F9C00E27CF0 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		D6DA508B170D10ED00E27CF0 /* TaskTasksDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaskTasksDetailViewController.h; path = feedback/TaskTasksDetailViewController.h; sourceTree = "<group>"; };
-		D6DA508C170D10ED00E27CF0 /* TaskTasksDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaskTasksDetailViewController.m; path = feedback/TaskTasksDetailViewController.m; sourceTree = "<group>"; };
-		D6DA508D170D10ED00E27CF0 /* TaskTasksDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TaskTasksDetailViewController.xib; path = feedback/TaskTasksDetailViewController.xib; sourceTree = "<group>"; };
 		F49B45D213315AA200EAA732 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -465,11 +500,12 @@
 		13C82E9111373B3000ACAEDD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D62C5F93172D7D1800F01D39 /* clear-style */,
+				D62C5F6E172D7CA500F01D39 /* TaskTasksDetailViewController.m */,
+				D62C5F6F172D7CA500F01D39 /* TaskTasksDetailViewController.xib */,
+				D62C5F70172D7CA500F01D39 /* TaskTasksDetailViewController.h */,
 				D62C5F69172B430600F01D39 /* RootViewController.m */,
 				D62C5F6A172B430600F01D39 /* RootViewController.h */,
-				D6DA508B170D10ED00E27CF0 /* TaskTasksDetailViewController.h */,
-				D6DA508C170D10ED00E27CF0 /* TaskTasksDetailViewController.m */,
-				D6DA508D170D10ED00E27CF0 /* TaskTasksDetailViewController.xib */,
 				13C82E9311373B3000ACAEDD /* AppDelegate.h */,
 				13C82E9411373B3000ACAEDD /* AppDelegate.m */,
 				13C82E9B11373B6A00ACAEDD /* Resources */,
@@ -634,6 +670,37 @@
 				D62C375316FCDEFA00EF8CDE /* GTLTasksTasks.m */,
 			);
 			name = GTLTasks;
+			sourceTree = "<group>";
+		};
+		D62C5F93172D7D1800F01D39 /* clear-style */ = {
+			isa = PBXGroup;
+			children = (
+				D62C5FB7172D7E7600F01D39 /* SHCAppDelegate.h */,
+				D62C5FB8172D7E7600F01D39 /* SHCAppDelegate.m */,
+				D62C5FB9172D7E7600F01D39 /* SHCMulticastDelegate.h */,
+				D62C5FBA172D7E7600F01D39 /* SHCMulticastDelegate.m */,
+				D62C5FBB172D7E7600F01D39 /* SHCMulticastDelegateUITableViewDelegate.h */,
+				D62C5FBC172D7E7600F01D39 /* SHCMulticastDelegateUITableViewDelegate.m */,
+				D62C5FBD172D7E7600F01D39 /* SHCPinchToAddNewBehaviour.h */,
+				D62C5FBE172D7E7600F01D39 /* SHCPinchToAddNewBehaviour.m */,
+				D62C5FBF172D7E7600F01D39 /* SHCPullToAddNewBehaviour.h */,
+				D62C5FC0172D7E7600F01D39 /* SHCPullToAddNewBehaviour.m */,
+				D62C5FC1172D7E7600F01D39 /* SHCStrikethroughLabel.h */,
+				D62C5FC2172D7E7600F01D39 /* SHCStrikethroughLabel.m */,
+				D62C5FC3172D7E7600F01D39 /* SHCTableView.h */,
+				D62C5FC4172D7E7600F01D39 /* SHCTableView.m */,
+				D62C5FC5172D7E7600F01D39 /* SHCTableView+Multicast.h */,
+				D62C5FC6172D7E7600F01D39 /* SHCTableView+Multicast.m */,
+				D62C5FC7172D7E7600F01D39 /* SHCTableViewCell.h */,
+				D62C5FC8172D7E7600F01D39 /* SHCTableViewCell.m */,
+				D62C5FC9172D7E7600F01D39 /* SHCTableViewCellDelegate.h */,
+				D62C5FCA172D7E7600F01D39 /* SHCTableViewDataSource.h */,
+				D62C5FCB172D7E7600F01D39 /* SHCToDoItem.h */,
+				D62C5FCC172D7E7600F01D39 /* SHCToDoItem.m */,
+				D62C5FCD172D7E7600F01D39 /* SHCViewController.h */,
+				D62C5FCE172D7E7600F01D39 /* SHCViewController.m */,
+			);
+			name = "clear-style";
 			sourceTree = "<group>";
 		};
 		D68536A41703A8FC006767EF /* ThirdParty */ = {
@@ -987,11 +1054,11 @@
 				D6DA5076170A2D2B00E27CF0 /* topShadow.png in Resources */,
 				D6DA5077170A2D2B00E27CF0 /* topShadow@2x.png in Resources */,
 				D6DA507C170A2F9C00E27CF0 /* Localizable.strings in Resources */,
-				D6DA508F170D10ED00E27CF0 /* TaskTasksDetailViewController.xib in Resources */,
 				D62C5F2F172B2BCB00F01D39 /* LoginViewController.xib in Resources */,
 				D62C5F31172B2BE800F01D39 /* december-12@2x.jpg in Resources */,
 				D62C5F33172B2EFD00F01D39 /* december-12.jpg in Resources */,
 				D62C5F35172B308800F01D39 /* december-12-568h@2x.jpg in Resources */,
+				D62C5F72172D7CA500F01D39 /* TaskTasksDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1041,9 +1108,20 @@
 				D6DA5078170A2D2B00E27CF0 /* SSMetalTheme.m in Sources */,
 				D6DA5079170A2D2B00E27CF0 /* SSSmallButton.m in Sources */,
 				D6DA507A170A2D2B00E27CF0 /* SSTheme.m in Sources */,
-				D6DA508E170D10ED00E27CF0 /* TaskTasksDetailViewController.m in Sources */,
 				D62C5F2E172B2BCB00F01D39 /* LoginViewController.m in Sources */,
 				D62C5F6B172B430600F01D39 /* RootViewController.m in Sources */,
+				D62C5F71172D7CA500F01D39 /* TaskTasksDetailViewController.m in Sources */,
+				D62C5FCF172D7E7600F01D39 /* SHCAppDelegate.m in Sources */,
+				D62C5FD0172D7E7600F01D39 /* SHCMulticastDelegate.m in Sources */,
+				D62C5FD1172D7E7600F01D39 /* SHCMulticastDelegateUITableViewDelegate.m in Sources */,
+				D62C5FD2172D7E7600F01D39 /* SHCPinchToAddNewBehaviour.m in Sources */,
+				D62C5FD3172D7E7600F01D39 /* SHCPullToAddNewBehaviour.m in Sources */,
+				D62C5FD4172D7E7600F01D39 /* SHCStrikethroughLabel.m in Sources */,
+				D62C5FD5172D7E7600F01D39 /* SHCTableView.m in Sources */,
+				D62C5FD6172D7E7600F01D39 /* SHCTableView+Multicast.m in Sources */,
+				D62C5FD7172D7E7600F01D39 /* SHCTableViewCell.m in Sources */,
+				D62C5FD8172D7E7600F01D39 /* SHCToDoItem.m in Sources */,
+				D62C5FD9172D7E7600F01D39 /* SHCViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

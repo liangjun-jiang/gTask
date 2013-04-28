@@ -8,10 +8,7 @@
 @implementation AppDelegate
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
      self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//    RootViewController *rootViewController = [[RootViewController alloc] initWithStyle:UITableViewStyleGrouped];
-//    self.window.rootViewController = rootViewController;
-//    [self.window makeKeyAndVisible];
-    
+
     __block UINavigationController *navController = nil;
     
     [[[UIAlertView alloc] initWithTitle:@"auth desc" message:[self auth].debugDescription delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil] show];
@@ -57,6 +54,19 @@
 {
     return [[UIApplication sharedApplication] delegate];
     
+}
+
+- (void)signOut {
+    [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:self.auth];
+    
+    // remove the stored Google authentication from the keychain, if any
+    [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kKeychainItemName];
+    
+    LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    
+    self.window.rootViewController = loginViewController;
+    [self.window makeKeyAndVisible];
+
 }
 
 

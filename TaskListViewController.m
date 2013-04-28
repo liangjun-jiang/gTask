@@ -9,6 +9,8 @@
 #import "TaskListViewController.h"
 #import "TaskTasksViewController.h"
 #import "SVProgressHUD.h"
+#import "AppDelegate.h"
+#import "LoginViewController.h"
 
 @interface TaskListViewController ()<UIActionSheetDelegate>
 {
@@ -86,6 +88,8 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 //    
 //    return items;
 //}
+
+
 
 #pragma mark - IBAction
 - (void)addTaskListClicked:(id)sender {
@@ -233,10 +237,12 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 }
 
 #pragma mark - UI
--(void)cancel:(id)sender
+-(void)onSignOut:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+    AppDelegate *delegate = [AppDelegate appDelegate];
+    [delegate signOut];
+    
+   }
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -273,8 +279,8 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTaskListClicked:)];
     self.navigationItem.rightBarButtonItem = addItem;
     
-    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
-    self.navigationItem.leftBarButtonItem = cancelItem;
+    UIBarButtonItem *signOutItem = [[UIBarButtonItem alloc] initWithTitle:@"SignOut" style:UIBarButtonItemStyleBordered target:self action:@selector(onSignOut:)];
+    self.navigationItem.leftBarButtonItem = signOutItem;
 
     // Long press recognizer
     UILongPressGestureRecognizer *longpressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
