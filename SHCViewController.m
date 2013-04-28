@@ -222,6 +222,10 @@
 //    SHCToDoItem* toDoItem = [[SHCToDoItem alloc] init];
 //    [_toDoItems insertObject:toDoItem atIndex:index];
     
+    // todo:
+    GTLTasksTaskList *tasklist = [GTLTasksTaskList object];
+//    tasklist.title = title;
+    
     [self addTaskListClicked:nil];
     
     // refresh the table
@@ -231,11 +235,11 @@
     SHCTableViewCell* editCell;
     for(SHCTableViewCell* cell in _tableView.visibleCells)
     {
-//        if (cell.todoItem == toDoItem)
-//        {
-//            editCell = cell;
-//            break;
-//        }
+        if (cell.todoItem == tasklist)
+        {
+            editCell = cell;
+            break;
+        }
     }
     [editCell.label becomeFirstResponder];
 }

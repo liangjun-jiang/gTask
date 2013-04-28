@@ -19,7 +19,7 @@
 #import "GTMHTTPFetcherLogging.h"
 #import "TaskListViewController.h"
 #import "AppDelegate.h"
-
+#import "SHCViewController.h"
 
 @interface LoginViewController ()
 
@@ -262,10 +262,14 @@
         // Authentication succeeded
       if (error == nil) {
           self.tasksService.authorizer = auth;
-          TaskListViewController *tasksListViewController = [[TaskListViewController alloc] initWithStyle:UITableViewStylePlain];
-          tasksListViewController.tasksService = self.tasksService;
+//          TaskListViewController *tasksListViewController = [[TaskListViewController alloc] initWithStyle:UITableViewStylePlain];
+//          tasksListViewController.tasksService = self.tasksService;
           
-          UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tasksListViewController];
+          SHCViewController *shcViewController = [[SHCViewController alloc] initWithNibName:@"SHCViewController" bundle:nil];
+          shcViewController.tasksService = self.tasksService;
+
+          
+          UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:shcViewController];
 
           AppDelegate *delegate = [AppDelegate appDelegate];
           delegate.window.rootViewController = navController;
