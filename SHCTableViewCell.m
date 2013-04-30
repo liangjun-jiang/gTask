@@ -233,7 +233,7 @@ const float UI_CUES_WIDTH = 50.0f;
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
 //    return !self.todoItem. completed;
-    return NO;
+    return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField

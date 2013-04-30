@@ -5,6 +5,7 @@
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "TaskListViewController.h"
 #import "SHCViewController.h"
+#import "SVProgressHUD.h"
 
 @implementation AppDelegate
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
@@ -12,7 +13,7 @@
 
     __block UINavigationController *navController = nil;
     
-    [[[UIAlertView alloc] initWithTitle:@"auth desc" message:[self auth].debugDescription delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil] show];
+//    [[[UIAlertView alloc] initWithTitle:@"auth desc" message:[self auth].debugDescription delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil] show];
     
     if([self auth].canAuthorize){
         NSString *urlStr = @"https://www.googleapis.com/tasks/v1/users/@me/lists";
@@ -24,6 +25,10 @@
                       NSString *output = nil;
                       if (error) {
                           output = [error description];
+                          //todo: we need to show a better alert screen
+                          [SVProgressHUD showErrorWithStatus:output];
+                          self.window.rootViewController = [self rootViewController];
+                          
                       } else {
                           
                           self.tasksService.authorizer = self.auth;
@@ -41,9 +46,9 @@
                   }];
     } else {
     
-        LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-        navController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-         self.window.rootViewController = navController;
+//        LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+//        navController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+         self.window.rootViewController = [self rootViewController];
     }
    
     [self.window makeKeyAndVisible];
@@ -51,6 +56,14 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
   [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
+- (UIViewController *)rootViewController
+{
+    LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    return [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    
 }
 
 

@@ -39,7 +39,7 @@
 @property (strong) NSError *tasksFetchError;
 
 @property (strong) GTLServiceTicket *editTaskTicket;
-@property (strong)  NSIndexPath *selectedIndexPath;
+//@property (strong)  NSIndexPath *selectedIndexPath;
 
 
 @end
@@ -121,6 +121,7 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    _tableView = nil;
 }
 
 - (UIColor*)colorForIndex:(NSInteger) index
@@ -161,19 +162,19 @@
                              if (cell != editingCell)
                              {
                                  cell.alpha = 1.0;
-                             }
+                                 
+                             } else
+                                [self renameSelectedTaskList:editingCell.todoItem];
                          }];
     }
+    
+   
 }
 
 
 - (void) toDoItemDeleted:(GTLTasksTaskList*) todoItem
 {    
     float delay = 0.0;
-    
-//    [_toDoItems removeObject:todoItem];
-    
-    [self deleteTaskListClicked:nil];
     
     NSArray* visibleCells = [_tableView visibleCells];
     
@@ -203,6 +204,7 @@
         {
             startAnimating = true;
             cell.hidden = YES;
+            [self deleteSelectedTaskList:todoItem];
         }
     }
 }
@@ -223,19 +225,20 @@
 //    [_toDoItems insertObject:toDoItem atIndex:index];
     
     // todo:
-    GTLTasksTaskList *tasklist = [GTLTasksTaskList object];
+    GTLTasksTaskList *toDoItem = [GTLTasksTaskList object];
 //    tasklist.title = title;
     
-    [self addTaskListClicked:nil];
+    // we add an emty task immediately. When the editing of textfiled is finished, it will be an update
     
-    // refresh the table
-    [_tableView reloadData];
+    [self addATaskList:toDoItem];
+    
+//    [self addTaskListClicked:nil];
     
     // enter edit mode
     SHCTableViewCell* editCell;
     for(SHCTableViewCell* cell in _tableView.visibleCells)
     {
-        if (cell.todoItem == tasklist)
+        if (cell.todoItem == toDoItem)
         {
             editCell = cell;
             break;
@@ -303,9 +306,9 @@
     [alert show];
 }
 
-- (void)deleteTaskListClicked:(id)sender {
-    GTLTasksTaskList *tasklist = [self selectedTaskList];
-    NSString *title = tasklist.title;
+- (void)deleteTaskListClicked:(GTLTasksTaskList *)item {
+//    GTLTasksTaskList *tasklist = [self selectedTaskList];
+    NSString *title = item.title;
     [self displayAlert:@"Delete" format:@"Delete \"%@\"?", title];
     
 }
@@ -316,11 +319,11 @@
         [alertView dismissWithClickedButtonIndex:alertView.cancelButtonIndex animated:YES];
     } else {
         if (alertView.tag == 110 || alertView.tag == 111) {
-            UITextField *taskString = [alertView textFieldAtIndex:0];
+//            UITextField *taskString = [alertView textFieldAtIndex:0];
             if (alertView.tag  == 110) {
-                [self addATaskList:taskString.text];
+//                [self addATaskList:taskString.text];
             } else if(alertView.tag == 111) {
-                [self renameSelectedTaskList:taskString.text];
+//                [self renameSelectedTaskList:taskString.text];
             }
         } else
             // from other alertView
@@ -363,37 +366,37 @@
 
 - (void)updateUI
 {
-    
+    [self.tableView reloadData];
     
     // todo: needs to handle errors!
-    if (self.taskListsTicket != nil || self.editTaskListTicket != nil) {
-        [SVProgressHUD showWithStatus:@"Loading..."];
-    } else {
-        [SVProgressHUD dismiss];
-    }
-    
-    // Get the description of the selected item, or the feed fetch error
-    NSString *resultStr = @"";
-    
-    if (self.taskListsFetchError) {
-        // Display the error
-        resultStr = [self.taskListsFetchError description];
-        
-        // Also display any server data present
-        NSData *errData = [[self.taskListsFetchError userInfo] objectForKey:kGTMHTTPFetcherStatusDataKey];
-        if (errData) {
-            NSString *dataStr = [[NSString alloc] initWithData:errData
-                                                      encoding:NSUTF8StringEncoding];
-            resultStr = [resultStr stringByAppendingFormat:@"\n%@", dataStr];
-        }
-    } else {
+//    if (self.taskListsTicket != nil || self.editTaskListTicket != nil) {
+//        [SVProgressHUD showWithStatus:@"Loading..."];
+//    } else {
+//        [SVProgressHUD dismiss];
+//    }
+//    
+//    // Get the description of the selected item, or the feed fetch error
+//    NSString *resultStr = @"";
+//    
+//    if (self.taskListsFetchError) {
+//        // Display the error
+//        resultStr = [self.taskListsFetchError description];
+//        
+//        // Also display any server data present
+//        NSData *errData = [[self.taskListsFetchError userInfo] objectForKey:kGTMHTTPFetcherStatusDataKey];
+//        if (errData) {
+//            NSString *dataStr = [[NSString alloc] initWithData:errData
+//                                                      encoding:NSUTF8StringEncoding];
+//            resultStr = [resultStr stringByAppendingFormat:@"\n%@", dataStr];
+//        }
+//    } else {
         // Display the selected item
-        GTLTasksTaskList *item = [self selectedTaskList];
-        if (item) {
-            // this is all we care
-            resultStr = [item description];
-        }
-    }
+//        GTLTasksTaskList *item = [self selectedTaskList];
+//        if (item) {
+//            // this is all we care
+//            resultStr = [item description];
+//        }
+//    }
     //    [taskListsResultTextView_ setString:resultStr];
     
 //    BOOL hasTaskLists = (self.taskLists != nil);
@@ -411,7 +414,7 @@
     //    BOOL isEditingTaskList = (self.editTaskListTicket != nil);
     //    [taskListsCancelButton_ setEnabled:(isFetchingTaskLists || isEditingTaskList)];
     
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
     
 }
 
@@ -436,20 +439,20 @@
 
 
 
-- (GTLTasksTaskList *)selectedTaskList {
-    
-    NSIndexPath *indexPath = self.selectedIndexPath;// [self.tableView indexPathForSelectedRow];
-    
-    // to make it simple
-    if (indexPath == nil)
-        indexPath = self.selectedIndexPath;
-    
-    if (indexPath.row > -1) {
-        GTLTasksTaskList *item = [self.taskLists itemAtIndex:indexPath.row];
-        return item;
-    }
-    return nil;
-}
+//- (GTLTasksTaskList *)selectedTaskList {
+//    
+//    NSIndexPath *indexPath = self.selectedIndexPath;// [self.tableView indexPathForSelectedRow];
+//    
+//    // to make it simple
+//    if (indexPath == nil)
+//        indexPath = self.selectedIndexPath;
+//    
+//    if (indexPath.row > -1) {
+//        GTLTasksTaskList *item = [self.taskLists itemAtIndex:indexPath.row];
+//        return item;
+//    }
+//    return nil;
+//}
 
 //- (GTLTasksTaskList *)selectedTaskListForIndexPath:(NSIndexPath *)indexPath {
 //
@@ -464,47 +467,47 @@
 
 #pragma mark Add a Task List
 
-- (void)addATaskList:(NSString *)title {
-    if ([title length] > 0) {
+- (void)addATaskList:(GTLTasksTaskList *)toDoItem {
+//    if ([title length] > 0) {
         // Make a new task list
-        GTLTasksTaskList *tasklist = [GTLTasksTaskList object];
-        tasklist.title = title;
-        
-        GTLQueryTasks *query = [GTLQueryTasks queryForTasklistsInsertWithObject:tasklist];
-        
-        GTLServiceTasks *service = self.tasksService;
-        self.editTaskListTicket = [service executeQuery:query
-                                      completionHandler:^(GTLServiceTicket *ticket,
-                                                          id item, NSError *error) {
-                                          // callback
-                                          self.editTaskListTicket = nil;
-                                          GTLTasksTaskList *tasklist = item;
-                                          
-                                          if (error == nil) {
-                                              [self displayAlertWithMessage:[NSString stringWithFormat:@"Added task list \"%@\"", tasklist.title]];
-                                              [self fetchTaskLists];
-                                          } else {
-                                              [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
-                                              [self updateUI];
-                                          }
-                                      }];
-        [self updateUI];
-    }
+//        GTLTasksTaskList *tasklist = [GTLTasksTaskList object];
+//        tasklist.title = title;
+//        
+    GTLQueryTasks *query = [GTLQueryTasks queryForTasklistsInsertWithObject:toDoItem];
+    
+    GTLServiceTasks *service = self.tasksService;
+    self.editTaskListTicket = [service executeQuery:query
+                                  completionHandler:^(GTLServiceTicket *ticket,
+                                                      id item, NSError *error) {
+                                      // callback
+                                      self.editTaskListTicket = nil;
+//                                      GTLTasksTaskList *tasklist = item;
+//
+                                      if (error == nil) {
+//                                          [self displayAlertWithMessage:[NSString stringWithFormat:@"Added task list \"%@\"", tasklist.title]];
+                                          [self fetchTaskLists];
+                                      } else {
+//                                          [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
+                                          [self updateUI];
+                                      }
+                                  }];
+    [self updateUI];
+//    }
 }
 
 #pragma mark Rename a Task List
 
-- (void)renameSelectedTaskList:(NSString *)title{
+- (void)renameSelectedTaskList:(GTLTasksTaskList *)toDoItem{
     
-    if ([title length] > 0) {
+//    if ([title length] > 0) {
         // Rename the selected task list
         
         // Rather than update the object with a complete replacement, we'll make
         // a patch object containing just the changed title
         GTLTasksTaskList *patchObject = [GTLTasksTaskList object];
-        patchObject.title = title;
+        patchObject.title = toDoItem.title;
         
-        GTLTasksTaskList *selectedTaskList = [self selectedTaskList];
+        GTLTasksTaskList *selectedTaskList = toDoItem;
         
         GTLQueryTasks *query = [GTLQueryTasks queryForTasklistsPatchWithObject:patchObject
                                                                       tasklist:selectedTaskList.identifier];
@@ -514,31 +517,31 @@
                                                           id item, NSError *error) {
                                           // callback
                                           self.editTaskListTicket = nil;
-                                          GTLTasksTaskList *tasklist = item;
+//                                          GTLTasksTaskList *tasklist = item;
                                           
                                           if (error == nil) {
-                                              [self displayAlertWithMessage:[NSString stringWithFormat:@"Updated task list \"%@\"", tasklist.title]];
+//                                              [self displayAlertWithMessage:[NSString stringWithFormat:@"Updated task list \"%@\"", tasklist.title]];
                                               //                                              [self displayAlert:@"Task List Updated"
                                               //                                                          format:@"Updated task list \"%@\"", tasklist.title];
                                               [self fetchTaskLists];
                                               //                                              [taskListNameField_ setStringValue:@""];
                                           } else {
-                                              [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
+//                                              [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
                                               //                                              [self displayAlert:@"Error"
                                               //                                                          format:@"%@", error];
                                               [self updateUI];
                                           }
                                       }];
         [self updateUI];
-    }
+//    }
 }
 
 #pragma mark Delete a Task List
 
-- (void)deleteSelectedTaskList {
-    GTLTasksTaskList *tasklist = [self selectedTaskList];
+- (void)deleteSelectedTaskList:(GTLTasksTaskList *)toDoItem {
+//    GTLTasksTaskList *tasklist = [self selectedTaskList];
     
-    GTLQueryTasks *query = [GTLQueryTasks queryForTasklistsDeleteWithTasklist:tasklist.identifier];
+    GTLQueryTasks *query = [GTLQueryTasks queryForTasklistsDeleteWithTasklist:toDoItem.identifier];
     
     GTLServiceTasks *service = self.tasksService;
     self.editTaskListTicket = [service executeQuery:query
@@ -548,10 +551,10 @@
                                       self.editTaskListTicket = nil;
                                       
                                       if (error == nil) {
-                                          [self displayAlertWithMessage:[NSString stringWithFormat:@"Delete task list \"%@\"", tasklist.title]];
+//                                          [self displayAlertWithMessage:[NSString stringWithFormat:@"Delete task list \"%@\"", toDoItem.title]];
                                           [self fetchTaskLists];
                                       } else {
-                                          [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
+//                                          [self displayAlertWithMessage:[NSString stringWithFormat:@"error: \"%@\"", error]];
                                           [self updateUI];
                                       }
                                   }];
