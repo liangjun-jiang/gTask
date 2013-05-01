@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1301BB45119CB4B100A33D6C /* OAuth2SampleMainiPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1301BB44119CB4B100A33D6C /* OAuth2SampleMainiPad.xib */; };
-		13E350A0119CA9AE00B2EB5A /* mainTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C82E9211373B3000ACAEDD /* mainTouch.m */; };
-		13E350A1119CA9AE00B2EB5A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C82E9411373B3000ACAEDD /* AppDelegate.m */; };
 		13E350A8119CA9AE00B2EB5A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		13E350A9119CA9AE00B2EB5A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		13E350AA119CA9AE00B2EB5A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
@@ -40,7 +38,6 @@
 		D62C365E16FCD2C600EF8CDE /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C364016FCD2C600EF8CDE /* GTMOAuth2Authentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D62C365F16FCD2C600EF8CDE /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C364216FCD2C600EF8CDE /* GTMOAuth2SignIn.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D62C366216FCD2C600EF8CDE /* GTMOAuth2ViewControllerTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C364716FCD2C600EF8CDE /* GTMOAuth2ViewControllerTouch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		D62C366316FCD2C600EF8CDE /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = D62C364816FCD2C600EF8CDE /* GTMOAuth2ViewTouch.xib */; };
 		D62C375416FCDEFA00EF8CDE /* GTLQueryTasks.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C374C16FCDEFA00EF8CDE /* GTLQueryTasks.m */; };
 		D62C375516FCDEFA00EF8CDE /* GTLServiceTasks.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C374D16FCDEFA00EF8CDE /* GTLServiceTasks.m */; };
 		D62C375816FCDEFA00EF8CDE /* GTLTasksTask.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C375016FCDEFA00EF8CDE /* GTLTasksTask.m */; };
@@ -74,6 +71,22 @@
 		D62C5FD7172D7E7600F01D39 /* SHCTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FC8172D7E7600F01D39 /* SHCTableViewCell.m */; };
 		D62C5FD8172D7E7600F01D39 /* SHCToDoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FCC172D7E7600F01D39 /* SHCToDoItem.m */; };
 		D62C5FD9172D7E7600F01D39 /* SHCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FCE172D7E7600F01D39 /* SHCViewController.m */; };
+		D62C5FFA172F584100F01D39 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FE0172F584100F01D39 /* AppDelegate.m */; };
+		D62C5FFB172F584100F01D39 /* ECSlidingViewController-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D62C5FE1172F584100F01D39 /* ECSlidingViewController-Info.plist */; };
+		D62C5FFD172F584100F01D39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D62C5FE4172F584100F01D39 /* InfoPlist.strings */; };
+		D62C5FFE172F584100F01D39 /* FirstTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FE7172F584100F01D39 /* FirstTopViewController.m */; };
+		D62C5FFF172F584100F01D39 /* InitialSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FE9172F584100F01D39 /* InitialSlidingViewController.m */; };
+		D62C6000172F584100F01D39 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D62C5FEA172F584100F01D39 /* iPad.storyboard */; };
+		D62C6001172F584100F01D39 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D62C5FEB172F584100F01D39 /* iPhone.storyboard */; };
+		D62C6002172F584100F01D39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FEC172F584100F01D39 /* main.m */; };
+		D62C6003172F584100F01D39 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FEE172F584100F01D39 /* MenuViewController.m */; };
+		D62C6004172F584100F01D39 /* NavigationTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FF0172F584100F01D39 /* NavigationTopViewController.m */; };
+		D62C6005172F584100F01D39 /* SampleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FF2172F584100F01D39 /* SampleTableViewController.m */; };
+		D62C6006172F584100F01D39 /* SecondTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FF4172F584100F01D39 /* SecondTopViewController.m */; };
+		D62C6007172F584100F01D39 /* ThirdTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FF6172F584100F01D39 /* ThirdTopViewController.m */; };
+		D62C6008172F584100F01D39 /* UnderRightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C5FF8172F584100F01D39 /* UnderRightViewController.m */; };
+		D62C600E172F586000F01D39 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C600B172F586000F01D39 /* ECSlidingViewController.m */; };
+		D62C600F172F586000F01D39 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C600D172F586000F01D39 /* UIImage+ImageWithUIView.m */; };
 		D62EC16116FCC2C5005E65F5 /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62EC15F16FCC2C5005E65F5 /* TaskListViewController.m */; };
 		D62EC16216FCC2C5005E65F5 /* TaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D62EC16016FCC2C5005E65F5 /* TaskListViewController.xib */; };
 		D67ED23717028F6C0084E8A6 /* TaskTasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D67ED23517028F6C0084E8A6 /* TaskTasksViewController.m */; };
@@ -215,9 +228,6 @@
 /* Begin PBXFileReference section */
 		1301BB44119CB4B100A33D6C /* OAuth2SampleMainiPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OAuth2SampleMainiPad.xib; sourceTree = "<group>"; };
 		1397AC501137075C00DE52FD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		13C82E9211373B3000ACAEDD /* mainTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mainTouch.m; sourceTree = "<group>"; };
-		13C82E9311373B3000ACAEDD /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		13C82E9411373B3000ACAEDD /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		13C82E9711373B3000ACAEDD /* prefixTouch.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prefixTouch.pch; sourceTree = "<group>"; };
 		13E350B0119CA9AE00B2EB5A /* gTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13FA93DF113867A700E1AAA4 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
@@ -334,6 +344,34 @@
 		D62C5FCC172D7E7600F01D39 /* SHCToDoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCToDoItem.m; sourceTree = "<group>"; };
 		D62C5FCD172D7E7600F01D39 /* SHCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCViewController.h; sourceTree = "<group>"; };
 		D62C5FCE172D7E7600F01D39 /* SHCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCViewController.m; sourceTree = "<group>"; };
+		D62C5FDF172F584100F01D39 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ECSlidingViewController/AppDelegate.h; sourceTree = "<group>"; };
+		D62C5FE0172F584100F01D39 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ECSlidingViewController/AppDelegate.m; sourceTree = "<group>"; };
+		D62C5FE1172F584100F01D39 /* ECSlidingViewController-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ECSlidingViewController-Info.plist"; path = "ECSlidingViewController/ECSlidingViewController-Info.plist"; sourceTree = "<group>"; };
+		D62C5FE2172F584100F01D39 /* ECSlidingViewController-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ECSlidingViewController-Prefix.pch"; path = "ECSlidingViewController/ECSlidingViewController-Prefix.pch"; sourceTree = "<group>"; };
+		D62C5FE5172F584100F01D39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ECSlidingViewController/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D62C5FE6172F584100F01D39 /* FirstTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirstTopViewController.h; path = ECSlidingViewController/FirstTopViewController.h; sourceTree = "<group>"; };
+		D62C5FE7172F584100F01D39 /* FirstTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirstTopViewController.m; path = ECSlidingViewController/FirstTopViewController.m; sourceTree = "<group>"; };
+		D62C5FE8172F584100F01D39 /* InitialSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InitialSlidingViewController.h; path = ECSlidingViewController/InitialSlidingViewController.h; sourceTree = "<group>"; };
+		D62C5FE9172F584100F01D39 /* InitialSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InitialSlidingViewController.m; path = ECSlidingViewController/InitialSlidingViewController.m; sourceTree = "<group>"; };
+		D62C5FEA172F584100F01D39 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = iPad.storyboard; path = ECSlidingViewController/iPad.storyboard; sourceTree = "<group>"; };
+		D62C5FEB172F584100F01D39 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = iPhone.storyboard; path = ECSlidingViewController/iPhone.storyboard; sourceTree = "<group>"; };
+		D62C5FEC172F584100F01D39 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ECSlidingViewController/main.m; sourceTree = "<group>"; };
+		D62C5FED172F584100F01D39 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuViewController.h; path = ECSlidingViewController/MenuViewController.h; sourceTree = "<group>"; };
+		D62C5FEE172F584100F01D39 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuViewController.m; path = ECSlidingViewController/MenuViewController.m; sourceTree = "<group>"; };
+		D62C5FEF172F584100F01D39 /* NavigationTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavigationTopViewController.h; path = ECSlidingViewController/NavigationTopViewController.h; sourceTree = "<group>"; };
+		D62C5FF0172F584100F01D39 /* NavigationTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NavigationTopViewController.m; path = ECSlidingViewController/NavigationTopViewController.m; sourceTree = "<group>"; };
+		D62C5FF1172F584100F01D39 /* SampleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SampleTableViewController.h; path = ECSlidingViewController/SampleTableViewController.h; sourceTree = "<group>"; };
+		D62C5FF2172F584100F01D39 /* SampleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SampleTableViewController.m; path = ECSlidingViewController/SampleTableViewController.m; sourceTree = "<group>"; };
+		D62C5FF3172F584100F01D39 /* SecondTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondTopViewController.h; path = ECSlidingViewController/SecondTopViewController.h; sourceTree = "<group>"; };
+		D62C5FF4172F584100F01D39 /* SecondTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondTopViewController.m; path = ECSlidingViewController/SecondTopViewController.m; sourceTree = "<group>"; };
+		D62C5FF5172F584100F01D39 /* ThirdTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThirdTopViewController.h; path = ECSlidingViewController/ThirdTopViewController.h; sourceTree = "<group>"; };
+		D62C5FF6172F584100F01D39 /* ThirdTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThirdTopViewController.m; path = ECSlidingViewController/ThirdTopViewController.m; sourceTree = "<group>"; };
+		D62C5FF7172F584100F01D39 /* UnderRightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnderRightViewController.h; path = ECSlidingViewController/UnderRightViewController.h; sourceTree = "<group>"; };
+		D62C5FF8172F584100F01D39 /* UnderRightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnderRightViewController.m; path = ECSlidingViewController/UnderRightViewController.m; sourceTree = "<group>"; };
+		D62C600A172F586000F01D39 /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSlidingViewController.h; path = ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.h; sourceTree = "<group>"; };
+		D62C600B172F586000F01D39 /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSlidingViewController.m; path = ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.m; sourceTree = "<group>"; };
+		D62C600C172F586000F01D39 /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageWithUIView.h"; path = "ECSlidingViewController/Vendor/ECSlidingViewController/UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
+		D62C600D172F586000F01D39 /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageWithUIView.m"; path = "ECSlidingViewController/Vendor/ECSlidingViewController/UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
 		D62EC15E16FCC2C5005E65F5 /* TaskListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListViewController.h; sourceTree = "<group>"; };
 		D62EC15F16FCC2C5005E65F5 /* TaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListViewController.m; sourceTree = "<group>"; };
 		D62EC16016FCC2C5005E65F5 /* TaskListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskListViewController.xib; sourceTree = "<group>"; };
@@ -500,14 +538,13 @@
 		13C82E9111373B3000ACAEDD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D62C5FDE172F57EB00F01D39 /* SlidingView */,
 				D62C5F93172D7D1800F01D39 /* clear-style */,
 				D62C5F6E172D7CA500F01D39 /* TaskTasksDetailViewController.m */,
 				D62C5F6F172D7CA500F01D39 /* TaskTasksDetailViewController.xib */,
 				D62C5F70172D7CA500F01D39 /* TaskTasksDetailViewController.h */,
 				D62C5F69172B430600F01D39 /* RootViewController.m */,
 				D62C5F6A172B430600F01D39 /* RootViewController.h */,
-				13C82E9311373B3000ACAEDD /* AppDelegate.h */,
-				13C82E9411373B3000ACAEDD /* AppDelegate.m */,
 				13C82E9B11373B6A00ACAEDD /* Resources */,
 				D62EC15E16FCC2C5005E65F5 /* TaskListViewController.h */,
 				D62EC15F16FCC2C5005E65F5 /* TaskListViewController.m */,
@@ -574,7 +611,6 @@
 				D62C37EB16FF679300EF8CDE /* Icon-Small.png */,
 				D62C37EC16FF679300EF8CDE /* Icon.png */,
 				D62C37ED16FF679300EF8CDE /* Icon@2x.png */,
-				13C82E9211373B3000ACAEDD /* mainTouch.m */,
 				13C82E9711373B3000ACAEDD /* prefixTouch.pch */,
 				D6DA507B170A2F9C00E27CF0 /* Localizable.strings */,
 			);
@@ -701,6 +737,41 @@
 				D62C5FCE172D7E7600F01D39 /* SHCViewController.m */,
 			);
 			name = "clear-style";
+			sourceTree = "<group>";
+		};
+		D62C5FDE172F57EB00F01D39 /* SlidingView */ = {
+			isa = PBXGroup;
+			children = (
+				D62C600A172F586000F01D39 /* ECSlidingViewController.h */,
+				D62C600B172F586000F01D39 /* ECSlidingViewController.m */,
+				D62C600C172F586000F01D39 /* UIImage+ImageWithUIView.h */,
+				D62C600D172F586000F01D39 /* UIImage+ImageWithUIView.m */,
+				D62C5FDF172F584100F01D39 /* AppDelegate.h */,
+				D62C5FE0172F584100F01D39 /* AppDelegate.m */,
+				D62C5FE1172F584100F01D39 /* ECSlidingViewController-Info.plist */,
+				D62C5FE2172F584100F01D39 /* ECSlidingViewController-Prefix.pch */,
+				D62C5FE4172F584100F01D39 /* InfoPlist.strings */,
+				D62C5FE6172F584100F01D39 /* FirstTopViewController.h */,
+				D62C5FE7172F584100F01D39 /* FirstTopViewController.m */,
+				D62C5FE8172F584100F01D39 /* InitialSlidingViewController.h */,
+				D62C5FE9172F584100F01D39 /* InitialSlidingViewController.m */,
+				D62C5FEA172F584100F01D39 /* iPad.storyboard */,
+				D62C5FEB172F584100F01D39 /* iPhone.storyboard */,
+				D62C5FEC172F584100F01D39 /* main.m */,
+				D62C5FED172F584100F01D39 /* MenuViewController.h */,
+				D62C5FEE172F584100F01D39 /* MenuViewController.m */,
+				D62C5FEF172F584100F01D39 /* NavigationTopViewController.h */,
+				D62C5FF0172F584100F01D39 /* NavigationTopViewController.m */,
+				D62C5FF1172F584100F01D39 /* SampleTableViewController.h */,
+				D62C5FF2172F584100F01D39 /* SampleTableViewController.m */,
+				D62C5FF3172F584100F01D39 /* SecondTopViewController.h */,
+				D62C5FF4172F584100F01D39 /* SecondTopViewController.m */,
+				D62C5FF5172F584100F01D39 /* ThirdTopViewController.h */,
+				D62C5FF6172F584100F01D39 /* ThirdTopViewController.m */,
+				D62C5FF7172F584100F01D39 /* UnderRightViewController.h */,
+				D62C5FF8172F584100F01D39 /* UnderRightViewController.m */,
+			);
+			name = SlidingView;
 			sourceTree = "<group>";
 		};
 		D68536A41703A8FC006767EF /* ThirdParty */ = {
@@ -919,7 +990,6 @@
 				1301BB45119CB4B100A33D6C /* OAuth2SampleMainiPad.xib in Resources */,
 				D6D3CD0616F24CD9003C0434 /* GTMOAuth2ViewTouch.xib in Resources */,
 				D62EC16216FCC2C5005E65F5 /* TaskListViewController.xib in Resources */,
-				D62C366316FCD2C600EF8CDE /* GTMOAuth2ViewTouch.xib in Resources */,
 				D62C37EE16FF679300EF8CDE /* Icon-72.png in Resources */,
 				D62C37EF16FF679300EF8CDE /* Icon-72@2x.png in Resources */,
 				D62C37F016FF679300EF8CDE /* Icon-Small.png in Resources */,
@@ -1059,6 +1129,10 @@
 				D62C5F33172B2EFD00F01D39 /* december-12.jpg in Resources */,
 				D62C5F35172B308800F01D39 /* december-12-568h@2x.jpg in Resources */,
 				D62C5F72172D7CA500F01D39 /* TaskTasksDetailViewController.xib in Resources */,
+				D62C5FFB172F584100F01D39 /* ECSlidingViewController-Info.plist in Resources */,
+				D62C5FFD172F584100F01D39 /* InfoPlist.strings in Resources */,
+				D62C6000172F584100F01D39 /* iPad.storyboard in Resources */,
+				D62C6001172F584100F01D39 /* iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1069,8 +1143,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13E350A0119CA9AE00B2EB5A /* mainTouch.m in Sources */,
-				13E350A1119CA9AE00B2EB5A /* AppDelegate.m in Sources */,
 				D62EC16116FCC2C5005E65F5 /* TaskListViewController.m in Sources */,
 				D62C364916FCD2C600EF8CDE /* GTLObject.m in Sources */,
 				D62C364A16FCD2C600EF8CDE /* GTLQuery.m in Sources */,
@@ -1122,10 +1194,33 @@
 				D62C5FD7172D7E7600F01D39 /* SHCTableViewCell.m in Sources */,
 				D62C5FD8172D7E7600F01D39 /* SHCToDoItem.m in Sources */,
 				D62C5FD9172D7E7600F01D39 /* SHCViewController.m in Sources */,
+				D62C5FFA172F584100F01D39 /* AppDelegate.m in Sources */,
+				D62C5FFE172F584100F01D39 /* FirstTopViewController.m in Sources */,
+				D62C5FFF172F584100F01D39 /* InitialSlidingViewController.m in Sources */,
+				D62C6002172F584100F01D39 /* main.m in Sources */,
+				D62C6003172F584100F01D39 /* MenuViewController.m in Sources */,
+				D62C6004172F584100F01D39 /* NavigationTopViewController.m in Sources */,
+				D62C6005172F584100F01D39 /* SampleTableViewController.m in Sources */,
+				D62C6006172F584100F01D39 /* SecondTopViewController.m in Sources */,
+				D62C6007172F584100F01D39 /* ThirdTopViewController.m in Sources */,
+				D62C6008172F584100F01D39 /* UnderRightViewController.m in Sources */,
+				D62C600E172F586000F01D39 /* ECSlidingViewController.m in Sources */,
+				D62C600F172F586000F01D39 /* UIImage+ImageWithUIView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D62C5FE4172F584100F01D39 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D62C5FE5172F584100F01D39 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		13E350AE119CA9AE00B2EB5A /* Debug */ = {
@@ -1139,7 +1234,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = prefixTouch.pch;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../**";
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = "ECSlidingViewController/ECSlidingViewController-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
@@ -1159,7 +1254,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = prefixTouch.pch;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../**";
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = "ECSlidingViewController/ECSlidingViewController-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;

@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "GTMOAuth2ViewControllerTouch.h"
+#import "TaskListViewController.h"
+#import "LoginViewController.h"
+#import "InitialSlidingViewController.h"
 
 @implementation AppDelegate
 
@@ -14,6 +18,62 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+//    __block UINavigationController *navController = nil;
+    
+    //    [[[UIAlertView alloc] initWithTitle:@"auth desc" message:[self auth].debugDescription delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil] show];
+   
+//    if([self auth].canAuthorize){
+    
+//        NSString *urlStr = @"https://www.googleapis.com/tasks/v1/users/@me/lists";
+//        
+//        NSURL *url = [NSURL URLWithString:urlStr];
+//        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+//        [self.auth authorizeRequest:request
+//                  completionHandler:^(NSError *error) {
+//                      NSString *output = nil;
+//                      if (error) {
+//                          output = [error description];
+//                      } else {
+//                          
+//                          self.tasksService.authorizer = self.auth;
+//                          TaskListViewController *tasksListViewController = [[TaskListViewController alloc] initWithStyle:UITableViewStylePlain];
+//                          tasksListViewController.tasksService = self.tasksService;
+//                          
+//                          navController = [[UINavigationController alloc] initWithRootViewController:tasksListViewController];
+//                          self.window.rootViewController = navController;
+//                          
+//                      }
+//                      
+//                  }];
+//    } else {
+//        [self displayLogin];
+        
+//        LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+//        navController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+//        self.window.rootViewController = navController;
+//    }
+    
+//    [self.window makeKeyAndVisible];
+    UIViewController *rootViewController = nil;
+    if ([self auth].canAuthorize) {
+        UIStoryboard *storyboard;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+        } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            storyboard = [UIStoryboard storyboardWithName:@"iPad" bundle:nil];
+        }
+        InitialSlidingViewController *initialViewController = [storyboard instantiateInitialViewController];
+        initialViewController.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
+        rootViewController = initialViewController;
+    } else {
+        rootViewController = [[self storyBoard] instantiateViewControllerWithIdentifier:@"NavigationLogin"];
+    }
+//    self.window.rootViewController = [[self storyBoard] instantiateViewControllerWithIdentifier:([self auth].canAuthorize)?@"FirstTop":@"NavigationLogin"];
+    self.window.rootViewController = rootViewController;
+    [self.window makeKeyAndVisible];
   return YES;
 }
 
@@ -54,6 +114,86 @@
    Save data if appropriate.
    See also applicationDidEnterBackground:.
    */
+}
+
++(AppDelegate *)appDelegate
+{
+    return [[UIApplication sharedApplication] delegate];
+    
+}
+
+- (void)signOut {
+    [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:self.auth];
+    
+    // remove the stored Google authentication from the keychain, if any
+    [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kKeychainItemName];
+    
+    LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    
+    self.window.rootViewController = loginViewController;
+    [self.window makeKeyAndVisible];
+    
+}
+
+
+- (GTMOAuth2Authentication *)auth{
+    // First, we'll try to get the saved Google authentication, if any, from
+    // the keychain
+    
+    NSString *clientID = myClientId;
+    NSString *clientSecret = mySecretKey;
+    
+    GTMOAuth2Authentication *auth = nil;
+    
+    if (clientID && clientSecret) {
+        auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
+                                                                     clientID:clientID
+                                                                 clientSecret:clientSecret];
+    }
+    
+    return auth;
+}
+
+- (GTLServiceTasks *)tasksService {
+    static GTLServiceTasks *service = nil;
+    
+    if (!service) {
+        service = [[GTLServiceTasks alloc] init];
+        
+        // Have the service object set tickets to fetch consecutive pages
+        // of the feed so we do not need to manually fetch them
+        service.shouldFetchNextPages = YES;
+        
+        // Have the service object set tickets to retry temporary error conditions
+        // automatically
+        service.retryEnabled = YES;
+    }
+    return service;
+}
+
+#pragma mark -
+#pragma mark - Login/Logout
+- (void)displayLogin
+{
+    LoginViewController *login = [[self storyBoard] instantiateViewControllerWithIdentifier:@"Login"];
+    self.window.rootViewController = login;
+    [self.window makeKeyAndVisible];
+}
+
+- (UIStoryboard *)storyBoard
+{
+    UIStoryboard *storyboard;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        storyboard = [UIStoryboard storyboardWithName:@"iPad" bundle:nil];
+    }
+    
+    return storyboard;
+}
+
+-(UIViewController *)rootViewController {
+    return [[self storyBoard] instantiateViewControllerWithIdentifier:@"FirstTop"];
 }
 
 @end

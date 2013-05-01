@@ -11,7 +11,7 @@
 
     __block UINavigationController *navController = nil;
     
-    [[[UIAlertView alloc] initWithTitle:@"auth desc" message:[self auth].debugDescription delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil] show];
+//    [[[UIAlertView alloc] initWithTitle:@"auth desc" message:[self auth].debugDescription delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil] show];
     
     if([self auth].canAuthorize){
         NSString *urlStr = @"https://www.googleapis.com/tasks/v1/users/@me/lists";

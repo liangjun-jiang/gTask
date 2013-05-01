@@ -19,6 +19,7 @@
 #import "GTMHTTPFetcherLogging.h"
 #import "TaskListViewController.h"
 #import "AppDelegate.h"
+#import "InitialSlidingViewController.h"
 
 
 @interface LoginViewController ()
@@ -36,6 +37,49 @@
 
 @implementation LoginViewController
 @synthesize auth = mAuth;
+
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        // Custom initialization
+        // Listen for network change notifications
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self selector:@selector(incrementNetworkActivity:) name:kGTMOAuth2WebViewStartedLoading object:nil];
+        [nc addObserver:self selector:@selector(decrementNetworkActivity:) name:kGTMOAuth2WebViewStoppedLoading object:nil];
+        [nc addObserver:self selector:@selector(incrementNetworkActivity:) name:kGTMOAuth2FetchStarted object:nil];
+        [nc addObserver:self selector:@selector(decrementNetworkActivity:) name:kGTMOAuth2FetchStopped object:nil];
+        [nc addObserver:self selector:@selector(signInNetworkLostOrFound:) name:kGTMOAuth2NetworkLost  object:nil];
+        [nc addObserver:self selector:@selector(signInNetworkLostOrFound:) name:kGTMOAuth2NetworkFound object:nil];
+        
+        // Fill in the Client ID and Client Secret text fields
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        
+//        // First, we'll try to get the saved Google authentication, if any, from
+//        // the keychain
+//        
+//        // Normal applications will hardcode in their client ID and client secret,
+//        // but the sample app allows the user to enter them in a text field, and
+//        // saves them in the preferences
+//        NSString *clientID = [defaults stringForKey:kGoogleClientIDKey];
+//        NSString *clientSecret = [defaults stringForKey:kGoogleClientSecretKey];
+        
+        GTMOAuth2Authentication *auth = nil;
+        
+//        if (clientID && clientSecret) {
+        auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
+                                                                         clientID:myClientId
+                                                                     clientSecret:mySecretKey];
+//        }
+        // Save the authentication object, which holds the auth tokens and
+        // the scope string used to obtain the token.  For Google services,
+        // the auth object also holds the user's email address.
+        self.auth = auth;
+    }
+    
+    return self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -217,8 +261,6 @@
     // strings into the source code; they should not be user-editable or visible.
     //
     // But for this sample code, they are editable.
-    NSString *clientID = myClientId; // self.clientIDField.text;
-    NSString *clientSecret = mySecretKey; //self.clientSecretField.text;
     
     // Note:
     // GTMOAuth2ViewControllerTouch is not designed to be reused. Make a new
@@ -229,8 +271,8 @@
     
     GTMOAuth2ViewControllerTouch *viewController;
     viewController = [GTMOAuth2ViewControllerTouch controllerWithScope:scope
-                                                              clientID:clientID
-                                                          clientSecret:clientSecret
+                                                              clientID:myClientId
+                                                          clientSecret:mySecretKey
                                                       keychainItemName:keychainItemName
                                                               delegate:self
                                                       finishedSelector:finishedSel];
@@ -305,14 +347,24 @@
     } else {
         // Authentication succeeded
       if (error == nil) {
-          self.tasksService.authorizer = auth;
-          TaskListViewController *tasksListViewController = [[TaskListViewController alloc] initWithStyle:UITableViewStylePlain];
-          tasksListViewController.tasksService = self.tasksService;
-          
-          UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tasksListViewController];
+//          self.tasksService.authorizer = auth;
+//          TaskListViewController *tasksListViewController = [[TaskListViewController alloc] initWithStyle:UITableViewStylePlain];
+//          tasksListViewController.tasksService = self.tasksService;
+//          
+//          UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tasksListViewController];
 
+          UIStoryboard *storyboard;
+          if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+              storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+          } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+              storyboard = [UIStoryboard storyboardWithName:@"iPad" bundle:nil];
+          }
+          
+          InitialSlidingViewController *initialViewController = [storyboard instantiateInitialViewController];
+          initialViewController.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
+          
           AppDelegate *delegate = [AppDelegate appDelegate];
-          delegate.window.rootViewController = navController;
+          delegate.window.rootViewController = initialViewController;
           
 
       } else {
