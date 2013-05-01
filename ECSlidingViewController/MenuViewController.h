@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ECSlidingViewController.h"
+#import "GTLTasks.h"
 
 @interface MenuViewController : UIViewController <UITableViewDataSource, UITabBarControllerDelegate>
+
+@property (nonatomic,strong) GTLServiceTasks *tasksService;
 
 @end

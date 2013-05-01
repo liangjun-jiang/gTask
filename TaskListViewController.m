@@ -36,8 +36,7 @@
 @end
 
 // Constants that ought to be defined by the API
-NSString *const kTaskStatusCompleted = @"completed";
-NSString *const kTaskStatusNeedsAction = @"needsAction";
+
 
 @implementation TaskListViewController
 @synthesize tasksService, selectedIndexPath;
@@ -161,7 +160,9 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     self.taskLists = nil;
     self.taskListsFetchError = nil;
     
-    GTLServiceTasks *service = self.tasksService;
+//    GTLServiceTasks *service = self.tasksService;
+    GTLServiceTasks *service = [self tasksService];
+
     
     GTLQueryTasks *query = [GTLQueryTasks queryForTasklistsList];
     
@@ -184,8 +185,6 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 
 - (void)updateUI
 {
-   
-    
     // todo: needs to handle errors!
     if (self.taskListsTicket != nil || self.editTaskListTicket != nil) {
         [SVProgressHUD showWithStatus:@"Loading..."];
@@ -242,7 +241,7 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     AppDelegate *delegate = [AppDelegate appDelegate];
     [delegate signOut];
     
-   }
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -258,13 +257,15 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     [super viewWillAppear:animated];
     
 }
-// ymao78
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"TASK_LIST", @"");
-    self.navigationController.navigationBar.alpha = 1.0;
+//    self.navigationController.navigationBar.alpha = 1.0;
+    
+    [self.slidingViewController setAnchorRightRevealAmount:280.0f];
+    self.slidingViewController.underLeftWidthLayout = ECFullWidth;
     
     [SSThemeManager customizeTableView:self.tableView];
     
@@ -374,22 +375,6 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
 
 
 #pragma mark - Table view delegate
-//- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-//{
-//    GTLTasksTaskList *selectedTasklist = [self selectedTaskList];
-//    
-//    // Navigation logic may go here. Create and push another view controller.
-//    TaskTasksViewController *detailViewController = [[TaskTasksViewController alloc] initWithStyle:UITableViewStylePlain];
-//    
-//    // todo: super stupid
-//    detailViewController.selectedTasklist = selectedTasklist;
-//    detailViewController.tasksService = self.tasksService;
-//    // ...
-//    // Pass the selected object to the new view controller.
-//    [self.navigationController pushViewController:detailViewController animated:YES];
-//    
-//}
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -405,7 +390,14 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     detailViewController.tasksService = self.tasksService;
     // ...
     // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
+    [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+        CGRect frame = self.slidingViewController.topViewController.view.frame;
+        self.slidingViewController.topViewController = detailViewController;
+        self.slidingViewController.topViewController.view.frame = frame;
+        [self.slidingViewController resetTopView];
+    }];
+    
+//    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 
@@ -558,5 +550,23 @@ NSString *const kTaskStatusNeedsAction = @"needsAction";
     }
     
 }
+
+//- (GTLServiceTasks *)tasksService {
+//    static GTLServiceTasks *service = nil;
+//    
+//    if (!service) {
+//        service = [[GTLServiceTasks alloc] init];
+//        
+//        // Have the service object set tickets to fetch consecutive pages
+//        // of the feed so we do not need to manually fetch them
+//        service.shouldFetchNextPages = YES;
+//        
+//        // Have the service object set tickets to retry temporary error conditions
+//        // automatically
+//        service.retryEnabled = YES;
+//    }
+//    return service;
+//}
+//
 
 @end

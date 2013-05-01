@@ -16,6 +16,9 @@ static NSString *const kKeychainItemName = @"gTasks: Google Tasks";
 static NSString *const kGoogleClientIDKey          = @"GoogleClientID";
 static NSString *const kGoogleClientSecretKey      = @"GoogleClientSecret";
 
+static NSString *const kTaskStatusCompleted = @"completed";
+static NSString *const kTaskStatusNeedsAction = @"needsAction";
+
 #define myClientId @"580813237419.apps.googleusercontent.com"
 #define mySecretKey @"1XLt_eUMs7hdIiqSDt04qe4-"
 

@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GTLTasks.h"
-extern NSString* const kTaskStatusCompleted;
-extern NSString* const kTaskStatusNeedsAction;
-
+#import "ECSlidingViewController.h"
 
 @interface TaskListViewController : UITableViewController{
     GTLServiceTasks *tasksService;
