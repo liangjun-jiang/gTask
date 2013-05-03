@@ -23,7 +23,7 @@
     UILabel* _crossLabel;
     
     // the item this cell is rendering
-    SHCToDoItem* _todoItem;
+    GTLTasksTask* _todoItem;
     
     // Transient state
     bool _markCompleteOnDragRelease;
@@ -186,7 +186,7 @@ const float UI_CUES_WIDTH = 50.0f;
         if (_markCompleteOnDragRelease)
         {
             // mark the item as complete and update the UI state
-            self.todoItem.completed = YES;
+//            self.todoItem.completed = YES;
             _itemCompleteLayer.hidden = NO;
             _label.strikethough = YES;
         }
@@ -207,17 +207,17 @@ const float UI_CUES_WIDTH = 50.0f;
     return _label;
 }
 
--(SHCToDoItem*) todoItem
+-(GTLTasksTask*) todoItem
 {
     return _todoItem;
 }
 
--(void) setTodoItem:(SHCToDoItem *)todoItem
+-(void) setTodoItem:(GTLTasksTask *)todoItem
 {
     _todoItem = todoItem;
     
     // we must update all the visual state associated with the model item
-    _label.text = todoItem.text;
+    _label.text = todoItem.title;
     _label.strikethough = todoItem.completed;
     _itemCompleteLayer.hidden = !todoItem.completed;
 }
@@ -237,7 +237,7 @@ const float UI_CUES_WIDTH = 50.0f;
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {    
-    self.todoItem.text = textField.text;
+    self.todoItem.title = textField.text;
     [self.delegate cellDidEndEditing:self];
 }
 

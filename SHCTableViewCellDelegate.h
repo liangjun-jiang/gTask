@@ -7,7 +7,7 @@
 //
 
 #import "SHCToDoItem.h"
-
+#import "GTLTasksTask.h"
 @class SHCTableViewCell;
 
 #import <Foundation/Foundation.h>
@@ -17,7 +17,7 @@
 @protocol SHCTableViewCellDelegate <NSObject>
 
 // indicates that the given item has been deleted
-- (void) toDoItemDeleted:(SHCToDoItem*) todoItem;
+- (void) toDoItemDeleted:(GTLTasksTask*) todoItem;
 
 // Indicates that the edit process has begun for the given cell 
 - (void) cellDidBeginEditing:(SHCTableViewCell*) cell;

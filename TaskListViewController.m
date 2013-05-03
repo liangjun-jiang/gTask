@@ -13,6 +13,7 @@
 #import "LoginViewController.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "MenuViewController.h"
+#import "SHCViewController.h"
 
 @interface TaskListViewController ()<UIActionSheetDelegate>
 {
@@ -412,18 +413,22 @@
     GTLTasksTaskList *selectedTasklist = [self selectedTaskList];
     
     // Navigation logic may go here. Create and push another view controller.
-    TaskTasksViewController *detailViewController = [[TaskTasksViewController alloc] initWithStyle:UITableViewStylePlain];
+//    TaskTasksViewController *detailViewController = [[TaskTasksViewController alloc] initWithStyle:UITableViewStylePlain];
+//    
+//    // todo: super stupid
+//    detailViewController.selectedTasklist = selectedTasklist;
+//    detailViewController.tasksService = self.tasksService;
     
-    // todo: super stupid
+    SHCViewController *detailViewController = [[SHCViewController alloc] initWithNibName:@"SHCViewController" bundle:nil];
     detailViewController.selectedTasklist = selectedTasklist;
     detailViewController.tasksService = self.tasksService;
     
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
     // ...
     // Pass the selected object to the new view controller.
     [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
         CGRect frame = self.slidingViewController.topViewController.view.frame;
-        self.slidingViewController.topViewController = navController;
+        self.slidingViewController.topViewController = detailViewController;
         self.slidingViewController.topViewController.view.frame = frame;
         [self.slidingViewController resetTopView];
     }];
