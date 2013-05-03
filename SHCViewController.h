@@ -8,10 +8,14 @@
 
 #import "SHCTableViewCellDelegate.h"
 #import "SHCTableView.h"
-
+#import "Constants.h"
 #import <UIKit/UIKit.h>
+#import "GTLTasks.h"
+
 
 @interface SHCViewController : UIViewController <SHCTableViewCellDelegate, SHCTableViewDataSource>
 @property (weak, nonatomic) IBOutlet SHCTableView *tableView;
+@property (nonatomic, strong) GTLTasksTaskList *selectedTasklist;
+@property (nonatomic,strong) GTLServiceTasks *tasksService;
 
 @end

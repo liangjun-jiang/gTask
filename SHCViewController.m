@@ -11,9 +11,23 @@
 #import "SHCTableViewCell.h"
 #import "SHCPullToAddNewBehaviour.h"
 #import "SHCPinchToAddNewBehaviour.h"
+#import "ECSlidingViewController.h"
+
+#define kAddTaskDueDate @"kAddTaskDueDate"
 
 @interface SHCViewController ()
+@property (strong) GTLTasksTaskLists *taskLists;
+@property (strong) GTLServiceTicket *taskListsTicket;
+@property (strong) NSError *taskListsFetchError;
 
+@property (strong) GTLServiceTicket *editTaskListTicket;
+
+@property (strong) GTLTasksTasks *tasks;
+@property (strong) GTLServiceTicket *tasksTicket;
+@property (strong) NSError *tasksFetchError;
+
+@property (strong) GTLServiceTicket *editTaskTicket;
+@property (strong)  NSIndexPath *selectedIndexPath;
 @end
 
 @implementation SHCViewController
@@ -27,6 +41,9 @@
     SHCPullToAddNewBehaviour* _pullAddNewBehaviour;
     SHCPinchToAddNewBehaviour* _pinchAddNewBehaviour;
 }
+@synthesize selectedTasklist;
+@synthesize tasksService;
+@synthesize selectedIndexPath;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,25 +51,26 @@
     if (self)
     {
         // create a dummy todo list
-        _toDoItems = [[NSMutableArray alloc] init];
-        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Feed the cat"]];
-        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Buy eggs"]];
-        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Pack bags for WWDC"]];
-        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Rule the web"]];
-        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Buy a new iPhone"]];
-        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Find missing socks"]];
-        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Write a new tutorial"]];
-        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Master Objective-C"]];
-        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Remember your wedding anniversary!"]];
-        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Drink less beer"]];
-        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Learn to draw"]];
-        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Take the car to the garage"]];
-        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Sell things on eBay"]];
-        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Learn to juggle"]];
-        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Give up"]];
+//        _toDoItems = [[NSMutableArray alloc] init];
+//        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Feed the cat"]];
+//        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Buy eggs"]];
+//        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Pack bags for WWDC"]];
+//        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Rule the web"]];
+//        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Buy a new iPhone"]];
+//        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Find missing socks"]];
+//        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Write a new tutorial"]];
+//        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Master Objective-C"]];
+//        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Remember your wedding anniversary!"]];
+//        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Drink less beer"]];
+//        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Learn to draw"]];
+//        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Take the car to the garage"]];
+//        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Sell things on eBay"]];
+//        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Learn to juggle"]];
+//        [_toDoItems addObject:[SHCToDoItem toDoItemWithText:@"Give up"]];
     }
     return self;
 }
+
 
 - (void)viewDidLoad
 {
@@ -66,6 +84,14 @@
     
     _pullAddNewBehaviour = [[SHCPullToAddNewBehaviour alloc] initWithTableView:self.tableView];
     _pinchAddNewBehaviour  = [[SHCPinchToAddNewBehaviour alloc] initWithTableView:self.tableView];
+    
+    id <SSTheme> theme = [SSThemeManager sharedTheme];
+    self.view.backgroundColor =  [theme mainColor]; //[UIColor blackColor];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+    });
+    
 }
 
 - (void)didReceiveMemoryWarning
