@@ -362,6 +362,7 @@
           
           InitialSlidingViewController *initialViewController = [storyboard instantiateInitialViewController];
           initialViewController.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
+//           [[NSNotificationCenter defaultCenter] postNotificationName:kAuthorized object:self.tasksService userInfo:nil];
           
           AppDelegate *delegate = [AppDelegate appDelegate];
           delegate.window.rootViewController = initialViewController;

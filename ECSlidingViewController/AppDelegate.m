@@ -11,6 +11,7 @@
 #import "TaskListViewController.h"
 #import "LoginViewController.h"
 #import "InitialSlidingViewController.h"
+#import "FirstTopViewController.h"
 
 @implementation AppDelegate
 
@@ -18,45 +19,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-//    __block UINavigationController *navController = nil;
-    
-    //    [[[UIAlertView alloc] initWithTitle:@"auth desc" message:[self auth].debugDescription delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil] show];
-   
-//    if([self auth].canAuthorize){
-    
-//        NSString *urlStr = @"https://www.googleapis.com/tasks/v1/users/@me/lists";
-//        
-//        NSURL *url = [NSURL URLWithString:urlStr];
-//        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-//        [self.auth authorizeRequest:request
-//                  completionHandler:^(NSError *error) {
-//                      NSString *output = nil;
-//                      if (error) {
-//                          output = [error description];
-//                      } else {
-//                          
-//                          self.tasksService.authorizer = self.auth;
-//                          TaskListViewController *tasksListViewController = [[TaskListViewController alloc] initWithStyle:UITableViewStylePlain];
-//                          tasksListViewController.tasksService = self.tasksService;
-//                          
-//                          navController = [[UINavigationController alloc] initWithRootViewController:tasksListViewController];
-//                          self.window.rootViewController = navController;
-//                          
-//                      }
-//                      
-//                  }];
-//    } else {
-//        [self displayLogin];
-        
-//        LoginViewController *loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-//        navController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-//        self.window.rootViewController = navController;
-//    }
-    
-//    [self.window makeKeyAndVisible];
     UIViewController *rootViewController = nil;
     if ([self auth].canAuthorize) {
         UIStoryboard *storyboard;
@@ -66,12 +28,13 @@
             storyboard = [UIStoryboard storyboardWithName:@"iPad" bundle:nil];
         }
         InitialSlidingViewController *initialViewController = [storyboard instantiateInitialViewController];
-        initialViewController.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
+        FirstTopViewController *firstTopViewController = (FirstTopViewController *)[storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
+        initialViewController.topViewController = firstTopViewController;
+        
         rootViewController = initialViewController;
     } else {
         rootViewController = [[self storyBoard] instantiateViewControllerWithIdentifier:@"NavigationLogin"];
     }
-//    self.window.rootViewController = [[self storyBoard] instantiateViewControllerWithIdentifier:([self auth].canAuthorize)?@"FirstTop":@"NavigationLogin"];
     self.window.rootViewController = rootViewController;
     [self.window makeKeyAndVisible];
   return YES;
@@ -154,22 +117,22 @@
     return auth;
 }
 
-- (GTLServiceTasks *)tasksService {
-    static GTLServiceTasks *service = nil;
-    
-    if (!service) {
-        service = [[GTLServiceTasks alloc] init];
-        
-        // Have the service object set tickets to fetch consecutive pages
-        // of the feed so we do not need to manually fetch them
-        service.shouldFetchNextPages = YES;
-        
-        // Have the service object set tickets to retry temporary error conditions
-        // automatically
-        service.retryEnabled = YES;
-    }
-    return service;
-}
+//- (GTLServiceTasks *)tasksService {
+//    static GTLServiceTasks *service = nil;
+//    
+//    if (!service) {
+//        service = [[GTLServiceTasks alloc] init];
+//        
+//        // Have the service object set tickets to fetch consecutive pages
+//        // of the feed so we do not need to manually fetch them
+//        service.shouldFetchNextPages = YES;
+//        
+//        // Have the service object set tickets to retry temporary error conditions
+//        // automatically
+//        service.retryEnabled = YES;
+//    }
+//    return service;
+//}
 
 #pragma mark -
 #pragma mark - Login/Logout

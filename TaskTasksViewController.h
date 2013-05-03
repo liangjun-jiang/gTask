@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GTLTasks.h"
 #import "TaskListViewController.h"
+#import "ECSlidingViewController.h"
 
 @interface TaskTasksViewController : UITableViewController
 {
@@ -18,4 +19,6 @@
 
 @property (nonatomic, strong) GTLTasksTaskList *selectedTasklist;
 @property (nonatomic,strong) GTLServiceTasks *tasksService;
+
+
 @end

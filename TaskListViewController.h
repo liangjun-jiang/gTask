@@ -10,10 +10,8 @@
 #import "GTLTasks.h"
 #import "ECSlidingViewController.h"
 
-@interface TaskListViewController : UITableViewController{
-    GTLServiceTasks *tasksService;
-    
-}
+@interface TaskListViewController : UITableViewController
 
 @property (nonatomic,strong) GTLServiceTasks *tasksService;
+@property (nonatomic, weak) IBOutlet UINavigationBar *navBar;
 @end

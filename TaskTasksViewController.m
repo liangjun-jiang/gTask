@@ -11,6 +11,7 @@
 #import "TaskNoteViewController.h"
 #import "TaskTasksDetailViewController.h"
 #import "Constants.h"
+#import "MenuViewController.h"
 
 #define kAddTaskDueDate @"kAddTaskDueDate"
 
@@ -240,8 +241,24 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self.navigationController setToolbarHidden:NO];
     [super viewWillAppear:animated];
+    
+    [self.navigationController setToolbarHidden:NO];
+    
+        
+    if (![self.slidingViewController.underLeftViewController isKindOfClass:[TaskListViewController class]]) {
+        TaskListViewController *taskListViewController = [[TaskListViewController alloc] initWithNibName:@"TaskListViewController" bundle:nil];
+        self.slidingViewController.underLeftViewController  =  taskListViewController;
+    }
+   
+    self.slidingViewController.underRightViewController = nil;
+    
+
+}
+
+- (IBAction)revealMenu:(id)sender
+{
+    [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
 - (void)viewDidLoad
@@ -255,7 +272,9 @@
     self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-//    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStyleBordered target:self action:@selector(revealMenu:)];
+    self.navigationItem.leftBarButtonItem = menuItem;
     
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addATask)];
     self.navigationItem.rightBarButtonItem = addItem;

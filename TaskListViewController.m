@@ -11,6 +11,8 @@
 #import "SVProgressHUD.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "GTMOAuth2ViewControllerTouch.h"
+#import "MenuViewController.h"
 
 @interface TaskListViewController ()<UIActionSheetDelegate>
 {
@@ -40,6 +42,7 @@
 
 @implementation TaskListViewController
 @synthesize tasksService, selectedIndexPath;
+@synthesize navBar;
 
 #pragma mark - alert helper
 - (void)displayAlertWithMessage:(NSString *)message {
@@ -160,10 +163,8 @@
     self.taskLists = nil;
     self.taskListsFetchError = nil;
     
-//    GTLServiceTasks *service = self.tasksService;
-    GTLServiceTasks *service = [self tasksService];
+    GTLServiceTasks *service = self.tasksService;
 
-    
     GTLQueryTasks *query = [GTLQueryTasks queryForTasklistsList];
     
     [SVProgressHUD showWithStatus:NSLocalizedString(@"LOADING", @"Loading")];
@@ -206,6 +207,7 @@
                                                       encoding:NSUTF8StringEncoding];
             resultStr = [resultStr stringByAppendingFormat:@"\n%@", dataStr];
         }
+        [SVProgressHUD showErrorWithStatus:resultStr];
     } else {
         // Display the selected item
         GTLTasksTaskList *item = [self selectedTaskList];
@@ -215,6 +217,7 @@
         }
     }
     //    [taskListsResultTextView_ setString:resultStr];
+    
     
     BOOL hasTaskLists = (self.taskLists != nil);
     BOOL isTaskListSelected = ([self selectedTaskList] != nil);
@@ -243,11 +246,20 @@
     
 }
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self){
+    }
+    
+    return self;
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
@@ -269,6 +281,20 @@
     
     [SSThemeManager customizeTableView:self.tableView];
     
+    
+    NSString *clientID = myClientId;
+    NSString *clientSecret = mySecretKey;
+    
+    GTMOAuth2Authentication *auth = nil;
+    
+    if (clientID && clientSecret) {
+        auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
+                                                                     clientID:clientID
+                                                                 clientSecret:clientSecret];
+    }
+    self.tasksService.authorizer = auth;
+    
+    
 //    [self.navigationController setToolbarHidden:NO];
 //    [self setToolbarItems:[self toolbarItems]];
 
@@ -277,15 +303,17 @@
     
 //    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTaskListClicked:)];
-    self.navigationItem.rightBarButtonItem = addItem;
-    
-    UIBarButtonItem *signOutItem = [[UIBarButtonItem alloc] initWithTitle:@"SignOut" style:UIBarButtonItemStyleBordered target:self action:@selector(onSignOut:)];
-    self.navigationItem.leftBarButtonItem = signOutItem;
+//    UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTaskListClicked:)];
+//    self.navigationItem.rightBarButtonItem = addItem;
+//    
+//    UIBarButtonItem *signOutItem = [[UIBarButtonItem alloc] initWithTitle:@"SignOut" style:UIBarButtonItemStyleBordered target:self action:@selector(onSignOut:)];
+//    self.navigationItem.leftBarButtonItem = signOutItem;
 
     // Long press recognizer
     UILongPressGestureRecognizer *longpressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
     [self.tableView addGestureRecognizer:longpressRecognizer];
+    
+    
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self fetchTaskLists];
@@ -296,6 +324,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -388,11 +417,13 @@
     // todo: super stupid
     detailViewController.selectedTasklist = selectedTasklist;
     detailViewController.tasksService = self.tasksService;
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
     // ...
     // Pass the selected object to the new view controller.
     [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
         CGRect frame = self.slidingViewController.topViewController.view.frame;
-        self.slidingViewController.topViewController = detailViewController;
+        self.slidingViewController.topViewController = navController;
         self.slidingViewController.topViewController.view.frame = frame;
         [self.slidingViewController resetTopView];
     }];
@@ -551,22 +582,22 @@
     
 }
 
-//- (GTLServiceTasks *)tasksService {
-//    static GTLServiceTasks *service = nil;
-//    
-//    if (!service) {
-//        service = [[GTLServiceTasks alloc] init];
-//        
-//        // Have the service object set tickets to fetch consecutive pages
-//        // of the feed so we do not need to manually fetch them
-//        service.shouldFetchNextPages = YES;
-//        
-//        // Have the service object set tickets to retry temporary error conditions
-//        // automatically
-//        service.retryEnabled = YES;
-//    }
-//    return service;
-//}
+- (GTLServiceTasks *)tasksService {
+    static GTLServiceTasks *service = nil;
+    
+    if (!service) {
+        service = [[GTLServiceTasks alloc] init];
+        
+        // Have the service object set tickets to fetch consecutive pages
+        // of the feed so we do not need to manually fetch them
+        service.shouldFetchNextPages = YES;
+        
+        // Have the service object set tickets to retry temporary error conditions
+        // automatically
+        service.retryEnabled = YES;
+    }
+    return service;
+}
 //
 
 @end
