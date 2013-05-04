@@ -15,6 +15,20 @@
 #import "MenuViewController.h"
 #import "SHCViewController.h"
 
+//http://stackoverflow.com/questions/13431976/visible-buttons-with-transparent-navigation-bar
+@interface TransparentNavigationBar : UINavigationBar
+
+@end
+
+@implementation TransparentNavigationBar
+
+-(void)drawRect:(CGRect)rect
+{
+    
+}
+
+@end
+
 @interface TaskListViewController ()<UIActionSheetDelegate>
 {
     UIBarButtonItem *addTaskListButton_;
@@ -275,13 +289,12 @@
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"TASK_LIST", @"");
-//    self.navigationController.navigationBar.alpha = 1.0;
     
     [self.slidingViewController setAnchorRightRevealAmount:280.0f];
     self.slidingViewController.underLeftWidthLayout = ECFullWidth;
     
-    [SSThemeManager customizeTableView:self.tableView];
-    
+//    id <SSTheme> theme = [SSThemeManager sharedTheme];
+//    self.view.backgroundColor =  [theme mainColor];
     
     NSString *clientID = myClientId;
     NSString *clientSecret = mySecretKey;
@@ -424,16 +437,16 @@
     detailViewController.tasksService = self.tasksService;
     
 //    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
-    // ...
+    UINavigationController *navController = [[UINavigationController alloc] initWithNavigationBarClass:[TransparentNavigationBar class] toolbarClass:nil];
+    [navController setViewControllers:@[detailViewController]];
     // Pass the selected object to the new view controller.
     [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
         CGRect frame = self.slidingViewController.topViewController.view.frame;
-        self.slidingViewController.topViewController = detailViewController;
+        self.slidingViewController.topViewController = navController;
         self.slidingViewController.topViewController.view.frame = frame;
         [self.slidingViewController resetTopView];
     }];
     
-//    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 

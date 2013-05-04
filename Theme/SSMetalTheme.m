@@ -18,7 +18,50 @@
 
 - (UIColor *)mainColor
 {
-    return [UIColor colorWithWhite:0.20 alpha:1.0];
+    NSString *wallpaperName = @"";
+    switch ([self currentMonth]) {
+        case 1:
+            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
+            break;
+        case 2:
+            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
+            break;
+        case 3:
+            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
+            break;
+        case 4:
+            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
+            break;
+        case 5:
+            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
+            break;
+        case 6:
+            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
+            break;
+        case 7:
+            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
+            break;
+        case 8:
+            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
+            break;
+        case 9:
+            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
+            break;
+        case 10:
+            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
+            break;
+        case 11:
+            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
+            break;
+        case 12:
+            wallpaperName = IS_IPHONE_5?@"december-12-568h@2x.jpg":@"december-12.jpg";
+            break;
+            
+            
+        default:
+            break;
+    }
+    return [UIColor colorWithPatternImage:[UIImage imageNamed:wallpaperName]];
 }
 
 - (UIColor *)highlightColor
@@ -354,4 +397,11 @@
     return image;
 }
 
+#pragma mark - helper
+-(NSUInteger)currentMonth
+{
+    NSCalendar * calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:NSMonthCalendarUnit fromDate:[NSDate date]];
+    return [components month];
+}
 @end

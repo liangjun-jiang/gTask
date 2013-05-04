@@ -259,7 +259,7 @@
 + (void)customizeTableView:(UITableView *)tableView
 {
     id <SSTheme> theme = [self sharedTheme];
-    UIImage *backgroundImage = [theme tableBackground];
+    UIImage *backgroundImage =  [theme tableBackground];
     UIColor *backgroundColor = [theme backgroundColor];
     if (backgroundImage) {
         UIImageView *background = [[UIImageView alloc] initWithImage:backgroundImage];

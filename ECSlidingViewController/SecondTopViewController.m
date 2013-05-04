@@ -7,6 +7,7 @@
 //
 
 #import "SecondTopViewController.h"
+#import "TaskListViewController.h"
 
 @implementation SecondTopViewController
 
@@ -14,9 +15,11 @@
 {
   [super viewWillAppear:animated];
   
-  if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuViewController class]]) {
-    self.slidingViewController.underLeftViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
-  }
+    if (![self.slidingViewController.underLeftViewController isKindOfClass:[TaskListViewController class]]) {
+        TaskListViewController *taskListViewController = [[TaskListViewController alloc] initWithNibName:@"TaskListViewController" bundle:nil];
+        self.slidingViewController.underLeftViewController  =  taskListViewController;
+    }
+
   self.slidingViewController.underRightViewController = nil;
   
   [self.view addGestureRecognizer:self.slidingViewController.panGesture];

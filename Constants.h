@@ -22,4 +22,8 @@ static NSString *const kTaskStatusNeedsAction = @"needsAction";
 #define myClientId @"580813237419.apps.googleusercontent.com"
 #define mySecretKey @"1XLt_eUMs7hdIiqSDt04qe4-"
 
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_IPHONE_5 (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0f)
+#define IS_IPHONE_4 (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 480.0f)
 #endif

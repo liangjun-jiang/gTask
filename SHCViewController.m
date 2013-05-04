@@ -14,6 +14,8 @@
 #import "ECSlidingViewController.h"
 #import "SVProgressHUD.h"
 #import "GTLTasksTask.h"
+#import "SSSmallButton.h"
+
 #define kAddTaskDueDate @"kAddTaskDueDate"
 
 @interface SHCViewController ()
@@ -34,7 +36,7 @@
 @implementation SHCViewController
 {
     // a array of to-do items
-    NSMutableArray* _toDoItems;
+//    NSMutableArray* _toDoItems;
     
     // the offset applied to cells when entering 'edit mode'
     float _editingOffset;
@@ -61,8 +63,6 @@
 {
     [super viewDidLoad];
         
-    self.view.backgroundColor = [UIColor blackColor];
-    
     // configure the table
     [self.tableView registerClassForCells:[SHCTableViewCell class]];
     self.tableView.datasource = self;
@@ -72,6 +72,20 @@
     
     id <SSTheme> theme = [SSThemeManager sharedTheme];
     self.view.backgroundColor =  [theme mainColor]; //[UIColor blackColor];
+    
+    
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+    
+    SSSmallButton *menuButton = [SSSmallButton buttonWithType:UIButtonTypeInfoDark];
+    [menuButton addTarget:self action:@selector(revealMenu:) forControlEvents:UIControlEventTouchUpInside];
+    [menuButton setTitle:@"Menu" forState:UIControlStateNormal];
+    [menuButton setTitle:@"Menu" forState:UIControlStateSelected];
+//    menuButton.frame = CGRectMake(0.0, 0.0, 44.0, 24.0);
+//    menuButton.backgroundColor = [UIColor clearColor];
+    
+    UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    self.navigationItem.leftBarButtonItem = menuItem;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self fetchTasksForSelectedList];
@@ -87,7 +101,7 @@
 
 - (UIColor*)colorForIndex:(NSInteger) index
 {
-    NSUInteger itemCount = _toDoItems.count - 1;
+    NSUInteger itemCount = self.tasks.items.count - 1;
     float val = ((float)index / (float)itemCount) * 0.6;
     return [UIColor colorWithRed: 1.0 green:val blue: 0.0 alpha:1.0];
 }
@@ -131,7 +145,7 @@
 {    
     float delay = 0.0;
     
-    [_toDoItems removeObject:todoItem];
+//    [_toDoItems removeObject:todoItem];
     
     NSArray* visibleCells = [_tableView visibleCells];
     
