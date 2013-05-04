@@ -44,11 +44,6 @@
 		D62C375916FCDEFA00EF8CDE /* GTLTasksTaskList.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C375116FCDEFA00EF8CDE /* GTLTasksTaskList.m */; };
 		D62C375A16FCDEFA00EF8CDE /* GTLTasksTaskLists.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C375216FCDEFA00EF8CDE /* GTLTasksTaskLists.m */; };
 		D62C375B16FCDEFA00EF8CDE /* GTLTasksTasks.m in Sources */ = {isa = PBXBuildFile; fileRef = D62C375316FCDEFA00EF8CDE /* GTLTasksTasks.m */; };
-		D62C37EE16FF679300EF8CDE /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37E916FF679300EF8CDE /* Icon-72.png */; };
-		D62C37EF16FF679300EF8CDE /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37EA16FF679300EF8CDE /* Icon-72@2x.png */; };
-		D62C37F016FF679300EF8CDE /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37EB16FF679300EF8CDE /* Icon-Small.png */; };
-		D62C37F116FF679300EF8CDE /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37EC16FF679300EF8CDE /* Icon.png */; };
-		D62C37F216FF679300EF8CDE /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37ED16FF679300EF8CDE /* Icon@2x.png */; };
 		D62C37F416FF68D700EF8CDE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37F316FF68D700EF8CDE /* Default.png */; };
 		D62C37F616FF68E200EF8CDE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37F516FF68E200EF8CDE /* Default@2x.png */; };
 		D62C37F816FF68EB00EF8CDE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D62C37F716FF68EB00EF8CDE /* Default-568h@2x.png */; };
@@ -94,6 +89,16 @@
 		D68536A21703A8F5006767EF /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D685369F1703A8F5006767EF /* SVProgressHUD.bundle */; };
 		D68536A31703A8F5006767EF /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D68536A11703A8F5006767EF /* SVProgressHUD.m */; };
 		D6CE8CBA1734836600B72609 /* SHCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6CE8CB91734836600B72609 /* SHCViewController.xib */; };
+		D6CE8CC51735810600B72609 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = D6CE8CBB1735810600B72609 /* Icon-72.png */; };
+		D6CE8CC61735810600B72609 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6CE8CBC1735810600B72609 /* Icon-72@2x.png */; };
+		D6CE8CC71735810600B72609 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = D6CE8CBD1735810600B72609 /* Icon-Small-50.png */; };
+		D6CE8CC81735810600B72609 /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6CE8CBE1735810600B72609 /* Icon-Small-50@2x.png */; };
+		D6CE8CC91735810600B72609 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = D6CE8CBF1735810600B72609 /* Icon-Small.png */; };
+		D6CE8CCA1735810600B72609 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6CE8CC01735810600B72609 /* Icon-Small@2x.png */; };
+		D6CE8CCB1735810600B72609 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D6CE8CC11735810600B72609 /* Icon.png */; };
+		D6CE8CCC1735810600B72609 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6CE8CC21735810600B72609 /* Icon@2x.png */; };
+		D6CE8CCD1735810600B72609 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = D6CE8CC31735810600B72609 /* iTunesArtwork.png */; };
+		D6CE8CCE1735810600B72609 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6CE8CC41735810600B72609 /* iTunesArtwork@2x.png */; };
 		D6D3CD0616F24CD9003C0434 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */; };
 		D6D3CD6616F253BE003C0434 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D3CD6516F253BE003C0434 /* QuartzCore.framework */; };
 		D6DA4F1D1708969D00E27CF0 /* TaskNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DA4F1C1708969D00E27CF0 /* TaskNoteViewController.m */; };
@@ -301,11 +306,6 @@
 		D62C375116FCDEFA00EF8CDE /* GTLTasksTaskList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLTasksTaskList.m; path = TaskService/GTLTasksTaskList.m; sourceTree = "<group>"; };
 		D62C375216FCDEFA00EF8CDE /* GTLTasksTaskLists.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLTasksTaskLists.m; path = TaskService/GTLTasksTaskLists.m; sourceTree = "<group>"; };
 		D62C375316FCDEFA00EF8CDE /* GTLTasksTasks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLTasksTasks.m; path = TaskService/GTLTasksTasks.m; sourceTree = "<group>"; };
-		D62C37E916FF679300EF8CDE /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
-		D62C37EA16FF679300EF8CDE /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
-		D62C37EB16FF679300EF8CDE /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
-		D62C37EC16FF679300EF8CDE /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		D62C37ED16FF679300EF8CDE /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		D62C37F316FF68D700EF8CDE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D62C37F516FF68E200EF8CDE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D62C37F716FF68EB00EF8CDE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -383,6 +383,16 @@
 		D68536A01703A8F5006767EF /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		D68536A11703A8F5006767EF /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		D6CE8CB91734836600B72609 /* SHCViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SHCViewController.xib; sourceTree = "<group>"; };
+		D6CE8CBB1735810600B72609 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "Resources/icon/ios/Icon-72.png"; sourceTree = "<group>"; };
+		D6CE8CBC1735810600B72609 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "Resources/icon/ios/Icon-72@2x.png"; sourceTree = "<group>"; };
+		D6CE8CBD1735810600B72609 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50.png"; path = "Resources/icon/ios/Icon-Small-50.png"; sourceTree = "<group>"; };
+		D6CE8CBE1735810600B72609 /* Icon-Small-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50@2x.png"; path = "Resources/icon/ios/Icon-Small-50@2x.png"; sourceTree = "<group>"; };
+		D6CE8CBF1735810600B72609 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small.png"; path = "Resources/icon/ios/Icon-Small.png"; sourceTree = "<group>"; };
+		D6CE8CC01735810600B72609 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "Resources/icon/ios/Icon-Small@2x.png"; sourceTree = "<group>"; };
+		D6CE8CC11735810600B72609 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Resources/icon/ios/Icon.png; sourceTree = "<group>"; };
+		D6CE8CC21735810600B72609 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Resources/icon/ios/Icon@2x.png"; sourceTree = "<group>"; };
+		D6CE8CC31735810600B72609 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iTunesArtwork.png; path = Resources/icon/ios/iTunesArtwork.png; sourceTree = "<group>"; };
+		D6CE8CC41735810600B72609 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iTunesArtwork@2x.png"; path = "Resources/icon/ios/iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		D6D3CD0516F24CD9003C0434 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
 		D6D3CD6516F253BE003C0434 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D6DA4F1B1708969D00E27CF0 /* TaskNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskNoteViewController.h; sourceTree = "<group>"; };
@@ -605,14 +615,19 @@
 		29B97315FDCFA39411CA2CEA /* Other App Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D6CE8CBB1735810600B72609 /* Icon-72.png */,
+				D6CE8CBC1735810600B72609 /* Icon-72@2x.png */,
+				D6CE8CBD1735810600B72609 /* Icon-Small-50.png */,
+				D6CE8CBE1735810600B72609 /* Icon-Small-50@2x.png */,
+				D6CE8CBF1735810600B72609 /* Icon-Small.png */,
+				D6CE8CC01735810600B72609 /* Icon-Small@2x.png */,
+				D6CE8CC11735810600B72609 /* Icon.png */,
+				D6CE8CC21735810600B72609 /* Icon@2x.png */,
+				D6CE8CC31735810600B72609 /* iTunesArtwork.png */,
+				D6CE8CC41735810600B72609 /* iTunesArtwork@2x.png */,
 				D62C5F34172B308800F01D39 /* december-12-568h@2x.jpg */,
 				D62C5F32172B2EFD00F01D39 /* december-12.jpg */,
 				D62C5F30172B2BE800F01D39 /* december-12@2x.jpg */,
-				D62C37E916FF679300EF8CDE /* Icon-72.png */,
-				D62C37EA16FF679300EF8CDE /* Icon-72@2x.png */,
-				D62C37EB16FF679300EF8CDE /* Icon-Small.png */,
-				D62C37EC16FF679300EF8CDE /* Icon.png */,
-				D62C37ED16FF679300EF8CDE /* Icon@2x.png */,
 				13C82E9711373B3000ACAEDD /* prefixTouch.pch */,
 				D6DA507B170A2F9C00E27CF0 /* Localizable.strings */,
 			);
@@ -993,11 +1008,6 @@
 				1301BB45119CB4B100A33D6C /* OAuth2SampleMainiPad.xib in Resources */,
 				D6D3CD0616F24CD9003C0434 /* GTMOAuth2ViewTouch.xib in Resources */,
 				D62EC16216FCC2C5005E65F5 /* TaskListViewController.xib in Resources */,
-				D62C37EE16FF679300EF8CDE /* Icon-72.png in Resources */,
-				D62C37EF16FF679300EF8CDE /* Icon-72@2x.png in Resources */,
-				D62C37F016FF679300EF8CDE /* Icon-Small.png in Resources */,
-				D62C37F116FF679300EF8CDE /* Icon.png in Resources */,
-				D62C37F216FF679300EF8CDE /* Icon@2x.png in Resources */,
 				D62C37F416FF68D700EF8CDE /* Default.png in Resources */,
 				D62C37F616FF68E200EF8CDE /* Default@2x.png in Resources */,
 				D62C37F816FF68EB00EF8CDE /* Default-568h@2x.png in Resources */,
@@ -1137,6 +1147,16 @@
 				D62C6000172F584100F01D39 /* iPad.storyboard in Resources */,
 				D62C6001172F584100F01D39 /* iPhone.storyboard in Resources */,
 				D6CE8CBA1734836600B72609 /* SHCViewController.xib in Resources */,
+				D6CE8CC51735810600B72609 /* Icon-72.png in Resources */,
+				D6CE8CC61735810600B72609 /* Icon-72@2x.png in Resources */,
+				D6CE8CC71735810600B72609 /* Icon-Small-50.png in Resources */,
+				D6CE8CC81735810600B72609 /* Icon-Small-50@2x.png in Resources */,
+				D6CE8CC91735810600B72609 /* Icon-Small.png in Resources */,
+				D6CE8CCA1735810600B72609 /* Icon-Small@2x.png in Resources */,
+				D6CE8CCB1735810600B72609 /* Icon.png in Resources */,
+				D6CE8CCC1735810600B72609 /* Icon@2x.png in Resources */,
+				D6CE8CCD1735810600B72609 /* iTunesArtwork.png in Resources */,
+				D6CE8CCE1735810600B72609 /* iTunesArtwork@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
